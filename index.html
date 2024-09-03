@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>kute GPA Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>工学院大学GPA計算機</h1>
+    <input type="file" id="fileInput" accept=".pdf">
+    <button onclick="calculateGPA()">GPA計算</button>
+    <div id="instructions">
+        <h2>使い方:</h2>
+        <p>1. キューポート>成績>成績照会 の右上にあるPDFをクリックして、成績のPDFファイルをダウンロードします。</p>
+        <p>2. このサイトを開き、PDFファイルを選択してアップロードしてください。</p>
+        <p>3. 「GPA計算」ボタンを押してください。</p>
+        <p>4. 成績が表示されます。</p>
+    </div>
+    <div id="result" style="display:none;">
+        <h1 id="gpa"></h1>
+        <p id="gpashow"></p>
+        <h2>成績の詳細</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>評定</th>
+                    <th>個数</th>
+                    <th>総単位数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A+</td>
+                    <td id="APlusCount"></td>
+                    <td id="APlusTotal"></td>
+                </tr>
+                <tr>
+                    <td>A</td>
+                    <td id="ACount"></td>
+                    <td id="ATotal"></td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td id="BCount"></td>
+                    <td id="BTotal"></td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td id="CCount"></td>
+                    <td id="CTotal"></td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td id="DCount"></td>
+                    <td id="DTotal"></td>
+                </tr>
+                <tr>
+                    <td>F</td>
+                    <td id="FCount"></td>
+                    <td id="FTotal"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer class="footer">
+        <p class="copyright">Copyright © 2024 SAYU. All Rights Reserved.</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
