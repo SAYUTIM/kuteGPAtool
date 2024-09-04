@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>工学院大学GPA自動計算機</h1>
+    <h1>工学院大学GPA計算機</h1>
 
     <div id="fileUploadArea" class="file-upload-area">
         <input type="file" id="fileInput" accept=".pdf" hidden>
@@ -24,8 +24,10 @@
     </div>
 
     <div id="result" style="display:none;">
+        <br>
         <h1 id="gpa"></h1>
         <p id="gpashow"></p>
+        <br>
         <h2>成績の詳細</h2>
         <table>
             <thead>
@@ -68,12 +70,47 @@
                 </tr>
             </tbody>
         </table>
+        <br>
+        <h2>各評定の科目</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th width="10%">評定</th>
+                    <th>科目名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A+</td>
+                    <td id="APlusSubjects" class="subjects"></td>
+                </tr>
+                <tr>
+                    <td>A</td>
+                    <td id="ASubjects" class="subjects"></td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td id="BSubjects" class="subjects"></td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td id="CSubjects" class="subjects"></td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td id="DSubjects" class="subjects"></td>
+                </tr>
+                <tr>
+                    <td>F</td>
+                    <td id="FSubjects" class="subjects"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <footer class="footer">
         <p class="copyright">Copyright © 2024 SAYU. All Rights Reserved.</p>
     </footer>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
     <script src="script.js"></script>
