@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Arial', sans-serif;
     text-align: center;
@@ -45,7 +46,7 @@ button:hover {
 }
 
 table {
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     border-collapse: collapse;
     background-color: #fff;
@@ -95,4 +96,8 @@ footer {
     margin-top: 20px;
     color: #333;
     font-size: 16px;
+}
+
+.subjects {
+    white-space: pre-wrap;
 }
