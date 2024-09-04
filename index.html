@@ -7,17 +7,22 @@
 </head>
 <body>
     <h1>工学院大学GPA自動計算機</h1>
-    <input type="file" id="fileInput" accept=".pdf">
-    <button onclick="calculateGPA()">GPA計算</button>
+
+    <div id="fileUploadArea" class="file-upload-area">
+        <input type="file" id="fileInput" accept=".pdf" hidden>
+        <p>ここにPDFファイルをドラッグ&ドロップするか、クリックして選択</p>
+        <p id="fileName" class="file-name"></p>
+    </div>
+
     <div id="instructions">
         <h2>使い方:</h2>
         <p>1. キューポート>成績>成績照会 の右上にあるPDFをクリックして、成績のPDFファイルをダウンロードします。</p>
-        <p>2. このサイトを開き、PDFファイルを選択してアップロードしてください。</p>
-        <p>3. 「GPA計算」ボタンを押してください。</p>
-        <p>4. 成績が表示されます。</p>
+        <p>2. このサイトを開き、PDFファイルを選択してください。</p>
+        <p>3. 成績が表示されます。</p>
         <font color=red>結果をSNS等で共有する場合はファイル名に注意してください</font><br>
         <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a>
     </div>
+
     <div id="result" style="display:none;">
         <h1 id="gpa"></h1>
         <p id="gpashow"></p>
@@ -64,9 +69,11 @@
             </tbody>
         </table>
     </div>
+
     <footer class="footer">
         <p class="copyright">Copyright © 2024 SAYU. All Rights Reserved.</p>
     </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
     <script src="script.js"></script>
