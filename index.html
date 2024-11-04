@@ -24,8 +24,18 @@
     <div id="result" style="display:none;">
         <br>
         <h1 id="gpa"></h1>
-        <p id="gpashow"></p>
+        <div id="gpashow"></div>
         <br>
+
+        <button id="repeater" onclick="startrepeat()" style="display:block;">再履修・リピートをシュミレートしてみる</button>
+        <div id="repeat" style="display:none;">
+            <h2>再履修・リピートシュミレーター</h2>
+            <div id="selecter">
+            </div>
+            <button onclick="addrepeat()">追加</button>
+            <button onclick="executerepeat()">実行</button>
+        </div>
+
         <h2>成績の詳細</h2>
         <table>
             <thead>
