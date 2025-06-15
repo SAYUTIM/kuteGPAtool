@@ -6,125 +6,136 @@
     <meta name="description" content="工学院大学（UNIVERSAL PASSPORT RX）の学生が、成績PDFをアップロードするだけでGPAを自動計算できるサイトです。再履修やリピートのシミュレーションにも対応しています。">
     <link rel="icon" href="icon.ico">
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1>工学院大学GPA計算機</h1>
 
-    <div id="fileUploadArea" class="file-upload-area">
-        <input type="file" id="fileInput" accept=".pdf" hidden>
-        <p>ここにPDFファイルをドラッグ&ドロップするか、クリックして選択</p>
-        <p id="fileName" class="file-name"></p>
+    <div id="login-prompt" style="display: none; padding: 40px 15px;">
+        <h1>工学院大学GPA計算機</h1>
+        <p>GPAの計算とランキング機能の利用には、大学のGoogleアカウント（@g.kogakuin.jp）でのログインが必要です。</p>
+
+        <div class="privacy-agreement" style="margin-top: 20px; margin-bottom: 15px; font-size: 14px;">
+            <label for="privacy-checkbox" class="privacy-agreement-label">
+                <input type="checkbox" id="privacy-checkbox">
+                <a href="privacy.html" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>に同意する
+            </label>
+        </div>
+        <button id="login-button" class="login-button" disabled>Googleアカウントでログイン</button>
+
+        <br><br>
+
+        <div id="instructions">
+            <h2>サイトについて:</h2>
+            <p>1. このサイトは工学院大学の学生有志が開発・運営しており、大学公式のサービスではありません。</p>
+            <p>2. 工学院大学の学生が、成績PDFをアップロードするだけでGPAを自動計算できるサイトです。</p>
+            <p>3. 再履修やリピートのシミュレーションにも対応しています。</p>
+        </div>
     </div>
 
-    <div id="instructions">
-        <h2>使い方:</h2>
-        <p>1. キューポート>成績>成績照会 の右上にあるPDFをクリックして、成績のPDFファイルをダウンロードします。</p>
-        <p>2. このサイトを開き、PDFファイルを選択してください。</p>
-        <p>3. 成績が表示されます。</p>
-    </div>
+    <div id="main-content" style="display: none;">
+        <h1>工学院大学GPA計算機</h1>
 
-    <div id="result" style="display:none;">
-        <br>
-        <h1 id="gpa"></h1>
-        <div id="gpashow"></div>
-        <br>
-
-        <button id="repeater" onclick="startrepeat()" style="display:block;">再履修・リピートをシュミレートしてみる</button>
-        <div id="repeat" style="display:none;">
-            <h2>再履修・リピートシュミレーター</h2>
-            <div id="selecter">
-            </div>
-            <button onclick="addrepeat()">追加</button>
-            <button onclick="executerepeat()">実行</button>
+        <div id="fileUploadArea" class="file-upload-area">
+            <input type="file" id="fileInput" accept=".pdf" hidden>
+            <p>ここにPDFファイルをドラッグ&ドロップするか、クリックして選択</p>
+            <p id="fileName" class="file-name"></p>
         </div>
 
-        <h2>成績の詳細</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>評定</th>
-                    <th>個数</th>
-                    <th>総単位数</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>A+</td>
-                    <td id="APlusCount"></td>
-                    <td id="APlusTotal"></td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td id="ACount"></td>
-                    <td id="ATotal"></td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td id="BCount"></td>
-                    <td id="BTotal"></td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td id="CCount"></td>
-                    <td id="CTotal"></td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td id="DCount"></td>
-                    <td id="DTotal"></td>
-                </tr>
-                <tr>
-                    <td>F</td>
-                    <td id="FCount"></td>
-                    <td id="FTotal"></td>
-                </tr>
-            </tbody>
-        </table>
-        <br>
-        <h2>各評定の科目</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th width="10%">評定</th>
-                    <th>科目名</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>A+</td>
-                    <td id="APlusSubjects" class="subjects"></td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td id="ASubjects" class="subjects"></td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td id="BSubjects" class="subjects"></td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td id="CSubjects" class="subjects"></td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td id="DSubjects" class="subjects"></td>
-                </tr>
-                <tr>
-                    <td>F</td>
-                    <td id="FSubjects" class="subjects"></td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="instructions2">
+            <h2>使い方:</h2>
+            <p>1. キューポート>成績>成績照会 の右上にあるPDFをクリックして、成績のPDFファイルをダウンロードします。</p>
+            <p>2. このサイトを開き、PDFファイルを選択してください。</p>
+            <p>3. 成績が表示されます。</p>
+
+            <br>
+
+            <h2>ランキング:</h2>
+            <p>1. 大学のGoogleアカウント(@g.kogakuin.jp)でログインをするとGPAランキングに参加出来ます。</p>
+            <p>2. 発行から1ヶ月以内の成績pdfが有効です。</p>
+            <p>3. 1年間更新がない場合はランキングから削除されます。</p>
+            <a href="ranking.html"  class="back-link">現在のランキングを確認</a>
+        </div>
+
+        <div id="result">
+            <br>
+            <h1 id="gpa"></h1>
+            <div id="gpashow"></div>
+            <br>
+
+            <div id="ranking-area">
+                <div id="ranking-unavailable-message" style="display: none;">
+                    <p>発行から1ヶ月以内の成績PDFを読み込むとランキングに参加できます。</p>
+                </div>
+                <div id="ranking-controls" style="display: none;">
+                    <div id="nickname-section">
+                    <h3 class="collapsible-trigger">ランキングに登録</h3>
+                    <div class="collapsible-content">
+                        <p>ようこそ、<span id="user-email"></span> さん！</p>
+                        <p>学籍番号は、あなたのブラウザ上で復元不可能なデータに暗号化（ハッシュ化）されてから送信されるため、サイト管理者が知ることはありません。</p>
+                        <p>ランキングに表示するニックネームを入力してください（8文字以内）。</p>
+                        <div class="form-row">
+                            <input type="text" id="nicknameInput" class="form-row-item" placeholder="ニックネームを入力">
+                            <button id="submitRankingButton" class="form-row-item">登録/更新</button>
+                            <button id="logout-button" class="form-row-item">ログアウト</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <p id="rankingStatus"></p>
+            </div>
+
+            <br>
+
+            <button id="repeater" onclick="startrepeat()">再履修・リピートをシュミレートしてみる</button>
+            <div id="repeat">
+                <h2>再履修・リピートシュミレーター</h2>
+                <div id="selecter"></div>
+                <button onclick="addrepeat()">追加</button>
+                <button onclick="executerepeat()">実行</button>
+            </div>
+
+            <h2>成績の詳細</h2>
+            <table>
+                <thead>
+                    <tr><th>評定</th><th>個数</th><th>総単位数</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>A+</td><td id="APlusCount"></td><td id="APlusTotal"></td></tr>
+                    <tr><td>A</td><td id="ACount"></td><td id="ATotal"></td></tr>
+                    <tr><td>B</td><td id="BCount"></td><td id="BTotal"></td></tr>
+                    <tr><td>C</td><td id="CCount"></td><td id="CTotal"></td></tr>
+                    <tr><td>D</td><td id="DCount"></td><td id="DTotal"></td></tr>
+                    <tr><td>F</td><td id="FCount"></td><td id="FTotal"></td></tr>
+                </tbody>
+            </table>
+            <br>
+            <h2>各評定の科目</h2>
+            <table>
+                <thead>
+                    <tr><th width="10%">評定</th><th>科目名</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>A+</td><td id="APlusSubjects" class="subjects"></td></tr>
+                    <tr><td>A</td><td id="ASubjects" class="subjects"></td></tr>
+                    <tr><td>B</td><td id="BSubjects" class="subjects"></td></tr>
+                    <tr><td>C</td><td id="CSubjects" class="subjects"></td></tr>
+                    <tr><td>D</td><td id="DSubjects" class="subjects"></td></tr>
+                    <tr><td>F</td><td id="FSubjects" class="subjects"></td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <footer class="footer">
         <font color=red>結果をSNS等で共有する場合はファイル名に注意してください</font><br>
-        <a href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a>
-        <br>
-        <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a>
-        <p class="copyright">Copyright © 2024 SAYU. All Rights Reserved.</p>
+        <a href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a><br>
+        <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a><br>
+        <a href="privacy.html">プライバシーポリシーについて</a>
+        <p class="copyright">Copyright © 2024-2025 SAYU. All Rights Reserved.</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
     <script src="pdf.min.js"></script>
     <script src="pdf.worker.min.js"></script>
     <script src="gpa.js"></script>
