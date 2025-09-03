@@ -57,6 +57,11 @@
         gap: 15px;
     }
 
+    .filters > div {
+        display: flex;
+        align-items: center;
+    }
+
     .ranking-table th,
     .ranking-table td {
         padding: 12px 6px;
@@ -337,6 +342,11 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    align-items: center;
+}
+
+.filters > div {
+    display: flex;
     align-items: center;
 }
 
