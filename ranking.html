@@ -33,6 +33,16 @@
 
         <div class="filters">
             <div>
+                <label for="year-filter">学年:</label>
+                <select id="year-filter">
+                    <option value="">すべて</option>
+                    <option value="1">1年</option>
+                    <option value="2">2年</option>
+                    <option value="3">3年</option>
+                    <option value="4">4年</option>
+                </select>
+            </div>
+            <div>
                 <label for="faculty-filter">学部:</label>
                 <select id="faculty-filter">
                     <option value="">すべて</option>
@@ -42,14 +52,10 @@
                     <option value="3">情報学部</option>
                 </select>
             </div>
-            <div>
-                <label for="year-filter">学年:</label>
-                <select id="year-filter">
+            <div id="department-container" style="display: none;">
+                <label for="department-filter">学科:</label>
+                <select id="department-filter">
                     <option value="">すべて</option>
-                    <option value="1">1年</option>
-                    <option value="2">2年</option>
-                    <option value="3">3年</option>
-                    <option value="4">4年</option>
                 </select>
             </div>
         </div>
