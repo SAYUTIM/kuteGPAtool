@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>工学院大学GPAランキング</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="icon.ico">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div id="login-prompt" style="display: none; padding: 20px;">
+        <div class="login-card">
+            <h1>GPAランキング</h1>
+            <p>ランキングを閲覧するには、大学のGoogleアカウントでログインしてください。</p>
+
+            <div class="custom-checkbox-container">
+                <input type="checkbox" id="privacy-checkbox">
+                <label for="privacy-checkbox">
+                    <a href="../privacy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>に同意します
+                </label>
+            </div>
+
+            <button id="login-button" class="modern-button" disabled>Googleアカウントでログイン</button>
+            
+            <p style="margin-top: 30px; font-size: 14px;"><a href="../" style="color: var(--text-color-secondary);">GPA計算ページに戻る</a></p>
+        </div>
+    </div>
+    
+    <div id="main-content" class="main-container" style="display: none;">
+        <h1>工学院大学 GPAランキング</h1>
+
+        <div id="my-rank" style="display: none;"></div>
+
+        <div class="filters">
+            <div>
+                <label for="year-filter">学年:</label>
+                <select id="year-filter">
+                    <option value="">すべて</option>
+                    <option value="1">1年</option>
+                    <option value="2">2年</option>
+                    <option value="3">3年</option>
+                    <option value="4">4年</option>
+                </select>
+            </div>
+            <div>
+                <label for="faculty-filter">学部:</label>
+                <select id="faculty-filter">
+                    <option value="">すべて</option>
+                    <option value="0">先進工学部</option>
+                    <option value="1">工学部</option>
+                    <option value="2">建築学部</option>
+                    <option value="3">情報学部</option>
+                </select>
+            </div>
+            <div id="department-container" style="display: none;">
+                <label for="department-filter">学科:</label>
+                <select id="department-filter">
+                    <option value="">すべて</option>
+                </select>
+            </div>
+            <button id="clear-filters-button" class="clear-button">クリア</button>
+            </div>
+
+        <div class="ranking-table-wrapper">
+            <table class="ranking-table">
+                <thead>
+                    <tr>
+                        <th>順位</th>
+                        <th>ニックネーム</th>
+                        <th>学部</th>
+                        <th>学年</th>
+                        <th>GPA</th>
+                    </tr>
+                </thead>
+                <tbody id="ranking-list">
+                </tbody>
+            </table>
+            <div id="loading-container" class="loading-container" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>ランキングを読み込み中...</p>
+            </div>
+             <p id="no-data-message" class="no-data-message" style="display: none;"></p>
+        </div>
+
+        <div class="pagination-controls">
+            <button id="prev-button" disabled>前へ</button>
+            <div id="pagination-numbers"></div>
+            <button id="next-button" disabled>次へ</button>
+            <div class="page-info-container">
+                <span id="page-info"></span>
+            </div>
+        </div>
+        <a href="../" class="back-link">GPA計算ページに戻る</a>
+
+    </div>
+
+    <footer class="footer">
+        <a href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a><br>
+        <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a><br>
+        <a href="../privacy/">プライバシーポリシーについて</a>
+        <p class="copyright">Copyright © 2024-2025 SAYU. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../auth.js"></script>
+    <script src="ranking.js"></script>
+</body>
+</html>
