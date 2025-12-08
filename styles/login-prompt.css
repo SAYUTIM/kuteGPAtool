@@ -1,0 +1,234 @@
+/* =======================================================================
+   ログインプロンプト共通スタイル
+   全ページで統一されたモダンデザインを適用
+   ======================================================================= */
+
+#login-prompt {
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 40px 20px !important;
+    min-height: calc(100vh - 150px) !important;
+    background: transparent !important;
+    text-align: center !important;
+    box-shadow: none !important;
+}
+
+/* When login-prompt is visible (display: block from JS), make it flex */
+#login-prompt[style*="block"] {
+    display: flex !important;
+}
+
+.login-card {
+    background: #ffffff !important;
+    border-radius: 24px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+    padding: 56px 48px !important;
+    max-width: 480px !important;
+    width: 100% !important;
+    text-align: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* 上部のアクセントライン */
+.login-card::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 5px !important;
+    background: linear-gradient(90deg, #4CAF50, #66BB6A, #43A047) !important;
+}
+
+.login-card h1 {
+    font-size: 1.9rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 1rem !important;
+    color: #1a1a2e !important;
+    letter-spacing: -0.02em !important;
+}
+
+.login-card>p {
+    color: #6b7280 !important;
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+    margin-bottom: 2.5rem !important;
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+}
+
+/* プライバシーチェックボックス */
+.login-card .privacy-checkbox-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    margin-bottom: 1.5rem !important;
+    font-size: 1rem !important;
+    padding: 14px 20px !important;
+    background: #f9fafb !important;
+    border-radius: 12px !important;
+    transition: background 0.2s ease !important;
+    cursor: pointer !important;
+}
+
+.login-card .privacy-checkbox-container:hover {
+    background: #f3f4f6 !important;
+}
+
+.login-card .privacy-checkbox-container input[type="checkbox"] {
+    width: 20px !important;
+    height: 20px !important;
+    accent-color: #4CAF50 !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+}
+
+.login-card .privacy-checkbox-container label {
+    cursor: pointer !important;
+    color: #4b5563 !important;
+    user-select: none !important;
+}
+
+.login-card .privacy-checkbox-container a {
+    color: #4CAF50 !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    transition: color 0.2s ease !important;
+}
+
+.login-card .privacy-checkbox-container a:hover {
+    color: #388E3C !important;
+    text-decoration: underline !important;
+}
+
+/* ログインボタン */
+.login-card .login-button {
+    width: 100% !important;
+    padding: 18px 28px !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    background: linear-gradient(135deg, #4CAF50, #43A047) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin: 0 !important;
+    box-shadow: 0 4px 14px rgba(76, 175, 80, 0.35) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.login-card .login-button::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+    transition: left 0.5s ease !important;
+}
+
+.login-card .login-button:hover:not(:disabled)::after {
+    left: 100% !important;
+}
+
+.login-card .login-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #43A047, #388E3C) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4) !important;
+}
+
+.login-card .login-button:active:not(:disabled) {
+    transform: translateY(0) !important;
+}
+
+.login-card .login-button:disabled {
+    background: linear-gradient(135deg, #9CA3AF, #6B7280) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* サイト説明 */
+.login-card .site-description {
+    margin-top: 2.5rem !important;
+    padding-top: 2rem !important;
+    border-top: 1px solid #e5e7eb !important;
+    text-align: left !important;
+}
+
+.login-card .site-description h2 {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    margin-bottom: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.login-card .site-description h2::before {
+    content: '📋' !important;
+    font-size: 1.1rem !important;
+}
+
+.login-card .site-description p {
+    font-size: 0.9rem !important;
+    color: #6b7280 !important;
+    line-height: 1.8 !important;
+    margin-bottom: 0.5rem !important;
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+}
+
+/* 戻るリンク */
+.login-card .back-to-main {
+    display: inline-block !important;
+    margin-top: 2rem !important;
+    font-size: 1rem !important;
+    color: #9CA3AF !important;
+    text-decoration: none !important;
+    padding: 10px 20px !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease !important;
+}
+
+.login-card .back-to-main:hover {
+    color: #4CAF50 !important;
+    background: #f0fdf4 !important;
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 480px) {
+    #login-prompt {
+        padding: 30px 15px !important;
+        min-height: calc(100vh - 120px) !important;
+    }
+
+    .login-card {
+        padding: 40px 28px !important;
+        border-radius: 20px !important;
+    }
+
+    .login-card h1 {
+        font-size: 1.5rem !important;
+    }
+
+    .login-card>p {
+        font-size: 0.9rem !important;
+    }
+
+    .login-card .login-button {
+        padding: 16px 24px !important;
+        font-size: 1rem !important;
+    }
+
+    .login-card .privacy-checkbox-container {
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+    }
+}

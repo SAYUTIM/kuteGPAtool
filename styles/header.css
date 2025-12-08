@@ -1,0 +1,93 @@
+/* styles/header.css - Sticky Navigation Header */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.site-header.hidden {
+    transform: translateY(-100%);
+}
+
+/* Site logo/name */
+.site-header-logo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-header-logo:hover {
+    color: #4CAF50;
+}
+
+.site-header-logo-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Navigation links */
+.site-header-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-header-link {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.site-header-link:hover {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+.site-header-link.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Body padding moved to base.css to prevent CLS */
+
+/* Responsive */
+@media (max-width: 600px) {
+    .site-header {
+        padding: 0 12px;
+    }
+
+    .site-header-logo {
+        font-size: 0.95rem;
+    }
+
+    .site-header-logo span:not(.site-header-logo-icon) {
+        display: none;
+    }
+
+    .site-header-link {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+}

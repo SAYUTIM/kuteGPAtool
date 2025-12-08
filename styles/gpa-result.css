@@ -1,0 +1,28 @@
+#result table {
+    width: 90%;
+    max-width: 700px;
+    margin: 30px auto 0;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(44, 62, 80, 0.05);
+}
+
+#result table th,
+#result table td {
+    border-bottom: 1px solid #ecf0f1;
+    padding: 15px;
+    text-align: center;
+}
+
+#result table th {
+    background-color: #e8e8f5;
+    font-weight: 600;
+}
+
+#result table .subjects {
+    white-space: pre-wrap;
+    text-align: left;
+    padding-left: 10%;
+}

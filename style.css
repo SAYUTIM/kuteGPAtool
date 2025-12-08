@@ -1,0 +1,12 @@
+@import 'styles/base.css';
+@import 'styles/layout.css';
+@import 'styles/components.css';
+@import 'styles/gpa-result.css';
+@import 'styles/ranking.css';
+@import 'styles/gpa-graph.css';
+@import 'styles/f-grade.css';
+@import 'styles/header.css';
+@import 'styles/ad-sidebar.css';
+@import 'styles/responsive.css';
+@import 'styles/loading.css';
+@import 'styles/login-prompt.css';
