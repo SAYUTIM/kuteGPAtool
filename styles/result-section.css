@@ -1,0 +1,530 @@
+/* =======================================================================
+   Result Section - Modern Design (Post-Upload)
+   Matches course page color scheme
+   ======================================================================= */
+
+/* CSS Variables matching course page */
+:root {
+    --primary-color: #10b981;
+    --primary-hover: #059669;
+    --primary-light: rgba(16, 185, 129, 0.1);
+    --primary-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f1f5f9;
+
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+
+    --border-color: #e2e8f0;
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+    --border-radius-lg: 16px;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+}
+
+/* =======================================================================
+   Result Container
+   ======================================================================= */
+#result {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+#result h1#gpa {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+#result h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border-color);
+    text-align: left;
+}
+
+/* =======================================================================
+   GPA Display - Simple text display, no card
+   ======================================================================= */
+#gpashow {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+/* =======================================================================
+   GPA Trend Chart Card
+   ======================================================================= */
+#gpa-trend {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg) !important;
+    padding: 28px !important;
+    margin: 0 auto 32px !important;
+    box-shadow: var(--shadow-md) !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+#gpa-trend h2 {
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+}
+
+/* =======================================================================
+   Ranking Area Card
+   ======================================================================= */
+#ranking-area {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg) !important;
+    padding: 28px !important;
+    margin: 0 auto 32px !important;
+    box-shadow: var(--shadow-md) !important;
+    max-width: 100% !important;
+}
+
+/* When collapsed, remove card styling */
+#ranking-area.collapsed {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+#ranking-box-expanded {
+    border-radius: var(--border-radius);
+    padding: 24px;
+}
+
+#ranking-box-expanded .collapsible-header h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+#ranking-box-expanded .collapsible-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+#ranking-box-expanded .collapsible-content p:last-of-type {
+    margin-bottom: 16px;
+}
+
+#ranking-unavailable-message {
+    padding: 16px 0;
+    text-align: center;
+}
+
+#ranking-unavailable-message p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.9375rem;
+}
+
+/* Form Row Styling */
+#ranking-area .form-row {
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+#ranking-area .form-row .form-row-item {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9375rem;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+#ranking-area .form-row #nicknameInput.form-row-item {
+    background: var(--bg-secondary);
+}
+
+#ranking-area .form-row #nicknameInput.form-row-item:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+#ranking-area #submitRankingButton.form-row-item {
+    background: var(--primary-gradient);
+    border: none;
+    font-weight: 500;
+}
+
+#ranking-area #submitRankingButton.form-row-item:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+#ranking-area #logout-button.form-row-item {
+    background: #ef4444;
+    border: none;
+    font-weight: 500;
+}
+
+#ranking-area #logout-button.form-row-item:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+#expand-ranking-btn {
+    display: block !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+    padding: 16px 32px !important;
+    background: var(--bg-secondary) !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    color: var(--text-primary) !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    transition: all var(--transition-fast) !important;
+}
+
+#expand-ranking-btn:hover {
+    border-color: var(--primary-color) !important;
+    background: var(--primary-light) !important;
+    color: var(--primary-color) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+#rankingStatus {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+}
+
+/* =======================================================================
+   Simulator Button
+   ======================================================================= */
+#repeater {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 32px !important;
+    padding: 16px 32px !important;
+    background: var(--bg-secondary) !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    color: var(--text-primary) !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    transition: all var(--transition-fast) !important;
+}
+
+#repeater:hover {
+    border-color: var(--primary-color) !important;
+    background: var(--primary-light) !important;
+    color: var(--primary-color) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* =======================================================================
+   Repeat Simulator Section
+   ======================================================================= */
+#repeat {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: 28px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-md);
+}
+
+#repeat h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+#repeat button {
+    background: var(--primary-gradient);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 12px 24px;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+#repeat button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.selecter-row {
+    border-radius: var(--border-radius);
+    padding: 12px 0;
+    margin-bottom: 8px;
+}
+
+.selecter-row:last-of-type {
+    margin-bottom: 0;
+}
+
+.subject-select,
+.grade-select {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 10px 14px;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+    min-width: 180px;
+}
+
+.subject-select:focus,
+.grade-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.selecter-row button {
+    background: #ef4444 !important;
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 16px !important;
+    border-radius: 50% !important;
+}
+
+.selecter-row button:hover {
+    background: #dc2626 !important;
+}
+
+/* =======================================================================
+   Tables - Modern Card Style
+   ======================================================================= */
+#result table {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 32px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+#result table th,
+#result table td {
+    padding: 16px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#result table tr:last-child td {
+    border-bottom: none;
+}
+
+#result table th {
+    background: var(--bg-tertiary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+#result table td {
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+}
+
+/* Remove hover effect from table rows - subjects are not fully clickable */
+#result table tbody tr {
+    transition: none;
+}
+
+/* Grade indicators with colored badges */
+#result table td:first-child {
+    font-weight: 600;
+}
+
+#result table .subjects {
+    text-align: left;
+    padding-left: 24px;
+    white-space: pre-wrap;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+/* =======================================================================
+   Section Cards Container
+   ======================================================================= */
+.result-section-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: 28px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-md);
+}
+
+.result-section-card h2 {
+    margin-top: 0;
+}
+
+/* =======================================================================
+   Stats Grid (for grade summary)
+   ======================================================================= */
+.grade-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.grade-stat-card {
+    background: var(--bg-tertiary);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    text-align: center;
+    transition: transform var(--transition-fast);
+}
+
+.grade-stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.grade-stat-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+}
+
+.grade-stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.grade-stat-sub {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* =======================================================================
+   Footer Enhancement
+   ======================================================================= */
+.footer {
+    border-top: 1px solid var(--border-color);
+    margin-top: 48px;
+    padding: 32px 20px;
+}
+
+.footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin: 0 16px;
+    font-size: 0.875rem;
+    transition: color var(--transition-fast);
+}
+
+.footer a:hover {
+    color: var(--primary-color);
+}
+
+.footer .copyright {
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    margin-top: 16px;
+}
+
+/* =======================================================================
+   Responsive Adjustments
+   ======================================================================= */
+@media (max-width: 768px) {
+    #result {
+        padding: 0 16px;
+    }
+
+    #result h1#gpa {
+        font-size: 2rem;
+    }
+
+    #result table th,
+    #result table td {
+        padding: 12px 14px;
+        font-size: 0.875rem;
+    }
+
+    #ranking-area,
+    #gpa-trend,
+    #repeat {
+        padding: 20px !important;
+    }
+
+    .grade-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .grade-stat-card {
+        padding: 16px;
+    }
+
+    .grade-stat-value {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #result table .subjects {
+        padding-left: 14px;
+        font-size: 0.8125rem;
+    }
+
+    .grade-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grade-stat-card {
+        padding: 12px;
+    }
+
+    .grade-stat-value {
+        font-size: 1.25rem;
+    }
+
+    .grade-stat-label {
+        font-size: 0.6875rem;
+    }
+}

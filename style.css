@@ -1,6 +1,8 @@
 @import 'styles/base.css';
 @import 'styles/layout.css';
 @import 'styles/components.css';
+@import 'styles/upload-section.css';
+@import 'styles/result-section.css';
 @import 'styles/gpa-result.css';
 @import 'styles/ranking.css';
 @import 'styles/gpa-graph.css';

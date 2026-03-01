@@ -4,7 +4,7 @@
     max-width: 600px;
     padding: 40px;
     background-color: #fff;
-    border: 2px dashed #4CAF50;
+    border: 2px dashed #10b981;
     border-radius: 12px;
     color: #666;
     font-size: 18px;
@@ -14,8 +14,8 @@
 }
 
 .file-upload-area:hover {
-    background-color: #e8f5e9;
-    border-color: #45a049;
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: #059669;
 }
 
 .file-name {
@@ -60,13 +60,13 @@
 }
 
 #submitRankingButton.form-row-item {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
+    background-color: #10b981;
+    border-color: #10b981;
 }
 
 #submitRankingButton.form-row-item:hover {
-    background-color: #45a049;
-    border-color: #45a049;
+    background-color: #059669;
+    border-color: #059669;
 }
 
 #logout-button.form-row-item {
@@ -85,12 +85,12 @@
 }
 
 #viewRankingButton {
-    background-color: #27ae60;
-    border-color: #27ae60;
+    background-color: #10b981;
+    border-color: #10b981;
 }
 
 #viewRankingButton:hover {
-    background-color: #2ecc71;
+    background-color: #059669;
 }
 
 #login-button:disabled {
@@ -191,8 +191,8 @@
 .loading-spinner {
     width: 50px;
     height: 50px;
-    border: 5px solid #ecf0f1;
-    border-top: 5px solid #27ae60;
+    border: 5px solid #f1f5f9;
+    border-top: 5px solid #10b981;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-bottom: 15px;

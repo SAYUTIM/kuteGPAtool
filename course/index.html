@@ -4,17 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>科目別成績統計 - 工学院大学</title>
+    <title>科目別成績統計 - 工学院GPA計算機</title>
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/loading.css">
     <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../styles/course.css">
     <link rel="stylesheet" href="../styles/login-prompt.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Sticky Navigation Header -->
     <header id="site-header" class="site-header">
         <a href="../" class="site-header-logo">
             <img src="../icon.ico" alt="" class="site-header-logo-icon">
@@ -35,135 +39,238 @@
         </div>
     </div>
 
-    <div id="login-prompt" style="display: none;">
-        <div class="login-card">
-            <h1>科目別成績統計</h1>
-            <p>科目別成績統計の閲覧には、大学のGoogleアカウント（@g.kogakuin.jp）でのログインが必要です。</p>
 
-            <label class="privacy-checkbox-container" for="privacy-checkbox">
-                <input type="checkbox" id="privacy-checkbox">
-                <span><a href="../privacy/" target="_blank" rel="noopener noreferrer"
-                        onclick="event.stopPropagation()">プライバシーポリシー</a>に同意する</span>
-            </label>
-            <button id="login-button" class="login-button" disabled>Googleアカウントでログイン</button>
 
-            <div class="site-description">
-                <h2>サイトについて</h2>
-                <p>このサイトは工学院大学の学生有志が開発・運営しており、大学公式のサービスではありません。</p>
-                <p>ログインすることで、科目ごとの成績分布や統計情報を閲覧できます。</p>
-            </div>
-
-            <a href="../" class="back-to-main">GPA計算ページに戻る</a>
-        </div>
-    </div>
 
     <div id="main-content" style="display: none;">
-        <div class="container">
-            <header>
-                <h1>📊 科目別成績統計 [ベータ版]</h1>
-                <p class="subtitle">各科目の成績分布をリアルタイムで確認</p>
-                <a href="../index.html" class="back-link">← メインページに戻る</a>
-            </header>
+        <div class="course-app">
 
-            <div class="search-section">
-                <div class="search-container">
-                    <input type="text" id="courseSearch" placeholder="" autocomplete="off">
+            <aside class="sidebar" id="sidebar">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="サイドバーを閉じる">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                </button>
 
-                    <!-- スライドアニメーション用 -->
-                    <div id="slideOverlay" class="slide-overlay hidden">
-                        <span class="placeholder-static">科目名を入力して検索... 例：</span>
-                        <span id="slideContainer" class="slide-container">
-                            <span id="slideText" class="slide-text"></span>
-                        </span>
-                    </div>
-                    <div id="autocomplete" class="autocomplete-results"></div>
-                </div>
-            </div>
-
-            <div id="resultsSection" class="results-section" style="display: none;">
-                <div class="course-header">
-                    <div class="course-title-row">
-                        <h2 id="courseName">-</h2>
-                        <span class="course-credits" id="courseCredits">-</span>
-                    </div>
-                    <div class="year-semester-text" id="yearSemesterText">-</div>
-                    <div class="course-meta-container">
-                        <div class="meta-group" id="departmentGroup"></div>
-                    </div>
+                <div class="sidebar-header">
+                    <h2>フィルター</h2>
+                    <button class="clear-filters" id="clearFilters">クリア</button>
                 </div>
 
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-label">履修者数</div>
-                        <div class="stat-value" id="totalStudents">-</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">合格率</div>
-                        <div class="stat-value" id="passRate">-</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">平均GPA</div>
-                        <div class="stat-value" id="avgGPA">-</div>
+                <div class="filter-section">
+                    <h3>学部</h3>
+                    <div class="filter-list" id="facultyList">
+                        <label class="filter-item">
+                            <input type="radio" name="faculty" value="all" checked>
+                            <span class="filter-label">すべての学部</span>
+                            <span class="filter-count" id="countAll">-</span>
+                        </label>
+                        <label class="filter-item">
+                            <input type="radio" name="faculty" value="advanced">
+                            <span class="filter-label">先進工学部</span>
+                            <span class="filter-count" id="countAdvanced">-</span>
+                        </label>
+                        <label class="filter-item">
+                            <input type="radio" name="faculty" value="engineering">
+                            <span class="filter-label">工学部</span>
+                            <span class="filter-count" id="countEngineering">-</span>
+                        </label>
+                        <label class="filter-item">
+                            <input type="radio" name="faculty" value="architecture">
+                            <span class="filter-label">建築学部</span>
+                            <span class="filter-count" id="countArchitecture">-</span>
+                        </label>
+                        <label class="filter-item">
+                            <input type="radio" name="faculty" value="informatics">
+                            <span class="filter-label">情報学部</span>
+                            <span class="filter-count" id="countInformatics">-</span>
+                        </label>
                     </div>
                 </div>
 
-                <div class="chart-section">
-                    <h3>成績分布</h3>
-                    <div class="grade-chart">
-                        <div class="grade-bar" data-grade="A+">
-                            <div class="bar-label">A+</div>
-                            <div class="bar-container">
-                                <div class="bar-fill" id="barAPlus" style="width: 0%"></div>
-                            </div>
-                            <div class="bar-value" id="countAPlus">0</div>
+                <div class="filter-section">
+                    <h3>学科</h3>
+                    <div class="filter-list scrollable" id="departmentList">
+
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>学期</h3>
+                    <div class="filter-list" id="semesterList">
+                        <label class="filter-item">
+                            <input type="checkbox" name="semester" value="all" checked>
+                            <span class="filter-label">すべて</span>
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox" name="semester" value="1Q">
+                            <span class="filter-label">1Q</span>
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox" name="semester" value="2Q">
+                            <span class="filter-label">2Q</span>
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox" name="semester" value="3Q">
+                            <span class="filter-label">3Q</span>
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox" name="semester" value="4Q">
+                            <span class="filter-label">4Q</span>
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox" name="semester" value="前期">
+                            <span class="filter-label">前期</span>
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox" name="semester" value="後期">
+                            <span class="filter-label">後期</span>
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+
+            <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+            <button class="mobile-filter-btn" id="mobileFilterBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" />
+                </svg>
+                フィルター
+            </button>
+
+            <main class="main-content">
+                <div class="content-header">
+                    <h1>科目別成績統計 [ベータ版]</h1>
+                    <p class="subtitle">各科目の成績分布をリアルタイムで確認</p>
+                </div>
+
+                <div class="search-section">
+                    <div class="search-container">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="M21 21l-4.35-4.35" />
+                        </svg>
+                        <input type="text" id="courseSearch" placeholder="" autocomplete="off">
+
+                        <div id="slideOverlay" class="slide-overlay hidden">
+                            <span class="placeholder-static">科目名を入力... 例：</span>
+                            <span id="slideContainer" class="slide-container">
+                                <span id="slideText" class="slide-text"></span>
+                            </span>
                         </div>
-                        <div class="grade-bar" data-grade="A">
-                            <div class="bar-label">A</div>
-                            <div class="bar-container">
-                                <div class="bar-fill" id="barA" style="width: 0%"></div>
+                        <div id="autocomplete" class="autocomplete-results"></div>
+                    </div>
+                </div>
+
+                <div class="course-list-header">
+                    <h2 id="courseListTitle">すべての科目</h2>
+                    <span class="course-count" id="courseCount">- 件</span>
+                </div>
+
+                <div class="course-grid" id="courseGrid">
+                </div>
+
+                <div class="load-more-container" id="loadMoreContainer" style="display: none;">
+                    <button class="load-more-btn" id="loadMoreBtn">もっと見る</button>
+                </div>
+                <div id="detailPanel" class="detail-panel" style="display: none;">
+                    <div class="detail-panel-content">
+                        <button class="detail-close" id="detailClose" aria-label="閉じる">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+
+                        <div class="detail-header">
+                            <h2 id="detailCourseName">-</h2>
+                            <div class="detail-meta">
+                                <span class="detail-credits" id="detailCredits">-</span>
+                                <span class="detail-semester" id="detailSemester">-</span>
                             </div>
-                            <div class="bar-value" id="countA">0</div>
+                            <div class="detail-departments" id="detailDepartments"></div>
                         </div>
-                        <div class="grade-bar" data-grade="B">
-                            <div class="bar-label">B</div>
-                            <div class="bar-container">
-                                <div class="bar-fill" id="barB" style="width: 0%"></div>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-label">履修者数</div>
+                                <div class="stat-value" id="totalStudents">-</div>
                             </div>
-                            <div class="bar-value" id="countB">0</div>
+                            <div class="stat-card">
+                                <div class="stat-label">合格率</div>
+                                <div class="stat-value" id="passRate">-</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">平均GPA</div>
+                                <div class="stat-value" id="avgGPA">-</div>
+                            </div>
                         </div>
-                        <div class="grade-bar" data-grade="C">
-                            <div class="bar-label">C</div>
-                            <div class="bar-container">
-                                <div class="bar-fill" id="barC" style="width: 0%"></div>
+
+                        <div class="chart-section">
+                            <h3>成績分布</h3>
+                            <div class="grade-chart">
+                                <div class="grade-bar" data-grade="A+">
+                                    <div class="bar-label">A+</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" id="barAPlus" style="width: 0%"></div>
+                                    </div>
+                                    <div class="bar-value" id="countAPlus">0</div>
+                                </div>
+                                <div class="grade-bar" data-grade="A">
+                                    <div class="bar-label">A</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" id="barA" style="width: 0%"></div>
+                                    </div>
+                                    <div class="bar-value" id="countA">0</div>
+                                </div>
+                                <div class="grade-bar" data-grade="B">
+                                    <div class="bar-label">B</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" id="barB" style="width: 0%"></div>
+                                    </div>
+                                    <div class="bar-value" id="countB">0</div>
+                                </div>
+                                <div class="grade-bar" data-grade="C">
+                                    <div class="bar-label">C</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" id="barC" style="width: 0%"></div>
+                                    </div>
+                                    <div class="bar-value" id="countC">0</div>
+                                </div>
+                                <div class="grade-bar" data-grade="D">
+                                    <div class="bar-label">D</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" id="barD" style="width: 0%"></div>
+                                    </div>
+                                    <div class="bar-value" id="countD">0</div>
+                                </div>
+                                <div class="grade-bar" data-grade="F">
+                                    <div class="bar-label">F</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" id="barF" style="width: 0%"></div>
+                                    </div>
+                                    <div class="bar-value" id="countF">0</div>
+                                </div>
                             </div>
-                            <div class="bar-value" id="countC">0</div>
                         </div>
-                        <div class="grade-bar" data-grade="D">
-                            <div class="bar-label">D</div>
-                            <div class="bar-container">
-                                <div class="bar-fill" id="barD" style="width: 0%"></div>
-                            </div>
-                            <div class="bar-value" id="countD">0</div>
-                        </div>
-                        <div class="grade-bar" data-grade="F">
-                            <div class="bar-label">F</div>
-                            <div class="bar-container">
-                                <div class="bar-fill" id="barF" style="width: 0%"></div>
-                            </div>
-                            <div class="bar-value" id="countF">0</div>
+
+                        <div id="noDataMessage" class="no-data" style="display: none;">
+                            <p>この科目のデータはまだありません</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="noDataMessage" class="no-data" style="display: none;">
-                <p>この科目のデータはまだありません</p>
-            </div>
+                <div class="detail-overlay" id="detailOverlay"></div>
+            </main>
         </div>
     </div>
 
     <footer class="footer">
-        <p class="copyright">Copyright © 2024-2025 SAYU. All Rights Reserved.</p>
+        <p class="copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

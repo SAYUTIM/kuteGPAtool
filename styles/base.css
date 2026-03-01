@@ -1,18 +1,19 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
     text-align: center;
     margin: 0;
     padding: 76px 15px 40px 15px;
     /* Top padding for fixed header (56px + 20px) */
-    color: #333;
-    background-color: #f5f5f5;
+    color: #1e293b;
+    background-color: #f8fafc;
+    -webkit-font-smoothing: antialiased;
 }
 
 button {
     margin: 10px auto;
     padding: 10px 18px;
     font-size: 16px;
-    background-color: #4CAF50;
+    background-color: #10b981;
     color: white;
     border: none;
     cursor: pointer;
@@ -22,7 +23,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #059669;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

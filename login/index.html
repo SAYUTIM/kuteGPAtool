@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン - 工学院大学GPA計算機</title>
+    <meta name="description" content="工学院大学GPA計算機へのログイン。大学のGoogleアカウント（@g.kogakuin.jp）が必要です。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../icon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/loading.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-body">
+
+    <div id="loading-screen">
+        <div class="wave-loader"></div>
+        <div class="loading-text">Loading...</div>
+        <div id="loading-message" style="display: none;">
+            サーバーが混み合っています...
+        </div>
+    </div>
+
+    <div id="login-prompt" class="login-prompt" style="display: none;">
+        <div class="login-wrapper">
+            <div class="login-left">
+                <div class="login-content">
+                    <div class="login-branding">
+                        <div class="brand-header">
+                            <img src="../icon.ico" alt="工学院GPA計算機" class="login-logo">
+                            <div>
+                                <h1>工学院大学GPA計算機</h1>
+                                <p class="tagline">成績管理をもっとスマートに</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="features">
+                        <div class="feature">
+                            <span class="feature-icon">📊</span>
+                            <div class="feature-body">
+                                <strong>GPA自動計算</strong>
+                                <p>PDFをアップロードするだけで、GPAを自動で計算。</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🏆</span>
+                            <div class="feature-body">
+                                <strong>GPAランキング</strong>
+                                <p>学部・学年別のGPAランキングで自分の位置を確認。</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">📈</span>
+                            <div class="feature-body">
+                                <strong>科目別成績統計</strong>
+                                <p>科目ごとの成績分布や平均評定を閲覧可能。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-right">
+                <div class="login-form">
+                    <h2>ログイン</h2>
+                    <p class="login-desc">
+                        大学のGoogleアカウント<br>
+                        <strong>@g.kogakuin.jp</strong> が必要です
+                    </p>
+
+                    <label class="privacy-checkbox" for="privacy-checkbox">
+                        <input type="checkbox" id="privacy-checkbox">
+                        <span><a href="../privacy/" target="_blank"
+                                onclick="event.stopPropagation()">プライバシーポリシー</a>に同意する</span>
+                    </label>
+
+                    <button id="login-button" class="login-button" disabled>
+                        <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="#4285F4"
+                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                            <path fill="#34A853"
+                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                            <path fill="#FBBC05"
+                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                            <path fill="#EA4335"
+                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                        </svg>
+                        <span>Googleでログイン</span>
+                    </button>
+
+                    <div class="login-footer">
+                        <p class="login-notice-text">このサイトは学生有志が運営しており、大学公式のサービスではありません。</p>
+                        <p class="copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../app.js"></script>
+</body>
+
+</html>

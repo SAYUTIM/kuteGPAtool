@@ -1,0 +1,463 @@
+/* =======================================================================
+   ログインページ - 左右分割レイアウト
+   PC: 左右分割、モバイル: シンプル中央配置
+   ======================================================================= */
+
+/* ボディ */
+.login-body {
+    padding: 0;
+    min-height: 100vh;
+    background-color: #f8fafc;
+}
+
+/* ログインプロンプト */
+.login-prompt {
+    min-height: 100vh;
+}
+
+#login-prompt[style*="block"] {
+    display: block !important;
+}
+
+/* ラッパー - 左右分割 */
+.login-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+}
+
+/* 左側 - ブランディング＆機能紹介 */
+.login-left {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: clamp(32px, 4vw, 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-content {
+    width: 100%;
+    max-width: 480px;
+}
+
+/* ブランドヘッダー - 横並び */
+.login-branding {
+    margin-bottom: clamp(28px, 3vw, 44px);
+}
+
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.5vw, 24px);
+}
+
+.login-logo {
+    width: clamp(52px, 5vw, 72px);
+    height: clamp(52px, 5vw, 72px);
+    border-radius: clamp(12px, 1.2vw, 16px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+    background-color: #f8fafc;
+    padding: 4px;
+}
+
+.brand-header h1 {
+    font-size: clamp(20px, 2.2vw, 34px);
+    margin: 0 0 4px 0;
+    color: white;
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.tagline {
+    font-size: clamp(0.85rem, 1vw, 1.15rem);
+    color: #94a3b8;
+    margin: 0;
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* 機能リスト */
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 1.5vw, 24px);
+}
+
+.feature {
+    display: flex;
+    gap: clamp(12px, 1.2vw, 18px);
+    align-items: flex-start;
+}
+
+.feature-icon {
+    font-size: clamp(1.1rem, 1.3vw, 1.6rem);
+    width: clamp(38px, 3.5vw, 52px);
+    height: clamp(38px, 3.5vw, 52px);
+    background: rgba(16, 185, 129, 0.2);
+    border-radius: clamp(8px, 0.8vw, 12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.feature-body {
+    flex: 1;
+    text-align: left;
+}
+
+.feature-body strong {
+    display: block;
+    font-size: clamp(0.9rem, 1vw, 1.1rem);
+    margin-bottom: 3px;
+    color: white;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.feature-body p {
+    font-size: clamp(0.8rem, 0.9vw, 1rem);
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+/* 右側 - ログインフォーム */
+.login-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(32px, 4vw, 64px);
+}
+
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-form h2 {
+    font-size: clamp(24px, 2.2vw, 34px);
+    margin-bottom: clamp(10px, 1vw, 16px);
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.login-desc {
+    color: #64748b;
+    font-size: clamp(0.9rem, 1vw, 1.1rem);
+    margin: 0 0 clamp(20px, 2vw, 28px) 0;
+    line-height: 1.6;
+}
+
+.login-desc strong {
+    color: #10b981;
+    font-weight: 600;
+}
+
+/* 注意事項 */
+.login-notice {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: clamp(0.75rem, 0.8vw, 0.88rem);
+    padding: clamp(8px, 0.8vw, 12px) clamp(10px, 1vw, 14px);
+    border-radius: 10px;
+    margin-bottom: clamp(16px, 1.5vw, 22px);
+    text-align: left;
+    line-height: 1.4;
+}
+
+/* プライバシーチェックボックス - カード型ボタン */
+.privacy-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: clamp(16px, 1.5vw, 22px);
+    font-size: clamp(0.9rem, 0.95vw, 1rem);
+    cursor: pointer;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.privacy-checkbox:hover {
+    background: #e2e8f0;
+    border-color: #10b981;
+}
+
+.privacy-checkbox:has(input:checked) {
+    background: #dcfce7;
+    border-color: #10b981;
+}
+
+.privacy-checkbox input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    accent-color: #10b981;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.privacy-checkbox a {
+    color: #10b981;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.privacy-checkbox a:hover {
+    text-decoration: underline;
+}
+
+/* ログインボタン */
+.login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: clamp(12px, 1.2vw, 16px) 24px;
+    font-size: clamp(0.95rem, 1vw, 1.1rem);
+    font-weight: 600;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0;
+}
+
+.login-button:hover:not(:disabled) {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+}
+
+.login-button:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.google-icon {
+    flex-shrink: 0;
+}
+
+/* フッター */
+.login-footer {
+    margin-top: clamp(24px, 2.5vw, 36px);
+    text-align: center;
+}
+
+.login-notice-text {
+    font-size: clamp(0.7rem, 0.75vw, 0.8rem);
+    color: #94a3b8;
+    margin: 0 0 8px 0;
+    white-space: nowrap;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+}
+
+.login-footer .copyright {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* =======================================================================
+   モバイル対応 - アニメーション付きデザイン
+   ======================================================================= */
+@media screen and (max-width: 900px) {
+
+    html,
+    body,
+    .login-body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .login-prompt {
+        height: 100%;
+    }
+
+    .login-wrapper {
+        display: block;
+        height: 100%;
+        overflow: hidden;
+        /* グラデーション背景 */
+        background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+        background-size: 200% 200%;
+        animation: gradientShift 8s ease infinite;
+    }
+
+    @keyframes gradientShift {
+
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    /* 左側を非表示 */
+    .login-left {
+        display: none;
+    }
+
+    /* 右側をフルスクリーン中央配置 */
+    .login-right {
+        height: 100%;
+        padding: 5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        overflow: hidden;
+        background: transparent;
+    }
+
+    .login-form {
+        width: 100%;
+        max-width: 90vw;
+        text-align: center;
+        /* ガラス効果 */
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 6vw 5vw;
+        border-radius: 4vw;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    /* モバイル用にロゴを追加表示（フローティング） */
+    .login-form::before {
+        content: '';
+        display: block;
+        width: 14vw;
+        height: 14vw;
+        max-width: 64px;
+        max-height: 64px;
+        margin: 0 auto 3vw;
+        background: url('../icon.ico') center/contain no-repeat;
+        border-radius: 3vw;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+
+    .login-form h2 {
+        font-size: 6vw;
+        margin-bottom: 2vw;
+        color: #1e293b;
+        animation: fadeInUp 0.6s ease both;
+    }
+
+    .login-desc {
+        font-size: 3.5vw;
+        margin-bottom: 4vw;
+        color: #64748b;
+        animation: fadeInUp 0.6s ease 0.1s both;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .login-desc br {
+        display: none;
+    }
+
+    .privacy-checkbox {
+        font-size: 3.2vw;
+        padding: 3vw 4vw;
+        margin-bottom: 3vw;
+        gap: 2vw;
+        animation: fadeInUp 0.6s ease 0.2s both;
+    }
+
+    .privacy-checkbox input[type="checkbox"] {
+        width: 5vw;
+        height: 5vw;
+        max-width: 20px;
+        max-height: 20px;
+    }
+
+    .login-button {
+        font-size: 3.8vw;
+        padding: 3vw 5vw;
+        border-radius: 2.5vw;
+        gap: 2vw;
+        animation: fadeInUp 0.6s ease 0.3s both, pulse 2s ease-in-out infinite 1s;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+        }
+
+        50% {
+            box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+        }
+    }
+
+    .login-button .google-icon {
+        width: 4.5vw;
+        height: 4.5vw;
+        max-width: 18px;
+        max-height: 18px;
+    }
+
+    .login-footer {
+        margin-top: 4vw;
+        animation: fadeInUp 0.6s ease 0.4s both;
+    }
+
+    .login-notice-text {
+        font-size: 2.2vw;
+        position: static;
+        transform: none;
+        width: auto;
+        white-space: nowrap;
+        color: #94a3b8;
+    }
+
+    .login-footer .copyright {
+        font-size: 2.5vw;
+        margin-top: 1vw;
+        color: #94a3b8;
+    }
+}

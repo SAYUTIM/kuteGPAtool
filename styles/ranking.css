@@ -1,7 +1,12 @@
+/* rankページではh1のサブタイトルを非表示 */
+.ranking-page #main-content>h1::after {
+    display: none;
+}
+
 #ranking-area {
     margin: 40px auto 0 auto;
     padding: 25px;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     border-radius: 12px;
     max-width: 600px;
 }
@@ -119,11 +124,11 @@
 
 .pagination-controls button {
     margin: 0;
-    background-color: #27ae60;
+    background-color: #10b981;
 }
 
 .pagination-controls button:hover {
-    background-color: #2ecc71;
+    background-color: #059669;
 }
 
 .pagination-controls button:disabled {
@@ -173,7 +178,7 @@
 
 .privacy-container h2 {
     font-size: 20px;
-    border-left: 5px solid #4CAF50;
+    border-left: 5px solid #10b981;
     padding-left: 10px;
     margin-top: 40px;
     margin-bottom: 15px;
@@ -222,9 +227,9 @@
 }
 
 .pagination-number.active {
-    background-color: #27ae60;
+    background-color: #10b981;
     color: white;
-    border-color: #27ae60;
+    border-color: #10b981;
     cursor: default;
 }
 
@@ -289,4 +294,17 @@
     background-color: #f9f9f9;
     border-color: #ccc;
     color: #000;
+}
+
+/* Visibility control based on parent collapsed state */
+#ranking-area:not(.collapsed) #expand-ranking-btn {
+    display: none !important;
+}
+
+#ranking-area.collapsed #ranking-box-expanded {
+    display: none !important;
+}
+
+#ranking-area.collapsed #expand-ranking-btn {
+    display: block !important;
 }

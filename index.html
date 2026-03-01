@@ -7,6 +7,11 @@
     <meta name="description"
         content="工学院大学（UNIVERSAL PASSPORT RX）の学生が、成績PDFをアップロードするだけでGPAを自動計算できるサイトです。再履修やリピートのシミュレーションにも対応しています。">
     <link rel="icon" href="icon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/course-popup.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +19,6 @@
 
 <body>
 
-    <!-- Sticky Navigation Header -->
     <header id="site-header" class="site-header">
         <a href="./" class="site-header-logo">
             <img src="icon.ico" alt="" class="site-header-logo-icon">
@@ -35,27 +39,6 @@
         </div>
     </div>
 
-    <div id="login-prompt" style="display: none;">
-        <div class="login-card">
-            <h1>工学院大学GPA計算機</h1>
-            <p>GPAの計算とランキング機能の利用には、大学のGoogleアカウント（@g.kogakuin.jp）でのログインが必要です。</p>
-
-            <label class="privacy-checkbox-container" for="privacy-checkbox">
-                <input type="checkbox" id="privacy-checkbox">
-                <span><a href="privacy/" target="_blank" rel="noopener noreferrer"
-                        onclick="event.stopPropagation()">プライバシーポリシー</a>に同意する</span>
-            </label>
-            <button id="login-button" class="login-button" disabled>Googleアカウントでログイン</button>
-
-            <div class="site-description">
-                <h2>サイトについて</h2>
-                <p>このサイトは工学院大学の学生有志が開発・運営しており、大学公式のサービスではありません。</p>
-                <p>成績PDFをアップロードするだけでGPAを自動計算できます。再履修やリピートのシミュレーションにも対応しています。</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- F-grade credit input UI (outside main-content) -->
     <div id="f-credit-input-container" style="display: none;"></div>
 
     <div id="main-content" style="display: none;">
@@ -63,15 +46,23 @@
 
         <div id="fileUploadArea" class="file-upload-area">
             <input type="file" id="fileInput" accept=".pdf" hidden>
-            <p>ここにPDFファイルをドラッグ&ドロップするか、クリックして選択</p>
+            <div class="upload-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+            </div>
+            <p class="upload-title">ここにPDFファイルをドラッグ&ドロップ</p>
+            <p class="upload-subtitle">またはクリックして選択</p>
             <p id="fileName" class="file-name"></p>
         </div>
 
         <div id="instructions2">
             <h2>使い方:</h2>
-            <p>1. キューポート>成績>成績照会 の右上にあるPDFをクリックして、成績のPDFファイルをダウンロードします。</p>
-            <p>2. このサイトを開き、PDFファイルを選択してください。</p>
-            <p>3. 成績が表示されます。</p>
+            <p>キューポート > 成績 > 成績照会 の右上にあるPDFをクリックして、成績のPDFファイルをダウンロードします。</p>
+            <p>このサイトを開き、PDFファイルを選択してください。</p>
+            <p>成績が表示されます。</p>
 
             <br>
 
@@ -82,7 +73,7 @@
             <a href="rank/" class="back-link">現在のランキングを確認</a>
 
             <h2>成績統計:</h2>
-            <p>- 各科目を検索して成績を確認できます。</p>
+            <p>- 科目ごとの成績の統計を検索できます。</p>
             <a href="course/" class="back-link">成績統計を確認</a>
         </div>
 
@@ -220,10 +211,8 @@
         </div>
     </div>
 
-    <!-- Course Popup Container -->
     <div id="course-popup-container"></div>
 
-    <!-- Side Advertisement (shown only with results) -->
     <aside id="ad-sidebar" class="ad-sidebar">
         <div class="ad-sidebar-wrapper">
             <button id="ad-sidebar-close" class="ad-sidebar-close" title="閉じる">&times;</button>
@@ -235,12 +224,12 @@
     </aside>
 
     <footer class="footer">
-        <font color="red">結果をSNS等で共有する場合はファイル名に注意してください</font><br>
+        <font color="red">結果をSNS等で共有する場合はファイル名に注意してください</font><br><br>
         <a
-            href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a><br>
-        <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a><br>
+            href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a>
+        <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a>
         <a href="privacy/">プライバシーポリシーについて</a>
-        <p class="copyright">Copyright © 2024-2025 SAYU. All Rights Reserved.</p>
+        <p class="copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

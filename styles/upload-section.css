@@ -1,0 +1,575 @@
+/* =======================================================================
+   アップロード前セクション - プレミアムリデザイン
+   Dropbox, Google Drive, Notion のような洗練されたデザイン
+   ======================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
+
+/* =======================================================================
+   CSS Variables
+   ======================================================================= */
+:root {
+    --primary-color: #10b981;
+    --primary-hover: #059669;
+    --primary-light: rgba(16, 185, 129, 0.08);
+    --primary-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-orange: #f59e0b;
+
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f1f5f9;
+    --bg-hover: #f8fafc;
+
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+
+    --border-color: #e2e8f0;
+    --border-radius: 16px;
+    --border-radius-sm: 10px;
+    --border-radius-lg: 24px;
+    --border-radius-full: 9999px;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.16);
+
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =======================================================================
+   Body & Typography
+   ======================================================================= */
+body {
+    font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, var(--bg-primary) 0%, #f1f5f9 100%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+}
+
+/* =======================================================================
+   Main Content Container
+   ======================================================================= */
+#main-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* =======================================================================
+   Hero Section - タイトル & サブテキスト
+   ======================================================================= */
+#main-content>h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* サブタイトル的なテキスト */
+#main-content>h1::after {
+    content: 'PDFをアップロードするだけで簡単計算';
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-top: 12px;
+    letter-spacing: 0;
+}
+
+/* =======================================================================
+   Hero Upload Card - メインアップロードエリア
+   ======================================================================= */
+.file-upload-area {
+    background: var(--bg-secondary) !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: var(--border-radius-lg) !important;
+    padding: 56px 48px !important;
+    margin: 40px 0 48px !important;
+    width: 100% !important;
+    max-width: 800px !important;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.file-upload-area:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* アップロードアイコン */
+.file-upload-area .upload-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-upload-area .upload-icon svg {
+    width: 56px;
+    height: 56px;
+    stroke: var(--primary-color);
+    stroke-width: 1.2;
+}
+
+/* タイトルテキスト */
+.file-upload-area .upload-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 6px;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+}
+
+/* サブタイトルテキスト */
+.file-upload-area .upload-subtitle {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+}
+
+/* ファイル名表示 */
+.file-upload-area .file-name {
+    margin-top: 20px;
+    padding: 14px 20px;
+    background: var(--bg-tertiary);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9375rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+    box-sizing: border-box;
+}
+
+.file-upload-area .file-name:empty {
+    display: none;
+}
+
+/* =======================================================================
+   Feature Cards - 機能紹介セクション
+   ======================================================================= */
+#instructions2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    text-align: left;
+}
+
+#instructions2 h2 {
+    grid-column: 1 / -1;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 4px 4px;
+    padding: 0;
+    border: none;
+}
+
+#instructions2 h2:not(:first-of-type) {
+    margin-top: 24px;
+}
+
+/* 使い方カード */
+.feature-card {
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+}
+
+.feature-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+}
+
+.feature-card-icon.green {
+    background: var(--primary-light);
+}
+
+.feature-card-icon.blue {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.feature-card-icon.purple {
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.feature-card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.feature-card p {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.feature-card .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: gap var(--transition-fast);
+}
+
+.feature-card .card-link:hover {
+    gap: 10px;
+}
+
+.feature-card .card-link::after {
+    content: '→';
+    transition: transform var(--transition-fast);
+}
+
+.feature-card .card-link:hover::after {
+    transform: translateX(2px);
+}
+
+/* =======================================================================
+   Legacy Instructions (既存構造の上書き)
+   ======================================================================= */
+#instructions2>h2,
+#instructions2>p,
+#instructions2>br,
+#instructions2>.back-link {
+    grid-column: 1 / -1;
+}
+
+#instructions2>p {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.8;
+    padding: 0;
+}
+
+#instructions2>br {
+    display: none;
+}
+
+/* Step indicators */
+#instructions2>p:nth-of-type(1)::before,
+#instructions2>p:nth-of-type(2)::before,
+#instructions2>p:nth-of-type(3)::before {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+#instructions2>p:nth-of-type(1)::before {
+    content: '1';
+}
+
+#instructions2>p:nth-of-type(2)::before {
+    content: '2';
+}
+
+#instructions2>p:nth-of-type(3)::before {
+    content: '3';
+}
+
+/* 各種リンクボタン */
+#instructions2 .back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 12px 0 32px;
+    padding: 14px 28px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-full);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+#instructions2 .back-link:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#instructions2 .back-link::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* ランキングリンク */
+#instructions2 .back-link[href="rank/"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2310b981' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E");
+}
+
+#instructions2 .back-link[href="rank/"]:hover::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E");
+}
+
+/* 成績統計リンク */
+#instructions2 .back-link[href="course/"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2310b981' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'/%3E%3C/svg%3E");
+}
+
+#instructions2 .back-link[href="course/"]:hover::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'/%3E%3C/svg%3E");
+}
+
+/* =======================================================================
+   Stats Banner (optional) - 統計バナー
+   ======================================================================= */
+.stats-banner {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    padding: 32px;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    margin-bottom: 48px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* =======================================================================
+   Footer Enhancements
+   ======================================================================= */
+.footer {
+    border-top: 1px solid var(--border-color);
+    padding: 32px 24px;
+    margin-top: 64px;
+}
+
+.footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.footer a:hover {
+    color: var(--primary-color);
+}
+
+.footer font[color="red"] {
+    color: #ef4444 !important;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+
+
+.footer a {
+    margin: 0 12px;
+}
+
+.copyright {
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    margin-top: 16px;
+}
+
+/* =======================================================================
+   Responsive Design
+   ======================================================================= */
+@media (max-width: 768px) {
+    #main-content {
+        padding: 32px 16px 60px;
+    }
+
+    #main-content>h1 {
+        font-size: 1.75rem;
+    }
+
+    #main-content>h1::after {
+        font-size: 0.9375rem;
+    }
+
+    .file-upload-area {
+        padding: 40px 24px !important;
+        margin: 32px 0 40px !important;
+        max-width: 100% !important;
+    }
+
+    .file-upload-area .upload-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .file-upload-area .upload-icon svg {
+        width: 48px;
+        height: 48px;
+    }
+
+    .file-upload-area .upload-title {
+        font-size: 1.125rem;
+    }
+
+    .file-upload-area .upload-subtitle {
+        font-size: 0.875rem;
+    }
+
+    #instructions2 {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        width: 100%;
+    }
+
+    #instructions2 .back-link {
+        width: auto;
+        max-width: 100%;
+        display: inline-flex;
+        justify-content: center;
+        padding: 12px 20px;
+        font-size: 0.875rem;
+        gap: 6px;
+    }
+
+    #instructions2 .back-link::before {
+        width: 16px;
+        height: 16px;
+    }
+
+    .footer {
+        padding: 24px 16px;
+        text-align: center;
+    }
+
+    .footer a {
+        display: block;
+        margin: 8px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #main-content {
+        padding: 24px 16px 60px;
+    }
+
+    #main-content>h1 {
+        font-size: 1.375rem;
+    }
+
+    #main-content>h1::after {
+        font-size: 0.875rem;
+        margin-top: 8px;
+    }
+
+    .file-upload-area {
+        padding: 32px 16px !important;
+    }
+
+    .file-upload-area .upload-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 16px;
+    }
+
+    .file-upload-area .upload-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .file-upload-area .upload-title {
+        font-size: 1rem;
+    }
+
+    #instructions2 h2 {
+        font-size: 0.6875rem;
+    }
+
+    #instructions2>p {
+        font-size: 0.875rem;
+    }
+
+    #instructions2 .back-link {
+        padding: 12px 20px;
+        font-size: 0.875rem;
+    }
+}
