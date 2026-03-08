@@ -210,7 +210,7 @@
     "id": 24,
     "department_num": "da|j1|dc|db|s2|s4|j2|j3|j0|a2|a1|s5|s3|s1|c4",
     "department": "まちづくり学科|コンピュータ科学科|建築デザイン学科|建築学科|応用化学科|応用物理学科|情報デザイン学科|情報科学科|情報通信工学科|機械システム工学科|機械工学科|機械理工学科|環境化学科|生命化学科|電気電子工学科",
-    "courseName": "English for Intercultural Communication A",
+    "courseName": "English for Intercultural Communication A|English for Intercultural Comm.A",
     "year": "2023|2024|2025",
     "semester": "前期",
     "credits": 1
@@ -219,7 +219,7 @@
     "id": 25,
     "department_num": "da|j1|ss|dc|db|s2|s4|j2|j3|j0|a2|a1|s5|s3|s1|c4",
     "department": "まちづくり学科|コンピュータ科学科|先進工学部大学院接続型|建築デザイン学科|建築学科|応用化学科|応用物理学科|情報デザイン学科|情報科学科|情報通信工学科|機械システム工学科|機械工学科|機械理工学科|環境化学科|生命化学科|電気電子工学科",
-    "courseName": "English for Intercultural Communication B",
+    "courseName": "English for Intercultural Communication B|English for Intercultural Comm.B|English for Intercultural Com.B",
     "year": "2023|2024|2025",
     "semester": "後期",
     "credits": 1
@@ -255,7 +255,7 @@
     "id": 29,
     "department_num": "da|j1|ss|dc|db|s2|s4|j2|j3|j0|a2|a1|s5|s3|s1|c4",
     "department": "まちづくり学科|コンピュータ科学科|先進工学部大学院接続型|建築デザイン学科|建築学科|応用化学科|応用物理学科|情報デザイン学科|情報科学科|情報通信工学科|機械システム工学科|機械工学科|機械理工学科|環境化学科|生命化学科|電気電子工学科",
-    "courseName": "Introduction to English for Global Communication I",
+    "courseName": "Introduction to English for Global Communication I|Introduction to English for Global Com.I|Introduction to English for Global Comm.I",
     "year": "2023|2024|2025",
     "semester": "前期|後期",
     "credits": 1
@@ -264,7 +264,7 @@
     "id": 30,
     "department_num": "da|j1|ss|dc|db|s2|s4|j2|j3|j0|a2|a1|s5|s3|s1|c4",
     "department": "まちづくり学科|コンピュータ科学科|先進工学部大学院接続型|建築デザイン学科|建築学科|応用化学科|応用物理学科|情報デザイン学科|情報科学科|情報通信工学科|機械システム工学科|機械工学科|機械理工学科|環境化学科|生命化学科|電気電子工学科",
-    "courseName": "Introduction to English for Global CommunicationII",
+    "courseName": "Introduction to English for Global CommunicationII|Introduction to English for Global Com.II|Introduction to English for Global Comm.II",
     "year": "2023|2024|2025",
     "semester": "前期|後期",
     "credits": 1
@@ -4062,7 +4062,7 @@
     "id": 452,
     "department_num": "j3",
     "department": "情報科学科",
-    "courseName": "情報科学セミナーI(PBL)",
+    "courseName": "情報科学セミナーI(PBL)|情報科学セミナーI（PBL）",
     "year": "2023|2024|2025",
     "semester": "前期",
     "credits": 1
@@ -4071,7 +4071,7 @@
     "id": 453,
     "department_num": "j3",
     "department": "情報科学科",
-    "courseName": "情報科学セミナーII(PBL)",
+    "courseName": "情報科学セミナーII(PBL)|情報科学セミナーII（PBL）",
     "year": "2023|2024|2025",
     "semester": "後期",
     "credits": 1
