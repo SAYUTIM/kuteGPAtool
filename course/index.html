@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-top-theme="studio">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>科目別成績統計 - 工学院GPA計算機</title>
-    <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/loading.css">
+    <link rel="icon" href="../icon.ico">
+    <title>科目別成績統計 - 工学院大学GPA計算機</title>
+    <link rel="stylesheet" href="../styles/base.css?v=shared-footer-20260830-3">
     <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/course.css">
-    <link rel="stylesheet" href="../styles/login-prompt.css">
+    <link rel="stylesheet" href="../styles/top-studio.css?v=studio-20260829-course-1">
+    <link rel="stylesheet" href="../styles/course.css?v=course-studio-20260830-9">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -17,12 +17,15 @@
         rel="stylesheet">
 </head>
 
-<body>
+<body class="course-page">
 
     <header id="site-header" class="site-header">
         <a href="../" class="site-header-logo">
             <img src="../icon.ico" alt="" class="site-header-logo-icon">
-            <span>工学院GPA計算機</span>
+            <span class="site-header-name">
+                <span class="top-header-name-full">工学院大学GPA計算機</span>
+                <span class="top-header-name-short">GPA計算機</span>
+            </span>
         </a>
         <nav class="site-header-nav">
             <a href="../" class="site-header-link">計算機</a>
@@ -31,18 +34,7 @@
         </nav>
     </header>
 
-    <div id="loading-screen">
-        <div class="wave-loader"></div>
-        <div class="loading-text">Loading...</div>
-        <div id="loading-message" style="display: none;">
-            サーバーが混み合っています...
-        </div>
-    </div>
-
-
-
-
-    <div id="main-content" style="display: none;">
+    <div id="main-content" inert aria-busy="true" data-auth-pending style="display: block;">
         <div class="course-app">
 
             <aside class="sidebar" id="sidebar">
@@ -57,93 +49,119 @@
                     <button class="clear-filters" id="clearFilters">クリア</button>
                 </div>
 
-                <div class="filter-section">
-                    <h3>学部</h3>
-                    <div class="filter-list" id="facultyList">
-                        <label class="filter-item">
-                            <input type="radio" name="faculty" value="all" checked>
-                            <span class="filter-label">すべての学部</span>
-                            <span class="filter-count" id="countAll">-</span>
-                        </label>
-                        <label class="filter-item">
-                            <input type="radio" name="faculty" value="advanced">
-                            <span class="filter-label">先進工学部</span>
-                            <span class="filter-count" id="countAdvanced">-</span>
-                        </label>
-                        <label class="filter-item">
-                            <input type="radio" name="faculty" value="engineering">
-                            <span class="filter-label">工学部</span>
-                            <span class="filter-count" id="countEngineering">-</span>
-                        </label>
-                        <label class="filter-item">
-                            <input type="radio" name="faculty" value="architecture">
-                            <span class="filter-label">建築学部</span>
-                            <span class="filter-count" id="countArchitecture">-</span>
-                        </label>
-                        <label class="filter-item">
-                            <input type="radio" name="faculty" value="informatics">
-                            <span class="filter-label">情報学部</span>
-                            <span class="filter-count" id="countInformatics">-</span>
-                        </label>
+                <section class="filter-section" data-filter-accordion>
+                    <button class="filter-section-toggle" id="facultyFilterToggle" type="button"
+                        aria-expanded="false" aria-controls="facultyFilterPanel">
+                        <span>学部</span>
+                        <svg class="filter-section-chevron" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="filter-section-panel" id="facultyFilterPanel" role="region"
+                        aria-labelledby="facultyFilterToggle" aria-hidden="true">
+                        <div class="filter-section-panel-inner">
+                            <div class="filter-list" id="facultyList">
+                                <label class="filter-item">
+                                    <input type="radio" name="faculty" value="all" checked>
+                                    <span class="filter-label">すべての学部</span>
+                                    <span class="filter-count" id="countAll">-</span>
+                                </label>
+                                <label class="filter-item">
+                                    <input type="radio" name="faculty" value="advanced">
+                                    <span class="filter-label">先進工学部</span>
+                                    <span class="filter-count" id="countAdvanced">-</span>
+                                </label>
+                                <label class="filter-item">
+                                    <input type="radio" name="faculty" value="engineering">
+                                    <span class="filter-label">工学部</span>
+                                    <span class="filter-count" id="countEngineering">-</span>
+                                </label>
+                                <label class="filter-item">
+                                    <input type="radio" name="faculty" value="architecture">
+                                    <span class="filter-label">建築学部</span>
+                                    <span class="filter-count" id="countArchitecture">-</span>
+                                </label>
+                                <label class="filter-item">
+                                    <input type="radio" name="faculty" value="informatics">
+                                    <span class="filter-label">情報学部</span>
+                                    <span class="filter-count" id="countInformatics">-</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="filter-section">
-                    <h3>学科</h3>
-                    <div class="filter-list scrollable" id="departmentList">
-
+                <section class="filter-section" data-filter-accordion>
+                    <button class="filter-section-toggle" id="departmentFilterToggle" type="button"
+                        aria-expanded="false" aria-controls="departmentFilterPanel">
+                        <span>学科</span>
+                        <svg class="filter-section-chevron" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="filter-section-panel" id="departmentFilterPanel" role="region"
+                        aria-labelledby="departmentFilterToggle" aria-hidden="true">
+                        <div class="filter-section-panel-inner">
+                            <div class="filter-list" id="departmentList"></div>
+                        </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="filter-section">
-                    <h3>学期</h3>
-                    <div class="filter-list" id="semesterList">
-                        <label class="filter-item">
-                            <input type="checkbox" name="semester" value="all" checked>
-                            <span class="filter-label">すべて</span>
-                        </label>
-                        <label class="filter-item">
-                            <input type="checkbox" name="semester" value="1Q">
-                            <span class="filter-label">1Q</span>
-                        </label>
-                        <label class="filter-item">
-                            <input type="checkbox" name="semester" value="2Q">
-                            <span class="filter-label">2Q</span>
-                        </label>
-                        <label class="filter-item">
-                            <input type="checkbox" name="semester" value="3Q">
-                            <span class="filter-label">3Q</span>
-                        </label>
-                        <label class="filter-item">
-                            <input type="checkbox" name="semester" value="4Q">
-                            <span class="filter-label">4Q</span>
-                        </label>
-                        <label class="filter-item">
-                            <input type="checkbox" name="semester" value="前期">
-                            <span class="filter-label">前期</span>
-                        </label>
-                        <label class="filter-item">
-                            <input type="checkbox" name="semester" value="後期">
-                            <span class="filter-label">後期</span>
-                        </label>
+                <section class="filter-section" data-filter-accordion>
+                    <button class="filter-section-toggle" id="semesterFilterToggle" type="button"
+                        aria-expanded="false" aria-controls="semesterFilterPanel">
+                        <span>学期</span>
+                        <svg class="filter-section-chevron" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="filter-section-panel" id="semesterFilterPanel" role="region"
+                        aria-labelledby="semesterFilterToggle" aria-hidden="true">
+                        <div class="filter-section-panel-inner">
+                            <div class="filter-list" id="semesterList">
+                                <label class="filter-item">
+                                    <input type="checkbox" name="semester" value="all" checked>
+                                    <span class="filter-label">すべて</span>
+                                </label>
+                                <label class="filter-item">
+                                    <input type="checkbox" name="semester" value="1Q">
+                                    <span class="filter-label">1Q</span>
+                                </label>
+                                <label class="filter-item">
+                                    <input type="checkbox" name="semester" value="2Q">
+                                    <span class="filter-label">2Q</span>
+                                </label>
+                                <label class="filter-item">
+                                    <input type="checkbox" name="semester" value="3Q">
+                                    <span class="filter-label">3Q</span>
+                                </label>
+                                <label class="filter-item">
+                                    <input type="checkbox" name="semester" value="4Q">
+                                    <span class="filter-label">4Q</span>
+                                </label>
+                                <label class="filter-item">
+                                    <input type="checkbox" name="semester" value="前期">
+                                    <span class="filter-label">前期</span>
+                                </label>
+                                <label class="filter-item">
+                                    <input type="checkbox" name="semester" value="後期">
+                                    <span class="filter-label">後期</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </section>
             </aside>
 
 
             <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-            <button class="mobile-filter-btn" id="mobileFilterBtn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" />
-                </svg>
-                フィルター
-            </button>
-
             <main class="main-content">
                 <div class="content-header">
-                    <h1>科目別成績統計 [ベータ版]</h1>
-                    <p class="subtitle">各科目の成績分布をリアルタイムで確認</p>
+                    <h1>科目別成績統計</h1>
                 </div>
 
                 <div class="search-section">
@@ -153,7 +171,8 @@
                             <circle cx="11" cy="11" r="8" />
                             <path d="M21 21l-4.35-4.35" />
                         </svg>
-                        <input type="text" id="courseSearch" placeholder="" autocomplete="off">
+                        <input type="text" id="courseSearch" placeholder="" autocomplete="off" role="combobox"
+                            aria-autocomplete="list" aria-controls="autocomplete" aria-expanded="false">
 
                         <div id="slideOverlay" class="slide-overlay hidden">
                             <span class="placeholder-static">科目名を入力... 例：</span>
@@ -161,24 +180,51 @@
                                 <span id="slideText" class="slide-text"></span>
                             </span>
                         </div>
-                        <div id="autocomplete" class="autocomplete-results"></div>
+                        <div id="autocomplete" class="autocomplete-results" role="listbox"></div>
                     </div>
+                </div>
+
+                <div class="course-view-switcher">
+                    <div class="course-view-tabs" role="tablist" aria-label="科目の表示順" data-active-index="0">
+                        <button class="course-view-tab is-active" id="courseViewCatalog" type="button" role="tab"
+                            aria-controls="courseGrid" aria-selected="true" data-course-view="catalog">科目を探す</button>
+                        <button class="course-view-tab" id="courseViewExcellent" type="button" role="tab" tabindex="-1"
+                            aria-controls="courseGrid" aria-selected="false" data-course-view="excellent">楽単科目</button>
+                        <button class="course-view-tab" id="courseViewFailed" type="button" role="tab" tabindex="-1"
+                            aria-controls="courseGrid" aria-selected="false" data-course-view="failed">落単科目</button>
+                        <button class="course-view-tab" id="courseViewPopular" type="button" role="tab" tabindex="-1"
+                            aria-controls="courseGrid" aria-selected="false" data-course-view="popular">人気科目</button>
+                    </div>
+                    <p class="course-view-status" id="courseViewStatus" aria-live="polite"></p>
                 </div>
 
                 <div class="course-list-header">
                     <h2 id="courseListTitle">すべての科目</h2>
                     <span class="course-count" id="courseCount">- 件</span>
+                    <button class="mobile-filter-btn" id="mobileFilterBtn" type="button">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" />
+                        </svg>
+                        絞り込み
+                    </button>
                 </div>
 
-                <div class="course-grid" id="courseGrid">
+                <div class="course-grid is-loading" id="courseGrid" role="tabpanel"
+                    aria-labelledby="courseViewCatalog" aria-busy="true">
+                    <div class="course-insight-skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <div class="course-insight-skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <div class="course-insight-skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <div class="course-insight-skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
                 </div>
 
                 <div class="load-more-container" id="loadMoreContainer" style="display: none;">
-                    <button class="load-more-btn" id="loadMoreBtn">もっと見る</button>
+                    <p class="load-more-status" id="loadMoreStatus"></p>
+                    <button class="load-more-btn" id="loadMoreBtn" type="button" aria-controls="courseGrid">もっと見る</button>
                 </div>
-                <div id="detailPanel" class="detail-panel" style="display: none;">
+                <div id="detailPanel" class="detail-panel" role="dialog" aria-modal="true"
+                    aria-labelledby="detailCourseName" aria-busy="false" style="display: none;">
                     <div class="detail-panel-content">
-                        <button class="detail-close" id="detailClose" aria-label="閉じる">
+                        <button class="detail-close" id="detailClose" type="button" aria-label="閉じる">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -188,10 +234,19 @@
 
                         <div class="detail-header">
                             <h2 id="detailCourseName">-</h2>
-                            <div class="detail-meta">
-                                <span class="detail-credits" id="detailCredits">-</span>
-                                <span class="detail-semester" id="detailSemester">-</span>
-                            </div>
+                            <dl class="detail-meta" aria-label="科目情報">
+                                <div class="detail-meta-item">
+                                    <dt class="detail-meta-label">単位数</dt>
+                                    <dd class="detail-credits" id="detailCredits">-</dd>
+                                </div>
+                                <div class="detail-meta-item">
+                                    <dt class="detail-meta-label">学期</dt>
+                                    <dd class="detail-semester">
+                                        <span class="detail-meta-separator" aria-hidden="true">·</span>
+                                        <span id="detailSemester">-</span>
+                                    </dd>
+                                </div>
+                            </dl>
                             <div class="detail-departments" id="detailDepartments"></div>
                         </div>
 
@@ -201,12 +256,16 @@
                                 <div class="stat-value" id="totalStudents">-</div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-label">合格率</div>
-                                <div class="stat-value" id="passRate">-</div>
+                                <div class="stat-label">最頻値</div>
+                                <div class="stat-value" id="modeGrade">-</div>
                             </div>
                             <div class="stat-card">
                                 <div class="stat-label">平均GPA</div>
                                 <div class="stat-value" id="avgGPA">-</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">単位取得率</div>
+                                <div class="stat-value" id="passRate">-</div>
                             </div>
                         </div>
 
@@ -269,12 +328,20 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <p class="copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
+    <footer class="footer site-footer">
+        <nav class="site-footer-links" aria-label="フッターリンク">
+            <a
+                href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a>
+            <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a>
+            <a href="../terms/">利用規約</a>
+            <a href="../privacy/">プライバシーポリシー</a>
+            <button class="site-footer-logout" type="button" data-site-footer-logout hidden>ログアウト</button>
+        </nav>
+        <p class="site-footer-copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4"></script>
+    <script src="../app.js?v=release-20260831-8"></script>
 </body>
 
 </html>

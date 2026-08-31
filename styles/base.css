@@ -9,6 +9,46 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+.auth-status-message {
+    position: relative;
+    z-index: 1000;
+    box-sizing: border-box;
+    display: flex;
+    width: min(100% - 32px, 720px);
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 80px auto 0;
+    padding: 14px 16px;
+    color: #343630;
+    background: #f8f7f2;
+    border: 1px solid rgba(54, 57, 50, .22);
+    font-size: .875rem;
+}
+
+.auth-status-message button {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 4px 0;
+    color: #001dffe0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transform: none;
+}
+
+.auth-status-message button:hover,
+.auth-status-message button:focus-visible {
+    color: #0014b8;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
 button {
     margin: 10px auto;
     padding: 10px 18px;
@@ -45,4 +85,115 @@ footer {
     padding-top: 1rem;
     font-size: 14px;
     color: #95a5a6;
+}
+
+/* Shared footer used by the calculator, ranking, and course pages. */
+html[data-top-theme] body footer.footer.site-footer {
+    box-sizing: border-box;
+    display: grid;
+    width: 100%;
+    justify-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 14px clamp(18px, 4.5vw, 72px) 16px;
+    color: var(--top-muted, #6f726b);
+    background: var(--top-paper, #f8f7f2);
+    border-top: 1px solid var(--top-line, rgba(54, 57, 50, 0.17));
+    font-family: "Yu Gothic UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+html[data-top-theme] body footer.footer.site-footer .site-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px 22px;
+}
+
+html[data-top-theme] body footer.footer.site-footer a {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 2px 0;
+    color: inherit;
+    font-size: inherit;
+    text-decoration: none;
+    transition: color 150ms ease;
+}
+
+html[data-top-theme] body footer.footer.site-footer a:hover,
+html[data-top-theme] body footer.footer.site-footer a:focus-visible {
+    color: var(--top-blue, #001dff);
+}
+
+html[data-top-theme] body footer.footer.site-footer a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+html[data-top-theme] body footer.footer.site-footer .site-footer-logout {
+    display: inline-flex;
+    min-height: 28px;
+    margin: 0;
+    padding: 2px 0;
+    align-items: center;
+    color: inherit;
+    font: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    cursor: pointer;
+    transform: none;
+    transition: color 150ms ease, opacity 150ms ease;
+}
+
+html[data-top-theme] body footer.footer.site-footer .site-footer-logout:hover,
+html[data-top-theme] body footer.footer.site-footer .site-footer-logout:focus-visible {
+    color: var(--top-blue, #001dff);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+html[data-top-theme] body footer.footer.site-footer .site-footer-logout:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+html[data-top-theme] body footer.footer.site-footer .site-footer-logout:disabled {
+    color: var(--top-faint, #989b94);
+    background: transparent;
+    box-shadow: none;
+    cursor: wait;
+    opacity: 0.72;
+    transform: none;
+}
+
+html[data-top-theme] body footer.footer.site-footer .site-footer-logout[hidden] {
+    display: none;
+}
+
+html[data-top-theme] body footer.footer.site-footer .site-footer-copyright {
+    margin: 0;
+    padding: 0;
+    color: var(--top-faint, #989b94);
+    font-size: inherit;
+}
+
+@media (max-width: 640px) {
+    html[data-top-theme] body footer.footer.site-footer {
+        gap: 5px;
+        padding: 12px 16px 14px;
+        font-size: 0.72rem;
+    }
+
+    html[data-top-theme] body footer.footer.site-footer .site-footer-links {
+        gap: 2px 14px;
+    }
 }

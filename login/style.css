@@ -1,463 +1,358 @@
-/* =======================================================================
-   ログインページ - 左右分割レイアウト
-   PC: 左右分割、モバイル: シンプル中央配置
-   ======================================================================= */
-
-/* ボディ */
-.login-body {
-    padding: 0;
-    min-height: 100vh;
-    background-color: #f8fafc;
+:root {
+    --login-ink: #252722;
+    --login-muted: #6f726b;
+    --login-line: rgba(54, 57, 50, 0.16);
+    --login-paper: #f8f7f2;
+    --login-accent: #17a96f;
+    --login-accent-dark: #11845a;
+    --login-sculpture-image: url("../assets/generated/login-sculpture-gemini-b.webp");
 }
 
-/* ログインプロンプト */
-.login-prompt {
+html,
+body {
+    min-height: 100%;
+}
+
+.login-body {
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+    color: var(--login-ink);
+    background: var(--login-paper);
+    font-family: "Yu Gothic UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+.login-prompt,
+.login-shell {
+    min-height: 100vh;
+    min-height: 100svh;
 }
 
 #login-prompt[style*="block"] {
     display: block !important;
 }
 
-/* ラッパー - 左右分割 */
-.login-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
+.login-sculpture {
+    position: fixed;
+    inset: 0 50% 0 0;
+    z-index: 0;
+    background-color: var(--login-paper);
+    background-position: center 58%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: sculpture-settle 1.4s cubic-bezier(.2, .75, .2, 1) both;
 }
 
-/* 左側 - ブランディング＆機能紹介 */
-.login-left {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: white;
-    padding: clamp(32px, 4vw, 64px);
-    display: flex;
+.login-brand {
+    position: fixed;
+    top: clamp(24px, 4vw, 52px);
+    left: clamp(24px, 4vw, 60px);
+    z-index: 2;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-}
-
-.login-content {
-    width: 100%;
-    max-width: 480px;
-}
-
-/* ブランドヘッダー - 横並び */
-.login-branding {
-    margin-bottom: clamp(28px, 3vw, 44px);
-}
-
-.brand-header {
-    display: flex;
-    align-items: center;
-    gap: clamp(14px, 1.5vw, 24px);
+    gap: 13px;
+    color: var(--login-ink);
+    font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
 }
 
 .login-logo {
-    width: clamp(52px, 5vw, 72px);
-    height: clamp(52px, 5vw, 72px);
-    border-radius: clamp(12px, 1.2vw, 16px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    flex-shrink: 0;
-    background-color: #f8fafc;
-    padding: 4px;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    object-fit: contain;
 }
 
-.brand-header h1 {
-    font-size: clamp(20px, 2.2vw, 34px);
-    margin: 0 0 4px 0;
-    color: white;
-    font-weight: 700;
-    text-align: left;
-    white-space: nowrap;
-}
-
-.tagline {
-    font-size: clamp(0.85rem, 1vw, 1.15rem);
-    color: #94a3b8;
-    margin: 0;
-    text-align: left;
-    white-space: nowrap;
-}
-
-/* 機能リスト */
-.features {
+.login-shell {
+    position: relative;
+    z-index: 1;
     display: flex;
-    flex-direction: column;
-    gap: clamp(14px, 1.5vw, 24px);
-}
-
-.feature {
-    display: flex;
-    gap: clamp(12px, 1.2vw, 18px);
-    align-items: flex-start;
-}
-
-.feature-icon {
-    font-size: clamp(1.1rem, 1.3vw, 1.6rem);
-    width: clamp(38px, 3.5vw, 52px);
-    height: clamp(38px, 3.5vw, 52px);
-    background: rgba(16, 185, 129, 0.2);
-    border-radius: clamp(8px, 0.8vw, 12px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.feature-body {
-    flex: 1;
-    text-align: left;
-}
-
-.feature-body strong {
-    display: block;
-    font-size: clamp(0.9rem, 1vw, 1.1rem);
-    margin-bottom: 3px;
-    color: white;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.feature-body p {
-    font-size: clamp(0.8rem, 0.9vw, 1rem);
-    color: #94a3b8;
-    margin: 0;
-    line-height: 1.5;
-    white-space: nowrap;
-}
-
-/* 右側 - ログインフォーム */
-.login-right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: clamp(32px, 4vw, 64px);
+    justify-content: flex-end;
 }
 
 .login-form {
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+    width: 50vw;
+    min-height: 100vh;
+    min-height: 100svh;
+    box-sizing: border-box;
+    padding: clamp(32px, 6vw, 88px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid rgba(57, 59, 52, 0.1);
+    background: rgba(250, 249, 245, 0.64);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: form-enter .72s cubic-bezier(.2, .7, .2, 1) both;
 }
 
-.login-form h2 {
-    font-size: clamp(24px, 2.2vw, 34px);
-    margin-bottom: clamp(10px, 1vw, 16px);
-    color: #1e293b;
-    font-weight: 700;
+.login-form-inner {
+    width: min(100%, 390px);
+    margin: auto;
+}
+
+.login-form h1 {
+    margin: 0 0 14px;
+    color: var(--login-ink);
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    text-align: left;
 }
 
 .login-desc {
-    color: #64748b;
-    font-size: clamp(0.9rem, 1vw, 1.1rem);
-    margin: 0 0 clamp(20px, 2vw, 28px) 0;
-    line-height: 1.6;
+    margin: 0 0 23px;
+    color: var(--login-muted);
+    font-size: 0.94rem;
+    line-height: 1.8;
+    text-align: left;
 }
 
 .login-desc strong {
-    color: #10b981;
+    color: var(--login-ink);
     font-weight: 600;
 }
 
-/* 注意事項 */
-.login-notice {
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
-    background: #fef3c7;
-    color: #92400e;
-    font-size: clamp(0.75rem, 0.8vw, 0.88rem);
-    padding: clamp(8px, 0.8vw, 12px) clamp(10px, 1vw, 14px);
-    border-radius: 10px;
-    margin-bottom: clamp(16px, 1.5vw, 22px);
-    text-align: left;
-    line-height: 1.4;
+.login-account-label {
+    display: inline-block;
+    padding: 3px 6px 4px;
+    margin: -3px -6px -4px;
+    border-radius: 0;
+    transition: color .2s ease, background-color .2s ease;
 }
 
-/* プライバシーチェックボックス - カード型ボタン */
-.privacy-checkbox {
-    display: flex;
+.login-desc.is-domain-error .login-account-label {
+    color: #fff;
+    background: #b42318;
+}
+
+.login-desc.is-domain-error strong {
+    color: #fff;
+}
+
+.login-domain-error-message {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.legal-consent-group {
+    margin: 0 0 18px;
+    padding-top: 10px;
+    border-top: 1px solid var(--login-line);
+}
+
+.legal-consent-row {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 11px;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: clamp(16px, 1.5vw, 22px);
-    font-size: clamp(0.9rem, 0.95vw, 1rem);
-    cursor: pointer;
-    color: #475569;
-    background: #f1f5f9;
-    padding: 14px 20px;
-    border-radius: 12px;
-    border: 2px solid transparent;
-    transition: all 0.2s ease;
+    min-height: 52px;
+    color: #54574f;
+    font-size: 0.84rem;
 }
 
-.privacy-checkbox:hover {
-    background: #e2e8f0;
-    border-color: #10b981;
-}
-
-.privacy-checkbox:has(input:checked) {
-    background: #dcfce7;
-    border-color: #10b981;
-}
-
-.privacy-checkbox input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
-    accent-color: #10b981;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-
-.privacy-checkbox a {
-    color: #10b981;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.privacy-checkbox a:hover {
-    text-decoration: underline;
-}
-
-/* ログインボタン */
-.login-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    padding: clamp(12px, 1.2vw, 16px) 24px;
-    font-size: clamp(0.95rem, 1vw, 1.1rem);
-    font-weight: 600;
-    background-color: #10b981;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.legal-consent-row input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
     margin: 0;
+    accent-color: var(--login-accent);
+    cursor: pointer;
+}
+
+.legal-consent-row label {
+    min-width: 0;
+    cursor: pointer;
+    word-break: auto-phrase;
+    text-wrap: pretty;
+}
+
+.legal-consent-row a {
+    color: #001dffe0;
+    font-weight: 600;
+    text-decoration-color: #001dff66;
+    text-underline-offset: 3px;
+}
+
+.login-button {
+    width: 100%;
+    min-height: 54px;
+    margin: 0;
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    background: var(--login-accent);
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.login-button::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 -55%;
+    width: 42%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+    transform: skewX(-18deg);
+    transition: left .65s cubic-bezier(.22, 1, .36, 1);
+    pointer-events: none;
+}
+
+.login-button:hover:not(:disabled)::after {
+    left: 115%;
+}
+
+.login-button > * {
+    position: relative;
+    z-index: 1;
 }
 
 .login-button:hover:not(:disabled) {
-    background-color: #059669;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+    background: var(--login-accent-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 9px 22px rgba(17, 132, 90, 0.18);
+}
+
+.login-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.login-button:focus-visible,
+.legal-consent-row input:focus-visible,
+.login-brand:focus-visible {
+    outline: 3px solid rgba(23, 169, 111, 0.27);
+    outline-offset: 3px;
+}
+
+.legal-consent-row a:focus-visible {
+    outline: 3px solid rgba(0, 29, 255, 0.24);
+    outline-offset: 3px;
 }
 
 .login-button:disabled {
-    background-color: #9ca3af;
+    color: #f5f5f1;
+    background: #b5b8b1;
     cursor: not-allowed;
 }
 
 .google-icon {
-    flex-shrink: 0;
-}
-
-/* フッター */
-.login-footer {
-    margin-top: clamp(24px, 2.5vw, 36px);
-    text-align: center;
+    flex: 0 0 auto;
+    padding: 2px;
+    border-radius: 50%;
+    background: white;
 }
 
 .login-notice-text {
-    font-size: clamp(0.7rem, 0.75vw, 0.8rem);
-    color: #94a3b8;
-    margin: 0 0 8px 0;
-    white-space: nowrap;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: max-content;
+    margin: 18px 0 0;
+    color: #858880;
+    font-size: 0.78rem;
+    text-align: left;
 }
 
-.login-footer .copyright {
-    font-size: 0.8rem;
-    color: #94a3b8;
-    margin: 0;
+.login-form .copyright {
+    width: min(100%, 390px);
+    margin: 42px auto 0;
+    color: #979990;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-align: left;
 }
 
-/* =======================================================================
-   モバイル対応 - アニメーション付きデザイン
-   ======================================================================= */
-@media screen and (max-width: 900px) {
+@keyframes sculpture-settle {
+    from {
+        opacity: 0;
+        transform: scale(1.025);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 
-    html,
-    body,
+@keyframes form-enter {
+    from {
+        opacity: 0;
+        transform: translateX(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (min-width: 721px) {
+    .login-sculpture {
+        background-image: var(--login-sculpture-image);
+    }
+
+}
+
+@media (max-width: 720px) {
     .login-body {
-        overflow: hidden;
-        height: 100%;
+        overflow-y: auto;
     }
 
-    .login-prompt {
-        height: 100%;
-    }
-
-    .login-wrapper {
-        display: block;
-        height: 100%;
-        overflow: hidden;
-        /* グラデーション背景 */
-        background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
-        background-size: 200% 200%;
-        animation: gradientShift 8s ease infinite;
-    }
-
-    @keyframes gradientShift {
-
-        0%,
-        100% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-    }
-
-    /* 左側を非表示 */
-    .login-left {
+    .login-sculpture {
         display: none;
     }
 
-    /* 右側をフルスクリーン中央配置 */
-    .login-right {
-        height: 100%;
-        padding: 5vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-        overflow: hidden;
-        background: transparent;
+    .login-brand {
+        position: absolute;
+        top: 22px;
+        left: 22px;
+    }
+
+    .login-logo {
+        width: 34px;
+        height: 34px;
+    }
+
+    .login-shell {
+        align-items: stretch;
     }
 
     .login-form {
         width: 100%;
-        max-width: 90vw;
-        text-align: center;
-        /* ガラス効果 */
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 6vw 5vw;
-        border-radius: 4vw;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        min-height: 100svh;
+        margin-top: 0;
+        padding: 112px 24px 28px;
+        justify-content: center;
+        border-left: 0;
+        border-top: 0;
+        background: var(--login-paper);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 
-    /* モバイル用にロゴを追加表示（フローティング） */
-    .login-form::before {
-        content: '';
-        display: block;
-        width: 14vw;
-        height: 14vw;
-        max-width: 64px;
-        max-height: 64px;
-        margin: 0 auto 3vw;
-        background: url('../icon.ico') center/contain no-repeat;
-        border-radius: 3vw;
-        animation: float 3s ease-in-out infinite;
+    .login-form h1 {
+        font-size: 2rem;
     }
 
-    @keyframes float {
-
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-8px);
-        }
-    }
-
-    .login-form h2 {
-        font-size: 6vw;
-        margin-bottom: 2vw;
-        color: #1e293b;
-        animation: fadeInUp 0.6s ease both;
-    }
-
-    .login-desc {
-        font-size: 3.5vw;
-        margin-bottom: 4vw;
-        color: #64748b;
-        animation: fadeInUp 0.6s ease 0.1s both;
-    }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .login-desc br {
-        display: none;
-    }
-
-    .privacy-checkbox {
-        font-size: 3.2vw;
-        padding: 3vw 4vw;
-        margin-bottom: 3vw;
-        gap: 2vw;
-        animation: fadeInUp 0.6s ease 0.2s both;
-    }
-
-    .privacy-checkbox input[type="checkbox"] {
-        width: 5vw;
-        height: 5vw;
-        max-width: 20px;
-        max-height: 20px;
-    }
-
-    .login-button {
-        font-size: 3.8vw;
-        padding: 3vw 5vw;
-        border-radius: 2.5vw;
-        gap: 2vw;
-        animation: fadeInUp 0.6s ease 0.3s both, pulse 2s ease-in-out infinite 1s;
-    }
-
-    @keyframes pulse {
-
-        0%,
-        100% {
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
-        }
-
-        50% {
-            box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-        }
-    }
-
-    .login-button .google-icon {
-        width: 4.5vw;
-        height: 4.5vw;
-        max-width: 18px;
-        max-height: 18px;
-    }
-
-    .login-footer {
-        margin-top: 4vw;
-        animation: fadeInUp 0.6s ease 0.4s both;
-    }
-
-    .login-notice-text {
-        font-size: 2.2vw;
-        position: static;
-        transform: none;
-        width: auto;
-        white-space: nowrap;
-        color: #94a3b8;
-    }
-
-    .login-footer .copyright {
-        font-size: 2.5vw;
-        margin-top: 1vw;
-        color: #94a3b8;
+    .login-form .copyright {
+        margin-top: 32px;
     }
 }

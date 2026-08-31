@@ -1,88 +1,280 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
-    <title>プライバシーポリシー - 工学院大学GPA計算機</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プライバシーポリシー - 工学院大学GPA計算機</title>
+    <meta name="description" content="工学院大学GPA計算機における利用者情報の取扱いを定めるプライバシーポリシーです。">
     <link rel="icon" href="../icon.ico">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/legal.css?v=legal-20260830-2">
 </head>
-
-<body>
-    <div class="privacy-container">
-        <h1>プライバシーポリシー</h1>
-
-        <p>本ウェブサイト「工学院大学GPA計算機」（以下、「本サービス」といいます）は、利用者（以下、「ユーザー」といいます）の個人情報の取り扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます）を定めます。
-        </p>
-
-        <h2>第1条（取得する情報）</h2>
-        <p>本サービスは、ユーザーから以下の情報を取得します。</p>
-        <ul>
-            <li><strong>Googleアカウント情報</strong>: ユーザー認証およびログイン機能の維持のため、本サービスの認証システム（Supabase
-                Auth）が、Googleアカウントのメールアドレス、およびGoogleから提供される一意のユーザーIDを保持します。本サービスは工学院大学の学生向けであるため、「@g.kogakuin.jp」で終わるドメインのメールアドレスのみを認証の対象とします。
-            </li>
-            <li><strong>成績情報PDFから抽出される情報</strong>:
-                <ul>
-                    <li>GPAの計算に必要な評点、単位数、科目名</li>
-                    <li>ランキング作成のための所属学部学科、学年</li>
-                    <li>本人確認とデータの一意性を保証するための番号</li>
-                    <li>ランキング登録資格を確認するためのPDF発行日</li>
-                    <li>科目別成績統計作成のための科目ID及び評点（A+, A, B, C, D, F）</li>
-                </ul>
-            </li>
-            <li><strong>ユーザーが任意で入力する情報</strong>: ランキングに表示するためのニックネーム。</li>
-            <li><strong>Cookie（クッキー）</strong>:
-                ユーザーの認証状態を維持するため、本サービスはSupabase社の認証サービスを利用しており、これによりCookieが使用されます。これはログインセッションの維持に不可欠なものです。</li>
-            <li><strong>IPアドレス</strong>: サービスの不正利用防止およびセキュリティ維持のため、ランキング登録時にIPアドレスを取得します。</li>
-        </ul>
-
-        <h2>第2条（情報の利用目的）</h2>
-        <p>本サービスは、取得した情報を以下の目的で利用します。</p>
-        <ul>
-            <li>本サービスの提供、運営、およびGPA計算機能の実現のため。</li>
-            <li>ユーザー認証およびログインセッションの管理のため。</li>
-            <li>GPAに基づいた匿名の学内ランキングを作成し、表示するため。</li>
-            <li>科目別の成績分布統計を匿名で集計し、表示するため。</li>
-            <li>スパム行為やサーバーへの不正なアクセス等の不正利用を防止するため。</li>
-        </ul>
-
-        <h2>第3条（ランキング登録への同意）</h2>
-        <p>本サービスは、GPAを共有し比較できるランキング機能を提供しています。ユーザーは、本サービスにGoogleアカウントでログイン、または成績PDFをアップロードしてGPA計算を行った時点で、本プライバシーポリシーのすべての条項に同意し、匿名化された情報（所属学部学科、学年、GPA、ニックネーム等）がランキングに登録されることを許諾したものとみなします。
-        </p>
-        <h2>第4条（個人を特定できる情報の取り扱い）</h2>
-        <p>本サービスでは、ユーザーのプライバシーを最大限尊重し、個人を特定できる情報の取り扱いには細心の注意を払っています。</p>
-        <ul>
-            <li><strong>学籍番号のハッシュ化</strong>:
-                ランキング登録時、ユーザーの学籍番号はサーバー上で元に戻せない形式（ハッシュ化）に変換されます。サイト管理者が元の学籍番号を知ることはできません。ハッシュ化されたIDは、ランキング上での個人の識別と順位の更新にのみ使用されます。
-            </li>
-        </ul>
-
-        <h2>第5条（第三者への情報提供）</h2>
-        <p>本サービスは、以下の場合を除き、ユーザーの同意なく個人情報を第三者に提供することはありません。</p>
-        <ul>
-            <li>法令に基づく場合。</li>
-            <li>人の生命、または身体保護のために必要がある場合であって、本人の同意を得ることが困難であるとき。</li>
-        </ul>
-        <p>なお、本サービスは、認証、データベース、サーバー機能の提供を受けるために、Supabase社（Supabase, Inc.）のサービスを利用しています。</p>
-
-        <h2>第6条（情報の管理とセキュリティ）</h2>
-        <p>アップロードされたPDFファイルの内容は、GPA計算とランキング登録処理のために一時的にサーバーに送信されますが、処理完了後にサーバー上に保存されることはありません。ランキング情報は、第4条に基づき匿名化された上で安全にデータベースに保管されます。
-        </p>
-
-        <h2>第7条（プライバシーポリシーの変更）</h2>
-        <p>本サービスは、必要に応じて、本ポリシーを変更することがあります。重要な変更がある場合には、X(旧 Twitter)またはサイト上でお知らせします。</p>
-
-        <h2>第8条（お問い合わせ）</h2>
-        <p>本ポリシーに関するお問い合わせは、フッターに記載のお問い合わせ先（Xアカウントへのリンク）よりお願いいたします。</p>
-
-        <p class="update-date">最終更新日: 2025年12月7日</p>
-    </div>
-
-    <footer class="footer">
-        <a href="../">トップページに戻る</a>
-        <p class="copyright">Copyright © 2024-2025 SAYU. All Rights Reserved.</p>
+<body class="legal-page">
+    <a class="skip-link" href="#legal-document">本文へ移動</a>
+    <header class="legal-header">
+        <a href="../" class="legal-header-logo" aria-label="工学院大学GPA計算機 トップへ">
+            <img src="../icon.ico" alt="" class="legal-header-logo-icon">
+            <span class="legal-header-name"><span class="legal-header-name-full">工学院大学GPA計算機</span><span class="legal-header-name-short">GPA計算機</span></span>
+        </a>
+        <nav class="legal-header-nav" aria-label="主要メニュー">
+            <a href="../" class="legal-header-link">計算機</a>
+            <a href="../rank/" class="legal-header-link">ランキング</a>
+            <a href="../course/" class="legal-header-link">成績統計</a>
+        </nav>
+    </header>
+    <main class="legal-main">
+        <header class="legal-intro legal-intro-compact">
+            <div class="legal-title-block">
+                <p class="legal-eyebrow">PRIVACY</p>
+                <h1>プライバシーポリシー</h1>
+                <p class="legal-date">最終更新日：2026年8月31日</p>
+            </div>
+            <nav class="legal-document-switch" aria-label="法律文書">
+                <a href="../terms/">利用規約</a>
+                <a href="./" aria-current="page">プライバシーポリシー</a>
+            </nav>
+        </header>
+        <div class="legal-layout">
+            <nav class="legal-toc" aria-label="プライバシーポリシーの目次">
+                <p>目次</p>
+                <ol>
+                    <li><a href="#application">適用・運営者</a></li>
+                    <li><a href="#information">取得・処理する情報</a></li>
+                    <li><a href="#collection">取得方法</a></li>
+                    <li><a href="#purpose">利用目的</a></li>
+                    <li><a href="#local-processing">端末内の処理</a></li>
+                    <li><a href="#server-processing">サーバー処理</a></li>
+                    <li><a href="#display">ランキング・統計</a></li>
+                    <li><a href="#browser-storage">ブラウザ保存</a></li>
+                    <li><a href="#logs">Cookie・アクセスログ</a></li>
+                    <li><a href="#retention">保存期間</a></li>
+                    <li><a href="#sharing">第三者提供</a></li>
+                    <li><a href="#providers">委託・外部サービス</a></li>
+                    <li><a href="#international">国外での取扱い</a></li>
+                    <li><a href="#google-data">Googleユーザーデータ</a></li>
+                    <li><a href="#security">安全管理</a></li>
+                    <li><a href="#rights">開示・訂正・削除</a></li>
+                    <li><a href="#minor">未成年者</a></li>
+                    <li><a href="#changes">変更</a></li>
+                    <li><a href="#contact">お問い合わせ</a></li>
+                </ol>
+            </nav>
+            <article id="legal-document" class="legal-document">
+                <section id="application" class="legal-section">
+                    <h2><span>01</span>適用・運営者</h2>
+                    <ol>
+                        <li>本ポリシーは、SAYU（以下「運営者」といいます）が提供する「<span class="legal-nowrap">工学院大学GPA計算機</span>」（以下「本サービス」といいます）における利用者情報の取扱いに適用されます。</li>
+                        <li>運営者は、個人情報の保護に関する法律その他適用される法令を遵守し、本ポリシーに従って利用者情報を取り扱います。</li>
+                        <li>本サービスは、工学院大学または同大学の関連法人が運営、承認または提供する公式サービスではありません。</li>
+                    </ol>
+                </section>
+                <section id="information" class="legal-section">
+                    <h2><span>02</span>取得・処理する情報</h2>
+                    <h3>認証・アカウント情報</h3>
+                    <ul>
+                        <li>工学院大学Googleアカウントのメールアドレス</li>
+                        <li>GoogleおよびSupabaseが発行する利用者識別子</li>
+                        <li>Google認証により提供される基本プロフィール情報</li>
+                        <li>アクセストークン、リフレッシュトークン、認証状態および認証日時</li>
+                        <li>利用規約および本ポリシーへの同意版ならびに同意日時</li>
+                    </ul>
+                    <p>運営者は、Googleアカウントのパスワードを取得しません。</p>
+                    <h3>成績PDF・成績情報</h3>
+                    <ul>
+                        <li>PDFファイル本体、ファイル名、SHA-256ハッシュ値、発行日時、作成日時、作成ソフトおよびファイル構造に関する情報</li>
+                        <li>学籍番号、学年、学部、学科その他の所属情報</li>
+                        <li>科目名、科目ID、年度、学期、評定、単位数および履修状況</li>
+                        <li>GPA、累積GPA推移、成績内訳、履修中科目および試算に用いる情報</li>
+                        <li>シラバスから一意に特定できない科目、正規化した科目名および利用者が選択した単位数</li>
+                    </ul>
+                    <h3>サービス利用情報</h3>
+                    <ul>
+                        <li>ランキングに表示するニックネーム、公開用識別子、順位および登録更新日時</li>
+                        <li>受付用識別子、受付チケット、処理状態、処理日時、エラーコード、パーサーのバージョンおよび更新回数</li>
+                        <li>IPアドレス、User-Agent、参照元、アクセス日時、リクエスト情報その他の通信記録</li>
+                        <li>問い合わせ時に利用者が送信する内容および連絡に必要な情報</li>
+                    </ul>
+                </section>
+                <section id="collection" class="legal-section">
+                    <h2><span>03</span>取得方法</h2>
+                    <ol>
+                        <li>運営者は、Google OAuthおよびSupabase Authを通じて認証・アカウント情報を取得します。</li>
+                        <li>運営者は、利用者が選択した成績PDF、入力したニックネーム、選択した単位数その他利用者が本サービスへ提供する情報を取得します。</li>
+                        <li>運営者は、本サービスの利用に伴い、利用端末、ブラウザ、サーバーおよび外部サービスから通信記録、処理記録および識別子を自動的に取得または生成します。</li>
+                        <li>利用者の端末内だけで処理する情報は、サーバーへの送信を伴わない限り、運営者がサーバー上で取得する情報には含まれません。</li>
+                    </ol>
+                </section>
+                <section id="purpose" class="legal-section">
+                    <h2><span>04</span>利用目的</h2>
+                    <p>運営者は、取得した情報を次の目的で利用します。</p>
+                    <ul>
+                        <li>大学アカウントによる認証、利用資格の確認およびセッションの維持</li>
+                        <li>ニックネームとGoogleアカウントの表示名または学籍番号との照合、および不適切なニックネームの登録防止</li>
+                        <li>成績PDFの真正性、形式、発行日時およびログイン中の大学アカウントとの対応関係の検証</li>
+                        <li>科目、評定、年度、学期および単位数の判定ならびにGPA計算</li>
+                        <li>計算結果、成績内訳、GPA推移、予測、再履修・リピート試算および計算履歴の表示</li>
+                        <li>ランキング情報の登録、更新、表示、検索、絞り込みおよび重複登録の防止</li>
+                        <li>科目別成績統計ならびに全体・学部・学科別のGPA統計の作成および表示</li>
+                        <li>シラバス未登録科目、表記揺れおよび単位数判定の精度改善</li>
+                        <li>受付処理、利用回数制限、複数タブからの処理、キャッシュおよびエラー復旧の管理</li>
+                        <li>不正利用の検知および防止、アクセス制御、障害調査、セキュリティ確保ならびにサービスの保守</li>
+                        <li>問い合わせ、開示等の請求および利用者からの申出への対応</li>
+                        <li>個人を直接識別しない集計情報を用いた利用状況の把握および機能改善</li>
+                    </ul>
+                    <p>運営者は、法令により認められる場合を除き、利用目的を超えて利用者情報を取り扱いません。利用目的を変更する場合は、変更前の目的と合理的な関連性を有する範囲で行い、本サービス上で公表します。</p>
+                </section>
+                <section id="local-processing" class="legal-section">
+                    <h2><span>05</span>端末内の処理</h2>
+                    <ol>
+                        <li>発行から31日以上経過した成績PDFおよび未対応の学籍番号を含む成績PDFは、原則としてPDF.jsを使用して利用者のブラウザ内で計算します。</li>
+                        <li>前項の計算では、PDF本体およびGPA計算のために抽出した成績情報をSupabaseへ送信せず、ランキングおよび成績統計へ登録しません。</li>
+                        <li>端末内で生成した計算結果、計算履歴、単位数設定その他の情報は、ブラウザの保存領域に保存される場合があります。</li>
+                    </ol>
+                </section>
+                <section id="server-processing" class="legal-section">
+                    <h2><span>06</span>サーバー処理</h2>
+                    <ol>
+                        <li>対応する新しい成績PDFは、受付処理の後、検証およびGPA計算のためSupabase Edge Functionsへ送信されます。</li>
+                        <li>PDF本体はリクエスト処理中に使用されますが、本サービスのデータベースまたはSupabase Storageへ永続的に保存されません。</li>
+                        <li>ログイン中の大学アカウントと成績PDF内の学籍番号が一致し、発行から31日未満であるなど所定の条件を満たす場合、計算完了時にランキングおよび成績統計の情報を自動的に登録または更新します。</li>
+                        <li>ランキングには、公開用識別子、GPA、ニックネーム、学部、学科および学年を登録します。照合および重複防止のため、認証ユーザー識別子、固定saltを用いた学籍番号ハッシュ、PDFハッシュ、更新日時その他の非公開情報を処理します。</li>
+                        <li>成績統計には、公開用識別子、科目IDまたは科目名、年度、学期、評定その他集計に必要な情報を登録します。GPA推移の集計には、学部、学科、学年進行段階および累積GPAを使用します。</li>
+                        <li>学籍番号ハッシュおよび公開用識別子は、学籍番号そのものを表示しないための識別子ですが、認証情報等との照合が可能な状態にあるため、匿名加工情報としては取り扱いません。</li>
+                    </ol>
+                </section>
+                <section id="display" class="legal-section">
+                    <h2><span>07</span>ランキング・統計</h2>
+                    <ol>
+                        <li>認証済みの利用者に対し、ランキング上のニックネーム、GPA、順位、学部、学科および学年を表示し、条件による検索、絞り込みおよび分布表示に使用します。</li>
+                        <li>ランキングへの初回登録時には「guest」を表示し、利用者が設定した場合は当該ニックネームへ更新します。</li>
+                        <li>科目別成績分布および全体・学部・学科別のGPA推移は集計値として表示します。</li>
+                        <li>ランキングおよび統計は学籍番号そのものを表示しません。ただし、所属、学年、GPA、ニックネーム、少人数の集計値その他の情報を組み合わせることにより、特定の利用者または成績が推測される可能性があります。</li>
+                        <li>運営者は、ランキングおよび統計に使用する情報を広告配信、信用評価、採用選考その他本サービスの提供と関係のない目的に使用しません。</li>
+                    </ol>
+                </section>
+                <section id="browser-storage" class="legal-section">
+                    <h2><span>08</span>ブラウザ保存</h2>
+                    <p>本サービスは、localStorageまたはsessionStorageに次の情報を保存します。</p>
+                    <ul>
+                        <li>Supabase Authのログインセッション、認証状態および利用者識別子</li>
+                        <li>PDFファイル名、PDFハッシュ、学籍番号およびPDF発行日時</li>
+                        <li>GPA、単位数、科目名、評定、年度、学期、履修中科目、予測情報および計算履歴</li>
+                        <li>ランキング公開用識別子、ニックネームおよび利用者が選択した単位数</li>
+                        <li>受付用識別子、一時的な受付情報、ランキング、成績統計、GPA平均値等のキャッシュおよび画面設定</li>
+                        <li>同意した利用規約および本ポリシーの版ならびに同意日時</li>
+                    </ul>
+                    <p>PDF本体はブラウザの計算履歴へ保存しません。ログアウトしても、計算履歴、ニックネーム、単位数設定その他ブラウザに保存された情報は自動的に削除されません。</p>
+                </section>
+                <section id="logs" class="legal-section">
+                    <h2><span>09</span>Cookie・アクセスログ</h2>
+                    <ol>
+                        <li>本サービスおよび利用する外部サービスは、認証状態の維持、セキュリティ確保、通信処理および機能提供のため、Cookie、Web Storageその他の端末識別技術を使用する場合があります。</li>
+                        <li>サイト配信、認証、APIおよびサーバー処理を提供する事業者は、IPアドレス、User-Agent、アクセス日時、参照元、リクエスト先、応答状況その他のアクセスログを記録する場合があります。</li>
+                        <li>本サービスは、行動ターゲティング広告を目的として成績情報を使用しません。</li>
+                    </ol>
+                </section>
+                <section id="retention" class="legal-section">
+                    <h2><span>10</span>保存期間</h2>
+                    <dl class="legal-definition-list">
+                        <div><dt>PDF本体</dt><dd>Edge Functionsのリクエスト処理中だけ使用し、本サービスのデータベースまたはSupabase Storageへ意図的に保存しません。</dd></div>
+                        <div><dt>ブラウザの計算履歴</dt><dd>利用者が本サービスの履歴削除機能またはブラウザのサイトデータ削除機能を使用するまで保存されます。一定期間後に自動表示の対象外となる場合でも、保存データが同時に削除されるとは限りません。</dd></div>
+                        <div><dt>ランキング・統計情報</dt><dd>削除申請、サービスの終了または利用目的上不要となるまで保存します。現時点では一律の自動削除期限を設けていません。</dd></div>
+                        <div><dt>受付・処理情報</dt><dd>処理の完了、失敗、期限切れの管理、不正利用防止および障害調査に必要な期間保存し、システムの清掃処理により削除します。</dd></div>
+                        <div><dt>キャッシュ</dt><dd>情報の種類に応じた有効期間、ブラウザのタブセッション終了時またはサイトデータの削除時まで保存します。</dd></div>
+                        <div><dt>同意記録</dt><dd>同じ利用者が新しい版へ同意した場合に上書きされ、ブラウザのサイトデータが削除されるまで保存されます。Google認証前の一時的な同意情報は、同一タブ内に最長5分間保存します。</dd></div>
+                        <div><dt>アクセスログ</dt><dd>各外部サービス提供者のセキュリティ、障害対応および保存方針に従って保持されます。</dd></div>
+                    </dl>
+                </section>
+                <section id="sharing" class="legal-section">
+                    <h2><span>11</span>第三者提供</h2>
+                    <p>運営者は、次の場合を除き、本人の同意なく個人データを第三者へ提供しません。</p>
+                    <ul>
+                        <li>本ポリシーに従い、ランキング情報を認証済みの利用者に表示する場合</li>
+                        <li>利用目的の達成に必要な範囲で取扱いの全部または一部を委託する場合</li>
+                        <li>法令に基づく場合</li>
+                        <li>人の生命、身体または財産の保護のために必要で、本人の同意を得ることが困難な場合</li>
+                        <li>公衆衛生の向上または児童の健全な育成の推進のために特に必要で、本人の同意を得ることが困難な場合</li>
+                        <li>国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行するために協力する必要があり、本人の同意により当該事務の遂行に支障を及ぼすおそれがある場合</li>
+                        <li>合併、事業譲渡その他の事由による事業の承継に伴って提供する場合</li>
+                        <li>その他個人情報保護法その他の法令により認められる場合</li>
+                    </ul>
+                </section>
+                <section id="providers" class="legal-section">
+                    <h2><span>12</span>委託・外部サービス</h2>
+                    <p>運営者は、本サービスの提供に必要な範囲で次の外部サービスを利用し、認証情報、成績情報、通信情報その他処理に必要な情報を送信する場合があります。</p>
+                    <ul>
+                        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google LLC</a>：Google OAuthおよびフォント配信</li>
+                        <li><a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">Supabase, Inc.</a>：認証、データベース、Edge FunctionsおよびAPI</li>
+                        <li><a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub, Inc.</a>：サイト配信</li>
+                        <li><a href="https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net" target="_blank" rel="noopener noreferrer">jsDelivr</a>：JavaScriptライブラリの配信</li>
+                        <li><a href="https://x.com/ja/privacy" target="_blank" rel="noopener noreferrer">X Corp.</a>：問い合わせリンクを利用した場合の問い合わせ受付</li>
+                    </ul>
+                    <p>運営者は、委託先を選定するにあたり、提供機能、情報の取扱いおよび安全管理に関する条件を確認し、必要な範囲で取扱状況を把握します。</p>
+                </section>
+                <section id="international" class="legal-section">
+                    <h2><span>13</span>国外での取扱い</h2>
+                    <ol>
+                        <li>前条の外部サービスの利用に伴い、利用者情報が日本国外のサーバーへ送信され、または国外に所在する事業者によって処理される場合があります。</li>
+                        <li>国外における情報の保護制度および外部サービス提供者が講じる措置は、各提供者のプライバシーポリシーその他公表資料に従います。</li>
+                        <li>運営者は、本サービスの構成または委託先を変更した場合、必要に応じて本ポリシーの外部サービスに関する記載を更新します。</li>
+                    </ol>
+                </section>
+                <section id="google-data" class="legal-section">
+                    <h2><span>14</span>Googleユーザーデータ</h2>
+                    <ol>
+                        <li>本サービスは、認証に必要な範囲でGoogleアカウントの情報へアクセスします。</li>
+                        <li>Google APIから取得した情報の利用および他のアプリへの転送は、限定使用要件を含む<a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy</a>に従います。</li>
+                        <li>Googleユーザーデータを広告配信、第三者への販売、信用評価または本サービスと関係のない目的に使用しません。</li>
+                    </ol>
+                </section>
+                <section id="security" class="legal-section">
+                    <h2><span>15</span>安全管理</h2>
+                    <ol>
+                        <li>運営者は、通信の暗号化、認証、アクセス制御、権限を限定したサーバー処理、識別子のハッシュ化およびPDF本体の非永続化その他取り扱う情報の性質に応じた措置を講じます。</li>
+                        <li>運営者は、利用者情報へアクセスできる処理および権限を本サービスの提供に必要な範囲へ限定します。</li>
+                        <li>情報漏えい、不正アクセス、改ざんまたは滅失が発生し、利用者への通知が必要と判断した場合は、法令に従い必要な対応を行います。</li>
+                        <li>インターネット通信、ブラウザ保存および外部サービスの利用には固有のリスクがあり、運営者は安全性を完全に保証するものではありません。</li>
+                    </ol>
+                </section>
+                <section id="rights" class="legal-section">
+                    <h2><span>16</span>開示・訂正・削除</h2>
+                    <ol>
+                        <li>利用者は、自己に関する保有個人データについて、適用される法令に基づき、利用目的の通知、開示、訂正、追加、削除、利用停止、消去または第三者提供の停止を請求できます。</li>
+                        <li>請求を行う場合は、お問い合わせ先から、請求の対象および内容を特定して申請するものとします。運営者は、大学アカウントその他の方法による本人確認を行う場合があります。</li>
+                        <li>法令により請求に応じる義務がない場合、本人または第三者の権利利益を害するおそれがある場合、本サービスの適正な実施に著しい支障を及ぼすおそれがある場合その他法令上認められる場合は、請求の全部または一部に応じないことがあります。</li>
+                        <li>ブラウザに保存された情報は、本サービスの履歴削除機能またはブラウザのサイトデータ削除機能で削除できます。ログアウトのみでは、ブラウザ保存情報またはサーバー上の登録情報は削除されません。</li>
+                        <li>削除前に作成された統計的な集計値で、特定の利用者との対応関係を保持しないものについては、削除後も残る場合があります。</li>
+                    </ol>
+                </section>
+                <section id="minor" class="legal-section">
+                    <h2><span>17</span>未成年者</h2>
+                    <ol>
+                        <li>未成年者が本サービスを利用する場合は、法定代理人の同意その他法令上必要な手続を行うものとします。</li>
+                        <li>運営者が法定代理人の同意を要する情報の取扱いを認識した場合、必要に応じて同意の確認、利用制限または情報の削除を行うことがあります。</li>
+                    </ol>
+                </section>
+                <section id="changes" class="legal-section">
+                    <h2><span>18</span>ポリシーの変更</h2>
+                    <ol>
+                        <li>運営者は、法令の改正、本サービスの内容、取得する情報、利用目的または外部サービスの変更その他の必要に応じて、本ポリシーを変更できます。</li>
+                        <li>変更後の本ポリシーは、本サービス上に掲載した時点または別途定めた効力発生日から効力を生じます。</li>
+                        <li>利用目的の重要な変更その他法令上同意が必要な変更については、変更内容を掲示し、改めて利用者の同意を取得します。</li>
+                    </ol>
+                </section>
+                <section id="contact" class="legal-section">
+                    <h2><span>19</span>お問い合わせ</h2>
+                    <p>本ポリシー、利用者情報の取扱い、開示等の請求および苦情に関するお問い合わせは、<a href="https://x.com/i/user/1769273557606150144" target="_blank" rel="noopener noreferrer">Xの問い合わせ窓口</a>で受け付けます。</p>
+                </section>
+            </article>
+        </div>
+    </main>
+    <footer class="legal-footer">
+        <nav aria-label="フッターメニュー">
+            <a href="../">計算機</a>
+            <a href="../terms/">利用規約</a>
+            <a href="./" aria-current="page">プライバシーポリシー</a>
+            <a href="https://x.com/i/user/1769273557606150144" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+        </nav>
+        <p>Copyright © 2024-2026 SAYU.</p>
     </footer>
 </body>
-
 </html>

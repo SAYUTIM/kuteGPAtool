@@ -1,0 +1,251 @@
+/*
+ * Result-page ranking registration
+ *
+ * This file is intentionally loaded last. The legacy ranking styles are shared
+ * with /rank/, while this block belongs only to the calculator result view.
+ */
+
+.home-page #result > #ranking-area {
+    width: 100% !important;
+    max-width: none !important;
+    margin: clamp(30px, 3vw, 42px) 0 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    color: var(--top-ink, #252722);
+    background: transparent !important;
+    border: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    animation: ranking-registration-v2-enter 420ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.home-page #result > #ranking-area[style*="display: none"] {
+    margin: 0 !important;
+}
+
+.home-page #ranking-area #ranking-controls,
+.home-page #ranking-area #nickname-section,
+.home-page #ranking-area #ranking-box-expanded {
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.home-page #ranking-area .ranking-registration-layout {
+    display: block;
+    min-height: 0;
+    background: transparent;
+}
+
+.home-page #ranking-area .ranking-registration-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    padding: 0;
+    border-right: 0;
+    text-align: left;
+}
+
+.home-page #ranking-area .ranking-registration-heading::before {
+    display: none;
+}
+
+.home-page #ranking-area .ranking-registration-heading h2 {
+    position: relative;
+    display: inline-flex;
+    min-height: 50px;
+    margin: 0 !important;
+    padding: 0 0 0 21px !important;
+    align-items: center;
+    color: var(--top-ink, #252722) !important;
+    background: transparent !important;
+    border: 0 !important;
+    font-size: 1.1875rem !important;
+    font-weight: 500 !important;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+.home-page #ranking-area .ranking-registration-heading h2::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--top-blue, #001dff);
+    content: "";
+}
+
+.home-page #ranking-area .ranking-registration-heading p {
+    margin: 10px 0 0 21px;
+    color: #50534d;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    text-align: left !important;
+}
+
+.home-page #ranking-area .ranking-registration-entry {
+    min-width: 0;
+    margin-top: 18px;
+    padding: 0;
+}
+
+.home-page #ranking-area .ranking-registration-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 164px;
+    align-items: stretch;
+    min-width: 0;
+    border-bottom: 1px solid var(--top-ink, #252722);
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.home-page #ranking-area .ranking-registration-form:focus-within {
+    border-bottom-color: var(--top-blue, #001dff);
+    box-shadow: inset 0 -1px 0 var(--top-blue, #001dff);
+}
+
+.home-page #ranking-area #nicknameInput {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: 54px;
+    margin: 0 !important;
+    padding: 0 16px 0 21px !important;
+    color: var(--top-ink, #252722);
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: 0;
+    font: inherit;
+    font-size: 0.96rem;
+}
+
+.home-page #ranking-area #nicknameInput::placeholder {
+    color: #969991;
+    opacity: 1;
+}
+
+.home-page #ranking-area #submitRankingButton {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 0;
+    height: 54px;
+    margin: 0 !important;
+    padding: 0 18px !important;
+    color: #fff !important;
+    background: var(--top-blue, #001dff) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-size: 0.84rem;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 160ms ease;
+}
+
+.home-page #ranking-area #submitRankingButton:hover,
+.home-page #ranking-area #submitRankingButton:focus-visible {
+    color: #fff !important;
+    background: #0016c9 !important;
+    box-shadow: none !important;
+    outline: none;
+    transform: none !important;
+}
+
+.home-page #ranking-area #submitRankingButton span:last-child {
+    font-size: 1.05rem;
+    transition: transform 220ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.home-page #ranking-area #submitRankingButton:hover span:last-child,
+.home-page #ranking-area #submitRankingButton:focus-visible span:last-child {
+    transform: translateX(4px);
+}
+
+.home-page #ranking-area #rankingStatus {
+    margin: 0;
+    padding: 0 clamp(28px, 3.5vw, 52px) 22px;
+    color: var(--top-muted, #6f726b);
+    font-size: 0.76rem;
+}
+
+@keyframes ranking-registration-v2-enter {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+    .home-page #result > #ranking-area {
+        margin-top: 26px !important;
+    }
+
+    .home-page #ranking-area .ranking-registration-layout {
+        min-height: 0;
+    }
+
+    .home-page #ranking-area .ranking-registration-heading {
+        align-items: flex-start;
+        padding: 0;
+        border-right: 0;
+        border-bottom: 0;
+    }
+
+    .home-page #ranking-area .ranking-registration-heading::before {
+        display: none;
+    }
+
+    .home-page #ranking-area .ranking-registration-heading h2 {
+        min-height: 42px;
+        padding-left: 18px !important;
+        font-size: 1rem !important;
+    }
+
+    .home-page #ranking-area .ranking-registration-heading p {
+        margin-left: 18px;
+    }
+
+    .home-page #ranking-area .ranking-registration-heading p {
+        margin-top: 10px;
+    }
+
+    .home-page #ranking-area .ranking-registration-entry {
+        margin-top: 16px;
+        padding: 0;
+    }
+
+    .home-page #ranking-area .ranking-registration-form {
+        grid-template-columns: minmax(0, 1fr) 132px;
+    }
+
+    .home-page #ranking-area #nicknameInput {
+        padding-left: 18px !important;
+    }
+
+    .home-page #ranking-area #submitRankingButton {
+        padding: 0 14px !important;
+    }
+
+    .home-page #ranking-area #rankingStatus {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+}
+
+@media (max-width: 390px) {
+    .home-page #ranking-area .ranking-registration-form {
+        grid-template-columns: minmax(0, 1fr) 122px;
+    }
+}

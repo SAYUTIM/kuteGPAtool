@@ -1,0 +1,2590 @@
+/* Ranking studio v2: editorial score sheet, shared with the result-page language. */
+.ranking-page {
+    --rank-blue: #3347b8;
+    --rank-blue-dark: #25358b;
+    --rank-ink: #1f211c;
+    --rank-muted: #777a72;
+    --rank-line: #d7d8d2;
+    --rank-line-strong: #a9aca4;
+    --rank-paper: #f7f6f1;
+    --rank-paper-deep: #efeee8;
+    --rank-white: #fffefa;
+    --rank-gold: #8f6b00;
+    --rank-silver: #68717a;
+    --rank-bronze: #9f5734;
+    min-height: 100vh;
+    padding: 64px 0 0 !important;
+    color: var(--rank-ink);
+    background: var(--rank-paper);
+    text-align: left;
+}
+
+.ranking-page *,
+.ranking-page *::before,
+.ranking-page *::after {
+    box-sizing: border-box;
+}
+
+.ranking-page .site-header {
+    height: 64px;
+    padding: 0 clamp(18px, 4vw, 64px);
+    background: rgba(247, 246, 241, .96);
+    border-bottom: 1px solid var(--rank-line);
+    box-shadow: none;
+    backdrop-filter: blur(12px);
+}
+
+.ranking-page .site-header-logo {
+    gap: 10px;
+    color: var(--rank-ink);
+    font-size: 15px;
+    font-weight: 650;
+    letter-spacing: -.02em;
+}
+
+.ranking-page .site-header-logo:hover {
+    color: var(--rank-blue);
+}
+
+.ranking-page .site-header-logo-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.ranking-page .site-header-nav {
+    align-self: stretch;
+    gap: 24px;
+}
+
+.ranking-page .site-header-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    color: #585b54;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 500;
+    background: transparent;
+}
+
+.ranking-page .site-header-link::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background: var(--rank-blue);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 220ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.ranking-page .site-header-link:hover,
+.ranking-page .site-header-link.active {
+    color: var(--rank-blue);
+    background: transparent;
+}
+
+.ranking-page .site-header-link:hover::after,
+.ranking-page .site-header-link.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.ranking-page #main-content.rank-workspace {
+    width: min(100%, 1440px);
+    max-width: none;
+    min-height: calc(100vh - 64px);
+    min-height: calc(100svh - 64px);
+    margin: 0 auto;
+    padding: 0 clamp(28px, 6vw, 96px) 96px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.rank-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: min(100%, 1120px);
+    min-height: calc(100vh - 64px);
+    min-height: calc(100svh - 64px);
+    margin-inline: auto;
+    align-content: center;
+    border-top: 0;
+    border-bottom: 1px solid var(--rank-line-strong);
+    animation: rank-v2-rise 560ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.rank-overview-summary {
+    display: grid;
+    grid-template-columns: minmax(270px, .8fr) minmax(0, 1.35fr);
+    align-items: stretch;
+    min-width: 0;
+}
+
+.ranking-page #my-rank {
+    position: relative;
+    min-width: 0;
+    min-height: 176px;
+    margin: 0;
+    padding: 0;
+    color: var(--rank-ink);
+    background: transparent;
+    border: 0;
+    border-left: 2px solid var(--rank-blue);
+    border-radius: 0;
+    outline: 0;
+    transition: border-color 180ms ease;
+}
+
+.rank-current-hit-area {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto auto;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 176px;
+    margin: 0;
+    padding: clamp(18px, 3svh, 28px) clamp(30px, 5vw, 58px);
+    color: inherit;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-family: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+    overflow: hidden;
+    transform: none;
+    transition: background-color 240ms ease, color 240ms ease;
+}
+
+.rank-current-hit-area::before {
+    display: none;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(51, 71, 184, .11), rgba(51, 71, 184, .025) 52%, transparent 78%);
+    opacity: 0;
+    transform: scaleX(.18);
+    transform-origin: left center;
+    transition: opacity 220ms ease, transform 420ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.rank-current-hit-area::after {
+    content: '';
+    position: absolute;
+    top: 16%;
+    bottom: 16%;
+    left: 0;
+    width: 2px;
+    background: var(--rank-blue);
+    opacity: 0;
+    transform: scaleY(.25);
+    transition: opacity 180ms ease, transform 360ms cubic-bezier(.22, 1, .36, 1), box-shadow 360ms ease;
+}
+
+.rank-current-hit-area > * {
+    position: relative;
+    z-index: 1;
+    transition: transform 360ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.rank-current-hit-area > .rank-overview-label {
+    margin-bottom: 7px;
+}
+
+.ranking-page .rank-current-hit-area:hover {
+    color: var(--rank-blue-dark);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.ranking-page .rank-current-hit-area:hover::before,
+.ranking-page .rank-current-hit-area:focus-visible::before {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.ranking-page .rank-current-hit-area:hover::after,
+.ranking-page .rank-current-hit-area:focus-visible::after {
+    opacity: 1;
+    transform: scaleY(1);
+    box-shadow: 10px 0 26px rgba(51, 71, 184, .18);
+}
+
+.ranking-page .rank-current-hit-area:hover > *,
+.ranking-page .rank-current-hit-area:focus-visible > * {
+    transform: translateX(7px);
+}
+
+.ranking-page .rank-current-hit-area:hover .rank-current-position strong,
+.ranking-page .rank-current-hit-area:focus-visible .rank-current-position strong {
+    color: var(--rank-blue-dark);
+}
+
+.ranking-page .rank-current-hit-area:focus-visible {
+    color: var(--rank-blue-dark);
+    background: transparent;
+    box-shadow: none;
+    outline: 1px solid var(--rank-blue);
+    outline-offset: -1px;
+    transform: none;
+}
+
+.rank-overview-label {
+    display: block;
+    margin: 0 0 18px;
+    color: inherit;
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.rank-current-position {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1vw, 14px);
+    margin-top: 0;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.rank-current-position strong {
+    color: var(--rank-ink);
+    font-size: clamp(56px, 4.7vw, 68px);
+    font-weight: 520;
+    letter-spacing: -.07em;
+    font-variant-numeric: tabular-nums;
+    transition: color 180ms ease;
+}
+
+.rank-current-divider {
+    color: #8d9088;
+    font-size: clamp(27px, 2.5vw, 34px);
+    font-weight: 300;
+    line-height: 1;
+}
+
+.rank-current-total {
+    color: #454841;
+    font-size: clamp(21px, 1.8vw, 26px);
+    font-weight: 450;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.035em;
+}
+
+.rank-current-context {
+    display: inline-grid;
+    align-self: center;
+    justify-items: start;
+    gap: 6px;
+    min-width: 0;
+}
+
+.rank-current-percentile {
+    display: block;
+    margin: 0;
+    color: var(--rank-blue-dark);
+    font-size: 12px;
+    font-weight: 620;
+    line-height: 1;
+    letter-spacing: .01em;
+}
+
+.ranking-page #my-rank-graph-card {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: clamp(20px, 3.5svh, 34px) clamp(30px, 5vw, 58px) clamp(14px, 2.5svh, 22px);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.ranking-page #my-rank-graph-header {
+    display: block;
+    margin: 0 0 clamp(10px, 1.7svh, 14px);
+}
+
+.ranking-page #my-rank-graph-title {
+    color: var(--rank-ink);
+    font-size: 19px;
+    font-weight: 560;
+    line-height: 1.4;
+    letter-spacing: -.025em;
+}
+
+.rank-summary-stats {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-self: center;
+    min-width: 0;
+    margin: 0;
+    padding: clamp(18px, 3svh, 26px) 0;
+    border: 0;
+    border-left: 1px solid var(--rank-line);
+}
+
+.rank-summary-stats > div {
+    min-width: 0;
+    padding: 0 clamp(13px, 2.2vw, 26px);
+}
+
+.rank-summary-stats > div:first-child {
+    padding-left: clamp(18px, 2.8vw, 32px);
+}
+
+.rank-summary-stats > div + div {
+    border-left: 1px solid var(--rank-line);
+}
+
+.rank-summary-stats dt {
+    margin: 0 0 7px;
+    color: var(--rank-muted);
+    font-size: 11px;
+    font-weight: 520;
+    letter-spacing: .04em;
+}
+
+.rank-summary-stats dd {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(6px, .7vw, 9px);
+    margin: 0;
+    color: var(--rank-ink);
+    font-size: clamp(23px, 2vw, 27px);
+    font-weight: 480;
+    line-height: 1;
+    letter-spacing: -.04em;
+    font-variant-numeric: tabular-nums;
+}
+
+.rank-summary-delta {
+    display: inline-block;
+    padding-bottom: 2px;
+    color: var(--rank-muted);
+    font-size: 10px;
+    font-weight: 520;
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.rank-summary-personal dd {
+    color: var(--rank-blue-dark);
+}
+
+.ranking-page #my-rank-graph-canvas {
+    height: clamp(240px, 42svh, 390px);
+}
+
+.ranking-page #my-rank-graph-tooltip {
+    padding: 8px 10px;
+    color: #fff;
+    background: var(--rank-ink);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 11px;
+}
+
+.rank-list-section {
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    width: min(100%, 820px);
+    height: calc(100vh - 64px);
+    height: calc(100svh - 64px);
+    margin-inline: auto;
+    padding: clamp(18px, 3svh, 28px) 0 clamp(12px, 2svh, 18px);
+    overflow: hidden;
+    overflow-anchor: none;
+    scroll-margin-top: 64px;
+    animation: rank-v2-rise 620ms 150ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.rank-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 0 0 22px 26px;
+    border-bottom: 1px solid var(--rank-line-strong);
+    position: relative;
+}
+
+.rank-section-header::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    bottom: 22px;
+    left: 0;
+    width: 2px;
+    background: var(--rank-blue);
+}
+
+.rank-section-header h2 {
+    margin: 0;
+    color: var(--rank-ink);
+    font-size: 20px;
+    font-weight: 560;
+    letter-spacing: -.03em;
+}
+
+#rank-filter-summary {
+    margin: 0;
+    color: var(--rank-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ranking-page .filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    align-items: stretch;
+    gap: 12px;
+    margin: 0;
+    padding: 16px 0;
+    border: 0;
+    border-bottom: 1px solid var(--rank-line);
+}
+
+.ranking-page .rank-filter-control {
+    position: relative;
+    display: block;
+    min-width: 0;
+    padding: 10px 13px 9px;
+    background: rgba(255, 254, 250, .34);
+    border: 1px solid var(--rank-line);
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.ranking-page .rank-filter-control::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    height: 2px;
+    background: var(--rank-blue);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 260ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.ranking-page .rank-filter-control:hover,
+.ranking-page .rank-filter-control:focus-within,
+.ranking-page .rank-filter-control.has-value {
+    background: rgba(51, 71, 184, .035);
+    border-color: rgba(51, 71, 184, .42);
+}
+
+.ranking-page .rank-filter-control:hover::after,
+.ranking-page .rank-filter-control:focus-within::after,
+.ranking-page .rank-filter-control.has-value::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.rank-filter-heading {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+}
+
+.rank-filter-index {
+    color: var(--rank-blue);
+    font-size: 9px;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .04em;
+}
+
+.ranking-page .filters label {
+    display: inline-block;
+    margin: 0;
+    color: var(--rank-muted);
+    font-size: 9px;
+    font-weight: 560;
+    letter-spacing: .08em;
+}
+
+.rank-filter-select-wrap {
+    position: relative;
+    min-width: 0;
+}
+
+.ranking-page .filters select {
+    appearance: none;
+    width: 100%;
+    min-width: 0;
+    height: 30px;
+    margin: 0;
+    padding: 0 24px 0 0;
+    color: var(--rank-ink);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    outline: 0;
+    font-size: 14px;
+    font-weight: 510;
+    line-height: 30px;
+    cursor: pointer;
+    transition: color 180ms ease;
+}
+
+.ranking-page .filters select:hover,
+.ranking-page .filters select:focus {
+    color: var(--rank-blue);
+}
+
+.rank-filter-chevron {
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    width: 7px;
+    height: 7px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    color: var(--rank-muted);
+    pointer-events: none;
+    transform: translateY(-70%) rotate(45deg);
+    transition: color 180ms ease, transform 220ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.rank-filter-control:hover .rank-filter-chevron,
+.rank-filter-control:focus-within .rank-filter-chevron {
+    color: var(--rank-blue);
+    transform: translateY(-48%) rotate(45deg);
+}
+
+.ranking-page .filters .clear-button {
+    min-width: 104px;
+    height: auto;
+    min-height: 58px;
+    margin: 0;
+    padding: 0 2px 0 14px;
+    color: var(--rank-muted);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--rank-line-strong);
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: right;
+    transition: color 180ms ease, border-color 180ms ease;
+}
+
+.ranking-page .filters .clear-button:hover,
+.ranking-page .filters .clear-button:focus-visible {
+    color: var(--rank-blue);
+    background: transparent;
+    border-bottom-color: var(--rank-blue);
+    box-shadow: none;
+    transform: none;
+}
+
+.ranking-page .filters .clear-button:disabled {
+    color: #b1b3ac;
+    border-bottom-color: var(--rank-line);
+    cursor: default;
+}
+
+.ranking-page .ranking-table-wrapper {
+    position: relative;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    overflow-anchor: none;
+    scrollbar-gutter: stable;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--rank-line-strong);
+    border-radius: 0;
+}
+
+.ranking-page .ranking-table {
+    width: 100%;
+    margin: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.ranking-page .ranking-table th,
+.ranking-page .ranking-table td {
+    height: 64px;
+    padding: 0 clamp(8px, 1.2vw, 16px);
+    color: var(--rank-ink);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--rank-line);
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.ranking-page .ranking-table th {
+    position: sticky;
+    top: 0;
+    z-index: 12;
+    height: 48px;
+    color: var(--rank-muted);
+    background: rgba(247, 246, 241, .96);
+    backdrop-filter: blur(10px);
+    font-size: 10px;
+    font-weight: 560;
+    letter-spacing: .08em;
+}
+
+.ranking-page .ranking-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.ranking-page .ranking-table .rank-column-position,
+.ranking-page .ranking-table .rank-cell-position {
+    width: 64px;
+    padding-left: 0;
+    text-align: left;
+}
+
+.ranking-page .ranking-table .rank-column-person {
+    width: 32%;
+}
+
+.ranking-page .ranking-table .rank-column-faculty {
+    width: 22%;
+}
+
+.ranking-page .ranking-table .rank-column-year {
+    width: 12%;
+}
+
+.ranking-page .ranking-table .rank-column-gpa,
+.ranking-page .ranking-table .rank-cell-gpa {
+    width: 86px;
+    padding-right: 0;
+    text-align: right;
+}
+
+.rank-cell-position {
+    color: var(--rank-muted);
+    font-size: 18px;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+}
+
+.rank-person-name {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+
+.rank-person-meta {
+    display: none;
+}
+
+.rank-cell-faculty,
+.rank-cell-year {
+    color: var(--rank-muted) !important;
+    font-size: 12px;
+}
+
+.rank-cell-gpa span {
+    position: relative;
+    display: inline-block;
+    min-width: 58px;
+    color: var(--rank-blue);
+    font-size: 18px;
+    font-weight: 560;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.025em;
+}
+
+.ranking-page .ranking-table tbody tr {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 300ms ease, transform 300ms ease, background-color 160ms ease;
+}
+
+.ranking-page .ranking-table tbody tr.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ranking-page .ranking-table tbody tr:hover {
+    background: rgba(20, 40, 255, .045);
+}
+
+.ranking-page .ranking-table tbody tr.rank-podium-gold .rank-cell-position {
+    color: var(--rank-gold) !important;
+}
+
+.ranking-page .ranking-table tbody tr.rank-podium-silver .rank-cell-position {
+    color: var(--rank-silver) !important;
+}
+
+.ranking-page .ranking-table tbody tr.rank-podium-bronze .rank-cell-position {
+    color: var(--rank-bronze) !important;
+}
+
+.ranking-page .loading-container {
+    inset: 48px 0 0;
+    min-height: 260px;
+    color: var(--rank-muted);
+    background: rgba(247, 246, 241, .94);
+    border-radius: 0;
+}
+
+.ranking-page .loading-spinner {
+    width: 32px;
+    height: 32px;
+    margin: 0 0 14px;
+    border: 1px solid var(--rank-line);
+    border-top-color: var(--rank-blue);
+}
+
+.ranking-page .loading-container p,
+.ranking-page .no-data-message {
+    color: var(--rank-muted);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.ranking-page .pagination-controls {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr) 120px;
+    align-items: center;
+    gap: 20px;
+    margin: 0;
+    padding: 14px 0 0;
+    background: var(--rank-paper);
+    border: 0;
+}
+
+.ranking-page .pagination-controls > button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 120px;
+    height: 42px;
+    margin: 0;
+    padding: 0;
+    color: var(--rank-ink);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--rank-line-strong);
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.ranking-page .pagination-controls > button:hover,
+.ranking-page .pagination-controls > button:focus-visible {
+    color: var(--rank-blue);
+    background: transparent;
+    border-bottom-color: var(--rank-blue);
+    box-shadow: none;
+    transform: none;
+}
+
+.ranking-page .pagination-controls > button:disabled {
+    color: #b1b3ac;
+    background: transparent;
+    border-bottom-color: var(--rank-line);
+    cursor: not-allowed;
+}
+
+.ranking-page #next-button {
+    justify-self: end;
+}
+
+.ranking-page #pagination-numbers {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+}
+
+.ranking-page .pagination-number,
+.ranking-page .pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    padding: 0;
+    color: var(--rank-muted);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.ranking-page .pagination-number:hover,
+.ranking-page .pagination-number:focus-visible {
+    color: var(--rank-blue);
+    background: rgba(20, 40, 255, .055);
+    box-shadow: none;
+    transform: none;
+}
+
+.ranking-page .pagination-number.active {
+    color: #fff;
+    background: var(--rank-blue);
+    border: 0;
+    cursor: default;
+}
+
+.ranking-page .pagination-ellipsis {
+    width: 24px;
+}
+
+.ranking-page .page-info-container {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: -2px 0 0;
+    color: var(--rank-muted);
+    text-align: center;
+    font-size: 10px;
+}
+
+.ranking-page .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 74px 0 0;
+    padding: 0 0 6px;
+    color: var(--rank-muted);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--rank-line-strong);
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.ranking-page .back-link:hover {
+    color: var(--rank-blue);
+    background: transparent;
+    border-bottom-color: var(--rank-blue);
+    transform: none;
+}
+
+.ranking-page .footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    align-items: center;
+    margin: 0;
+    padding: 28px clamp(28px, 6vw, 96px);
+    color: var(--rank-muted);
+    background: var(--rank-paper-deep);
+    border-top: 1px solid var(--rank-line);
+    font-size: 10px;
+}
+
+.ranking-page .footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ranking-page .footer a:hover {
+    color: var(--rank-blue);
+}
+
+.ranking-page .footer .copyright {
+    margin: 0 0 0 auto;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+}
+
+@keyframes rank-v2-rise {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 900px) {
+    .rank-overview {
+        width: min(100%, 960px);
+    }
+
+    .ranking-page .filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 680px) {
+    .ranking-page {
+        padding-top: 58px !important;
+    }
+
+    .ranking-page .site-header {
+        height: 58px;
+        padding: 0 14px;
+    }
+
+    .ranking-page .site-header-logo span {
+        display: none;
+    }
+
+    .ranking-page .site-header-nav {
+        gap: 16px;
+    }
+
+    .ranking-page .site-header-link {
+        font-size: 11px;
+    }
+
+    .ranking-page #main-content.rank-workspace {
+        min-height: calc(100vh - 58px);
+        min-height: calc(100svh - 58px);
+        padding: 0 18px 68px;
+    }
+
+    .rank-overview {
+        width: 100%;
+        min-height: calc(100vh - 58px);
+        min-height: calc(100svh - 58px);
+    }
+
+    .rank-overview-summary {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ranking-page #my-rank {
+        grid-column: 1;
+        grid-row: 1;
+        min-height: 0;
+    }
+
+    .rank-current-hit-area {
+        min-height: 0;
+        padding: clamp(18px, 3svh, 26px) 26px;
+    }
+
+    .rank-summary-stats {
+        grid-column: 1;
+        grid-row: 2;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin: 0 26px;
+        padding: 0;
+        border-top: 1px solid var(--rank-line);
+        border-bottom: 1px solid var(--rank-line);
+        border-left: 0;
+    }
+
+    .rank-summary-stats > div,
+    .rank-summary-stats > div:first-child {
+        padding: 12px;
+    }
+
+    .rank-summary-stats > div + div {
+        border-left: 0;
+    }
+
+    .rank-summary-stats > div:nth-child(even) {
+        border-left: 1px solid var(--rank-line);
+    }
+
+    .rank-summary-stats > div:nth-child(n + 3) {
+        border-top: 1px solid var(--rank-line);
+    }
+
+    .rank-summary-stats dt {
+        margin-bottom: 6px;
+        font-size: 10px;
+    }
+
+    .rank-summary-stats dd {
+        gap: 5px;
+        font-size: 22px;
+    }
+
+    .rank-summary-delta {
+        padding-bottom: 1px;
+        font-size: 9px;
+    }
+
+    .rank-current-position strong {
+        font-size: 64px;
+    }
+
+    .ranking-page #my-rank-graph-card {
+        min-height: 0;
+        padding: clamp(18px, 3svh, 28px) 0 clamp(10px, 2svh, 14px);
+    }
+
+    .ranking-page #my-rank-graph-title {
+        font-size: 17px;
+    }
+
+    .ranking-page #my-rank-graph-canvas {
+        height: clamp(180px, 29svh, 250px);
+    }
+
+    .rank-list-section {
+        height: calc(100vh - 58px);
+        height: calc(100svh - 58px);
+        padding-top: clamp(14px, 2.5svh, 22px);
+        scroll-margin-top: 58px;
+    }
+
+    .rank-section-header {
+        display: block;
+        padding-left: 18px;
+    }
+
+    #rank-filter-summary {
+        max-width: none;
+        margin-top: 10px;
+        padding-top: 0;
+        text-align: left;
+        line-height: 1.5;
+    }
+
+    .ranking-page .filters {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        padding: 12px 0;
+    }
+
+    .ranking-page .rank-filter-control {
+        padding: 8px 10px 7px;
+    }
+
+    .ranking-page .filters select {
+        min-width: 0;
+    }
+
+    .ranking-page .filters .clear-button {
+        grid-column: 2;
+        width: 100%;
+        min-width: 0;
+        min-height: 50px;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .ranking-page .ranking-table .rank-column-position,
+    .ranking-page .ranking-table .rank-cell-position {
+        width: 48px;
+    }
+
+    .ranking-page .ranking-table .rank-column-person {
+        width: auto;
+    }
+
+    .ranking-page .ranking-table .rank-column-faculty,
+    .ranking-page .ranking-table .rank-column-year,
+    .ranking-page .ranking-table .rank-cell-faculty,
+    .ranking-page .ranking-table .rank-cell-year {
+        display: none;
+    }
+
+    .ranking-page .ranking-table .rank-column-gpa,
+    .ranking-page .ranking-table .rank-cell-gpa {
+        width: 74px;
+    }
+
+    .ranking-page .ranking-table th,
+    .ranking-page .ranking-table td {
+        height: 68px;
+        padding: 0 10px;
+    }
+
+    .ranking-page .ranking-table .rank-cell-position {
+        padding-left: 0;
+    }
+
+    .rank-person-name {
+        font-size: 13px;
+    }
+
+    .rank-person-meta {
+        display: block;
+        margin-top: 6px;
+        color: var(--rank-muted);
+        font-size: 10px;
+    }
+
+    .rank-cell-gpa span {
+        min-width: 0;
+        font-size: 17px;
+    }
+
+    .ranking-page .pagination-controls {
+        grid-template-columns: 82px minmax(0, 1fr) 82px;
+        gap: 8px;
+        padding-top: 10px;
+    }
+
+    .ranking-page .pagination-controls > button {
+        width: 82px;
+    }
+
+    .ranking-page .pagination-number,
+    .ranking-page .pagination-ellipsis {
+        width: 30px;
+        height: 34px;
+    }
+
+    .ranking-page .footer {
+        display: grid;
+        gap: 12px;
+        padding: 28px 18px;
+    }
+
+    .ranking-page .footer .copyright {
+        margin: 8px 0 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .ranking-page #main-content.rank-workspace {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .ranking-page .site-header-nav {
+        gap: 11px;
+    }
+
+    .ranking-page .site-header-link {
+        font-size: 10px;
+    }
+
+    .ranking-page #pagination-numbers .pagination-number:nth-of-type(n + 5),
+    .ranking-page #pagination-numbers .pagination-ellipsis:nth-of-type(n + 5) {
+        display: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+ * Custom filter primitives. Final v3.1 cascade overrides live at EOF.
+ * -------------------------------------------------------------------------- */
+.ranking-page .site-header.hidden {
+    transform: translateY(0) !important;
+}
+
+.ranking-page #my-rank-graph-card {
+    padding-top: clamp(4px, 1svh, 10px);
+}
+
+.ranking-page #my-rank-graph-canvas {
+    height: clamp(270px, 38svh, 390px);
+}
+
+.rank-filter-dock {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.ranking-page .filters {
+    overflow: visible;
+    border-bottom: 0;
+}
+
+.ranking-page .rank-filter-control {
+    min-height: 48px;
+    padding: 4px 0 3px clamp(14px, 1.6vw, 20px);
+    background: transparent;
+    border: 0;
+    border-left: 1px solid var(--rank-line);
+    cursor: default;
+}
+
+.ranking-page .rank-filter-control:first-child {
+    padding-left: 0;
+    border-left: 0;
+}
+
+.ranking-page .rank-filter-control::after {
+    content: none;
+}
+
+.ranking-page .rank-filter-control:hover,
+.ranking-page .rank-filter-control:focus-within,
+.ranking-page .rank-filter-control.has-value {
+    color: var(--rank-blue-dark);
+    background: transparent;
+    border-left-color: var(--rank-line);
+}
+
+.rank-filter-label {
+    gap: 0;
+    margin-bottom: 5px;
+    font-size: 9px;
+    letter-spacing: .09em;
+}
+
+.rank-filter-label::before {
+    content: none;
+}
+
+.rank-filter-select-wrap {
+    position: relative;
+    display: block;
+    min-width: 0;
+}
+
+.ranking-page .filters .rank-native-select {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+    pointer-events: none;
+}
+
+.ranking-page .rank-filter-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    min-width: 0;
+    height: 28px;
+    margin: 0;
+    padding: 0;
+    color: var(--rank-ink);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 520;
+    line-height: 1;
+    text-align: left;
+    cursor: pointer;
+    transition: color 160ms ease;
+}
+
+.ranking-page .rank-filter-trigger:hover,
+.ranking-page .rank-filter-trigger:focus-visible,
+.ranking-page .rank-filter-control.is-open .rank-filter-trigger {
+    color: var(--rank-blue-dark);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.ranking-page .rank-filter-trigger:focus-visible {
+    outline: 1px solid var(--rank-blue);
+    outline-offset: 4px;
+}
+
+.rank-filter-value {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ranking-page .rank-filter-control.has-value .rank-filter-value {
+    color: var(--rank-blue-dark);
+}
+
+.rank-filter-trigger .rank-filter-chevron {
+    position: static;
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+    color: currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 220ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.rank-filter-control:hover .rank-filter-chevron,
+.rank-filter-control:focus-within .rank-filter-chevron {
+    color: currentColor;
+    transform: translateY(0) rotate(45deg);
+}
+
+.rank-filter-control.is-open .rank-filter-chevron {
+    transform: translateY(2px) rotate(225deg);
+}
+
+.rank-filter-control.is-open {
+    z-index: 50;
+}
+
+.rank-filter-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 60;
+    display: grid;
+    width: max(100%, 190px);
+    max-width: min(280px, calc(100vw - 32px));
+    max-height: min(330px, 50svh);
+    padding: 6px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    color: var(--rank-ink);
+    background: var(--rank-white);
+    border: 1px solid var(--rank-line-strong);
+    box-shadow: 0 18px 44px rgba(28, 31, 26, .14);
+    animation: rank-filter-menu-in 160ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.rank-filter-menu[hidden] {
+    display: none;
+}
+
+.rank-filter-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 36px;
+    margin: 0;
+    padding: 0 12px;
+    color: #555952;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: left;
+    cursor: pointer;
+    transition: color 140ms ease, background-color 140ms ease;
+}
+
+.rank-filter-option::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 0;
+    width: 2px;
+    background: var(--rank-blue);
+    opacity: 0;
+    transform: scaleY(.2);
+    transition: opacity 140ms ease, transform 180ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.rank-filter-option:hover,
+.rank-filter-option:focus-visible {
+    color: var(--rank-ink);
+    background: rgba(51, 71, 184, .055);
+    box-shadow: none;
+    transform: none;
+    outline: 0;
+}
+
+.rank-filter-option[aria-selected="true"] {
+    color: var(--rank-blue-dark);
+    background: rgba(51, 71, 184, .075);
+}
+
+.rank-filter-option[aria-selected="true"]::before,
+.rank-filter-option:focus-visible::before {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.ranking-page .filters .clear-button,
+.ranking-page .filters .clear-button:hover,
+.ranking-page .filters .clear-button:focus-visible,
+.ranking-page .filters .clear-button:disabled {
+    border: 0;
+    box-shadow: none;
+}
+
+.ranking-page .filters .clear-button:focus-visible {
+    outline: 1px solid var(--rank-blue);
+    outline-offset: 3px;
+}
+
+.rank-list-section {
+    padding-top: 32px;
+}
+
+.ranking-page .pagination-controls-top {
+    margin-bottom: 12px;
+    padding-top: 0;
+    border-bottom: 0;
+}
+
+.ranking-page .pagination-controls > button,
+.ranking-page .pagination-controls > button:hover,
+.ranking-page .pagination-controls > button:focus-visible,
+.ranking-page .pagination-controls > button:disabled {
+    border: 0;
+}
+
+.ranking-page .pagination-controls > button:hover:not(:disabled) span[aria-hidden="true"],
+.ranking-page .pagination-controls > button:focus-visible:not(:disabled) span[aria-hidden="true"] {
+    transform: translateX(3px);
+}
+
+.ranking-page .pagination-controls > button span[aria-hidden="true"] {
+    transition: transform 180ms ease;
+}
+
+.ranking-page .pagination-controls > button[id^="prev"]:hover:not(:disabled) span[aria-hidden="true"],
+.ranking-page .pagination-controls > button[id^="prev"]:focus-visible:not(:disabled) span[aria-hidden="true"] {
+    transform: translateX(-3px);
+}
+
+.ranking-page .ranking-table th {
+    background: var(--rank-paper);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+@keyframes rank-filter-menu-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 680px) {
+    .ranking-page #my-rank-graph-card {
+        padding-top: 6px;
+    }
+
+    .ranking-page #my-rank-graph-canvas {
+        height: clamp(240px, 36svh, 310px);
+    }
+
+    .rank-filter-dock {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .ranking-page .rank-filter-control {
+        padding-left: 14px;
+    }
+
+    .ranking-page .rank-filter-control:nth-of-type(odd) {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .ranking-page .rank-filter-control:nth-of-type(even) .rank-filter-menu {
+        right: 0;
+        left: auto;
+    }
+
+    .rank-filter-menu {
+        width: max(100%, 180px);
+    }
+
+    .rank-list-section {
+        padding-top: 38px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+ * Ranking studio v3.3: responsive canvas, fading self row, visible elite pass.
+ * -------------------------------------------------------------------------- */
+.ranking-page #main-content.rank-workspace {
+    width: min(100%, 1700px);
+    padding-right: clamp(22px, 4vw, 72px);
+    padding-left: clamp(22px, 4vw, 72px);
+}
+
+.rank-overview {
+    width: min(100%, 1480px);
+}
+
+.rank-overview-summary {
+    grid-template-columns: minmax(360px, .72fr) minmax(0, 1.5fr);
+}
+
+.ranking-page #my-rank-graph-canvas {
+    height: clamp(280px, 46svh, 500px);
+}
+
+.rank-list-section {
+    width: min(100%, clamp(820px, 64vw, 1040px));
+}
+
+/* A hover must never compete with the persistent current-user treatment. */
+.ranking-page .ranking-table tbody tr:not(.my-rank-highlight):hover {
+    background: transparent;
+}
+
+.ranking-page .ranking-table tbody tr:not(.my-rank-highlight):hover .rank-person-name,
+.ranking-page .ranking-table tbody tr:not(.my-rank-highlight):hover .rank-cell-gpa span {
+    color: var(--rank-blue-dark);
+}
+
+/* The current-user band dissolves at both edges instead of ending abruptly. */
+.ranking-page .ranking-table tbody tr.my-rank-highlight,
+.ranking-page .ranking-table tbody tr.my-rank-highlight:hover {
+    --rank-self-wash: rgba(51, 71, 184, .082);
+    background: transparent;
+    box-shadow: none;
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight:hover {
+    --rank-self-wash: rgba(51, 71, 184, .098);
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight td {
+    background-color: transparent;
+    background-image: linear-gradient(var(--rank-self-wash), var(--rank-self-wash));
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% calc(100% - 12px);
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight td:first-child {
+    padding-left: 0;
+    background-image: linear-gradient(to right,
+            rgba(51, 71, 184, 0) 0,
+            rgba(51, 71, 184, .018) 18px,
+            var(--rank-self-wash) 64px,
+            var(--rank-self-wash) 100%);
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight td:first-child::before {
+    content: none;
+    display: none;
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight td:last-child {
+    padding-right: 0;
+    background-image: linear-gradient(to left,
+            rgba(51, 71, 184, 0) 0,
+            rgba(51, 71, 184, .018) 18px,
+            var(--rank-self-wash) 64px,
+            var(--rank-self-wash) 100%);
+}
+
+@media (max-height: 760px) and (min-width: 681px) {
+    .ranking-page #my-rank-graph-canvas {
+        height: clamp(260px, 40svh, 300px);
+    }
+}
+
+@media (max-width: 900px) {
+    .rank-overview-summary {
+        grid-template-columns: minmax(290px, .9fr) minmax(0, 1.35fr);
+    }
+}
+
+@media (max-width: 680px) {
+    .ranking-page #main-content.rank-workspace {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .rank-overview-summary {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .rank-list-section {
+        width: 100%;
+    }
+
+    .ranking-page #my-rank-graph-canvas {
+        height: clamp(240px, 36svh, 310px);
+    }
+
+    .ranking-page .ranking-table tbody tr.my-rank-highlight td {
+        background-size: 100% calc(100% - 10px);
+    }
+
+    .ranking-page .ranking-table tbody tr.my-rank-highlight td:first-child {
+        padding-left: 0;
+        background-image: linear-gradient(to right,
+                rgba(51, 71, 184, 0) 0,
+                rgba(51, 71, 184, .018) 10px,
+                var(--rank-self-wash) 42px,
+                var(--rank-self-wash) 100%);
+    }
+
+    .ranking-page .ranking-table tbody tr.my-rank-highlight td:last-child {
+        padding-right: 0;
+        background-image: linear-gradient(to left,
+                rgba(51, 71, 184, 0) 0,
+                rgba(51, 71, 184, .018) 10px,
+                var(--rank-self-wash) 42px,
+                var(--rank-self-wash) 100%);
+    }
+}
+
+/* --------------------------------------------------------------------------
+ * Ranking studio v3.2: inset self-row, single-phase rank hover, award pulse.
+ * -------------------------------------------------------------------------- */
+.ranking-page #my-rank {
+    border-left-width: 2px;
+    transition: border-color 180ms ease;
+}
+
+.ranking-page #my-rank:has(.rank-current-hit-area:hover),
+.ranking-page #my-rank:has(.rank-current-hit-area:focus-visible) {
+    border-left-width: 2px;
+    border-left-color: var(--rank-blue-dark);
+}
+
+.rank-current-hit-area::before {
+    content: none;
+    display: none;
+}
+
+.rank-current-hit-area::after {
+    content: '順位表へ  ↓';
+    right: clamp(24px, 3vw, 34px);
+    bottom: 26px;
+    color: var(--rank-blue-dark);
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.ranking-page .rank-current-hit-area:hover::after,
+.ranking-page .rank-current-hit-area:focus-visible::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.rank-current-hit-area > *,
+.ranking-page .rank-current-hit-area:hover > *,
+.ranking-page .rank-current-hit-area:focus-visible > * {
+    transform: none;
+    transition: color 180ms ease;
+}
+
+.rank-current-position {
+    align-items: flex-end;
+    gap: 0;
+    width: max-content;
+}
+
+.rank-current-position strong {
+    line-height: .88;
+}
+
+.rank-current-divider {
+    margin: 0 8px 0 clamp(11px, 1vw, 15px);
+    font-size: clamp(23px, 2vw, 29px);
+    transform: translateY(-20%);
+}
+
+.rank-current-total {
+    margin-bottom: 0;
+    font-size: clamp(20px, 1.75vw, 25px);
+    line-height: 1;
+    transform: translateY(-20%);
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight {
+    --rank-self-wash: rgba(51, 71, 184, .075);
+    background: transparent;
+    box-shadow: none;
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight:hover {
+    --rank-self-wash: rgba(51, 71, 184, .105);
+    background: transparent;
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight td {
+    background-color: var(--rank-self-wash);
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight td:first-child {
+    position: relative;
+    padding-left: 30px;
+    background-color: transparent;
+    background-image: linear-gradient(to right,
+            transparent 0,
+            transparent 20px,
+            var(--rank-self-wash) 20px,
+            var(--rank-self-wash) 100%);
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight td:first-child::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 20px;
+    width: 2px;
+    background: var(--rank-blue);
+}
+
+.ranking-page .ranking-table tbody tr.my-rank-highlight td:last-child {
+    padding-right: 30px;
+    background-color: transparent;
+    background-image: linear-gradient(to left,
+            transparent 0,
+            transparent 20px,
+            var(--rank-self-wash) 20px,
+            var(--rank-self-wash) 100%);
+}
+
+@media (max-width: 680px) {
+    .rank-current-divider {
+        margin-right: 6px;
+        margin-left: 10px;
+        font-size: 22px;
+        transform: translateY(-20%);
+    }
+
+    .rank-current-total {
+        font-size: 19px;
+        transform: translateY(-20%);
+    }
+
+    .ranking-page .ranking-table tbody tr.my-rank-highlight td:first-child {
+        padding-left: 20px;
+        background-image: linear-gradient(to right,
+                transparent 0,
+                transparent 12px,
+                var(--rank-self-wash) 12px,
+                var(--rank-self-wash) 100%);
+    }
+
+    .ranking-page .ranking-table tbody tr.my-rank-highlight td:first-child::before {
+        left: 12px;
+    }
+
+    .ranking-page .ranking-table tbody tr.my-rank-highlight td:last-child {
+        padding-right: 20px;
+        background-image: linear-gradient(to left,
+                transparent 0,
+                transparent 12px,
+                var(--rank-self-wash) 12px,
+                var(--rank-self-wash) 100%);
+    }
+}
+
+/* --------------------------------------------------------------------------
+ * Ranking studio v3: top-page header, one-page flow, and filter dock.
+ * These rules intentionally supersede the earlier v2 experiments above.
+ * -------------------------------------------------------------------------- */
+.ranking-page {
+    --rank-paper: #f8f7f2;
+    --rank-paper-deep: #efeee8;
+    --rank-white: #fffefa;
+    --rank-line: rgba(54, 57, 50, .17);
+    --rank-line-strong: rgba(54, 57, 50, .34);
+    padding-top: 72px !important;
+    background: var(--rank-paper);
+    font-family: "Yu Gothic UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    overflow-x: clip;
+}
+
+/* Match the calculator header rather than maintaining a ranking-only variant. */
+.ranking-page .site-header {
+    height: 72px;
+    padding: 0 clamp(24px, 4.6vw, 72px);
+    background: rgba(248, 247, 242, .94);
+    border-bottom: 1px solid var(--rank-line);
+    box-shadow: none;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.ranking-page .site-header-logo {
+    gap: 11px;
+    color: var(--rank-ink);
+    font-size: .94rem;
+    font-weight: 700;
+    letter-spacing: -.025em;
+}
+
+.ranking-page .site-header-logo:hover {
+    color: var(--rank-ink);
+}
+
+.ranking-page .site-header-logo-icon {
+    width: 29px;
+    height: 29px;
+}
+
+.ranking-page .site-header-name {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 0;
+    color: var(--rank-ink);
+    line-height: 1.15;
+}
+
+.ranking-page .top-header-name-full {
+    display: inline;
+}
+
+.ranking-page .top-header-name-short {
+    display: none;
+}
+
+.ranking-page .site-header-nav {
+    align-self: center;
+    gap: clamp(2px, 1vw, 16px);
+}
+
+.ranking-page .site-header-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 10px;
+    color: #6f726b;
+    border-radius: 0;
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+.ranking-page .site-header-link::after {
+    right: 10px;
+    bottom: 5px;
+    left: 10px;
+    height: 1px;
+    background: #001dff;
+}
+
+.ranking-page .site-header-link:hover {
+    color: var(--rank-ink);
+    background: transparent;
+}
+
+.ranking-page .site-header-link.active {
+    color: #fff;
+    background: #001dff;
+}
+
+.ranking-page .site-header-link.active::after {
+    display: none;
+}
+
+.ranking-page #main-content.rank-workspace {
+    width: min(100%, 1440px);
+    min-height: calc(100svh - 72px);
+    padding: 0 clamp(28px, 6vw, 96px) 112px;
+}
+
+.rank-overview {
+    width: min(100%, 1120px);
+    min-height: calc(100svh - 72px);
+    padding: clamp(28px, 4svh, 42px) 0 clamp(24px, 3.4svh, 34px);
+    align-content: center;
+    gap: clamp(8px, 1.6svh, 16px);
+    border-bottom: 0;
+}
+
+.rank-overview-summary {
+    grid-template-columns: minmax(330px, .9fr) minmax(0, 1.55fr);
+    min-height: 164px;
+}
+
+.ranking-page #my-rank {
+    min-height: 164px;
+    border-left-color: var(--rank-blue);
+    transition: border-left-width 260ms cubic-bezier(.22, 1, .36, 1), border-color 180ms ease;
+}
+
+.rank-current-hit-area {
+    grid-template-rows: auto auto auto;
+    min-height: 164px;
+    padding: clamp(18px, 2.8svh, 26px) clamp(30px, 4.5vw, 50px);
+    overflow: visible;
+    transition: color 180ms ease;
+}
+
+.rank-current-hit-area::before {
+    top: auto;
+    right: clamp(24px, 3vw, 34px);
+    bottom: 24px;
+    left: auto;
+    width: 42px;
+    height: 1px;
+    background: var(--rank-blue);
+    opacity: .22;
+    transform: scaleX(.35);
+    transform-origin: right center;
+    transition: opacity 200ms ease, transform 360ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.rank-current-hit-area::after {
+    content: '順位表へ  ↓';
+    top: auto;
+    right: clamp(24px, 3vw, 34px);
+    bottom: 29px;
+    left: auto;
+    width: auto;
+    height: auto;
+    color: var(--rank-blue);
+    background: transparent;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    opacity: 0;
+    transform: translateY(-7px);
+    transition: opacity 180ms ease, transform 300ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.rank-current-hit-area > * {
+    transition: color 180ms ease;
+}
+
+.ranking-page #my-rank:has(.rank-current-hit-area:hover),
+.ranking-page #my-rank:has(.rank-current-hit-area:focus-visible) {
+    border-left-width: 4px;
+}
+
+.ranking-page .rank-current-hit-area:hover,
+.ranking-page .rank-current-hit-area:focus-visible {
+    color: var(--rank-blue-dark);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.ranking-page .rank-current-hit-area:hover::before,
+.ranking-page .rank-current-hit-area:focus-visible::before {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.ranking-page .rank-current-hit-area:hover::after,
+.ranking-page .rank-current-hit-area:focus-visible::after {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.ranking-page .rank-current-hit-area:hover > *,
+.ranking-page .rank-current-hit-area:focus-visible > * {
+    transform: none;
+}
+
+.ranking-page .rank-current-hit-area:focus-visible {
+    outline: 1px solid var(--rank-blue);
+    outline-offset: -1px;
+}
+
+.rank-overview-label {
+    margin-bottom: 8px;
+}
+
+.rank-current-position {
+    gap: clamp(9px, 1.1vw, 15px);
+}
+
+.rank-current-position strong {
+    font-size: clamp(58px, 5vw, 72px);
+}
+
+.rank-current-divider {
+    font-size: clamp(28px, 2.5vw, 35px);
+}
+
+.rank-current-total {
+    font-size: clamp(23px, 2vw, 29px);
+}
+
+.rank-current-percentile {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    width: max-content;
+    margin-top: 9px;
+    color: var(--rank-blue-dark);
+    font-size: 15px;
+    font-weight: 650;
+    line-height: 1.2;
+}
+
+.rank-current-percentile::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: currentColor;
+}
+
+.rank-summary-stats {
+    padding: clamp(17px, 2.6svh, 24px) 0;
+}
+
+.ranking-page #my-rank-graph-card {
+    padding: clamp(14px, 2.2svh, 22px) clamp(30px, 4.5vw, 50px) 0;
+}
+
+.ranking-page #my-rank-graph-header {
+    margin-bottom: 4px;
+}
+
+.ranking-page #my-rank-graph-canvas {
+    display: block;
+    width: 100%;
+    height: clamp(230px, 33svh, 330px);
+}
+
+/* Filters live with the distribution so the first viewport ends with its controls. */
+.rank-filter-dock {
+    display: grid;
+    grid-template-columns: minmax(130px, .36fr) minmax(0, 1.64fr);
+    align-items: stretch;
+    gap: clamp(20px, 3.5vw, 42px);
+    margin: 0 clamp(30px, 4.5vw, 50px);
+    padding: 13px 0 14px;
+    border-top: 1px solid var(--rank-line-strong);
+    border-bottom: 1px solid var(--rank-line);
+}
+
+.rank-filter-dock-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.rank-filter-dock-header h2 {
+    margin: 0;
+    color: var(--rank-ink);
+    font-size: 13px;
+    font-weight: 620;
+    letter-spacing: -.01em;
+}
+
+#rank-filter-summary {
+    margin: 5px 0 0;
+    color: var(--rank-muted);
+    font-size: 10px;
+    line-height: 1.4;
+    font-variant-numeric: tabular-nums;
+}
+
+.ranking-page .filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(112px, 1fr)) auto;
+    align-items: end;
+    gap: clamp(10px, 1.5vw, 18px);
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.ranking-page .rank-filter-control {
+    position: relative;
+    display: grid;
+    align-content: end;
+    min-width: 0;
+    min-height: 50px;
+    padding: 5px 2px 6px;
+    color: var(--rank-ink);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--rank-line-strong);
+    cursor: pointer;
+    transition: color 180ms ease, border-color 220ms ease;
+}
+
+.ranking-page .rank-filter-control::after {
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background: var(--rank-blue);
+}
+
+.ranking-page .rank-filter-control:hover,
+.ranking-page .rank-filter-control:focus-within,
+.ranking-page .rank-filter-control.has-value {
+    color: var(--rank-blue-dark);
+    background: transparent;
+    border-color: rgba(51, 71, 184, .58);
+}
+
+.rank-filter-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 2px;
+    color: var(--rank-muted);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .08em;
+}
+
+.rank-filter-label::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border: 1px solid var(--rank-line-strong);
+    transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.rank-filter-control:hover .rank-filter-label::before,
+.rank-filter-control:focus-within .rank-filter-label::before,
+.rank-filter-control.has-value .rank-filter-label::before {
+    background: var(--rank-blue);
+    border-color: var(--rank-blue);
+}
+
+.ranking-page .filters select {
+    height: 28px;
+    padding-right: 25px;
+    color: inherit;
+    font-size: 13px;
+    font-weight: 520;
+    line-height: 28px;
+}
+
+.ranking-page .filters .clear-button {
+    min-width: 86px;
+    min-height: 50px;
+    padding: 0 0 6px 10px;
+    text-align: right;
+}
+
+.rank-list-section {
+    display: block;
+    width: min(100%, 820px);
+    height: auto;
+    min-height: 0;
+    margin-inline: auto;
+    padding: 46px 0 0;
+    overflow: visible;
+    overflow-anchor: auto;
+    scroll-margin-top: 82px;
+}
+
+.rank-section-header {
+    padding-bottom: 18px;
+}
+
+.ranking-page .ranking-table-wrapper {
+    min-height: 220px;
+    overflow: visible;
+    overscroll-behavior: auto;
+    overflow-anchor: auto;
+    scrollbar-gutter: auto;
+}
+
+.ranking-page .ranking-table th {
+    top: 72px;
+}
+
+.ranking-page .pagination-controls {
+    grid-template-columns: 112px minmax(0, 1fr) 112px;
+    padding-top: 18px;
+}
+
+.ranking-page .pagination-controls-top {
+    margin-bottom: 8px;
+    padding: 10px 0 12px;
+    border-bottom: 1px solid var(--rank-line);
+}
+
+.ranking-page .pagination-controls > button {
+    width: 112px;
+    justify-content: center;
+    gap: 12px;
+}
+
+.ranking-page #next-button,
+.ranking-page #next-button-top {
+    justify-self: end;
+}
+
+.ranking-page #pagination-numbers,
+.ranking-page #pagination-numbers-top {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+}
+
+@media (max-width: 900px) {
+    .rank-overview-summary {
+        grid-template-columns: minmax(290px, .9fr) minmax(0, 1.35fr);
+    }
+
+    .rank-filter-dock {
+        grid-template-columns: minmax(112px, .3fr) minmax(0, 1.7fr);
+        gap: 20px;
+    }
+
+    .ranking-page .filters {
+        grid-template-columns: repeat(3, minmax(90px, 1fr)) auto;
+    }
+}
+
+@media (max-width: 680px) {
+    .ranking-page {
+        padding-top: 64px !important;
+    }
+
+    .ranking-page .site-header {
+        height: 64px;
+        padding: 0 16px;
+    }
+
+    .ranking-page .site-header-logo {
+        gap: 8px;
+    }
+
+    .ranking-page .site-header-logo-icon {
+        width: 27px;
+        height: 27px;
+    }
+
+    .ranking-page .site-header-logo .site-header-name {
+        display: inline-flex;
+        min-height: 23px;
+        padding: 2px 5px 3px;
+        font-size: .72rem;
+    }
+
+    .ranking-page .site-header-logo .top-header-name-full {
+        display: none;
+    }
+
+    .ranking-page .site-header-logo .top-header-name-short {
+        display: inline;
+    }
+
+    .ranking-page .site-header-nav {
+        gap: 0;
+    }
+
+    .ranking-page .site-header-link {
+        padding: 8px;
+        font-size: .73rem;
+    }
+
+    html[data-top-theme="studio"] .ranking-page .site-header-link[href="../"] {
+        display: none !important;
+    }
+
+    html[data-top-theme="studio"] .ranking-page .site-header-link[href="./"] {
+        display: inline-flex !important;
+    }
+
+    .ranking-page #main-content.rank-workspace {
+        min-height: calc(100svh - 64px);
+        padding: 0 16px 72px;
+    }
+
+    .rank-overview {
+        min-height: auto;
+        padding: 26px 0 24px;
+        gap: 12px;
+    }
+
+    .rank-overview-summary {
+        grid-template-columns: minmax(0, 1fr);
+        min-height: 0;
+    }
+
+    .ranking-page #my-rank {
+        min-height: 0;
+    }
+
+    .rank-current-hit-area {
+        min-height: 0;
+        padding: 20px 24px;
+    }
+
+    .rank-current-position strong {
+        font-size: clamp(54px, 18vw, 66px);
+    }
+
+    .rank-current-percentile {
+        font-size: 14px;
+    }
+
+    .rank-summary-stats {
+        margin: 0 24px;
+    }
+
+    .ranking-page #my-rank-graph-card {
+        padding: 18px 0 0;
+    }
+
+    .ranking-page #my-rank-graph-canvas {
+        height: clamp(210px, 31svh, 270px);
+    }
+
+    .rank-filter-dock {
+        display: block;
+        margin: 0;
+        padding: 14px 0 16px;
+    }
+
+    .rank-filter-dock-header {
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 9px;
+    }
+
+    #rank-filter-summary {
+        margin: 0;
+        text-align: right;
+    }
+
+    .ranking-page .filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px 14px;
+    }
+
+    .ranking-page .filters .clear-button {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        min-height: 40px;
+        text-align: right;
+    }
+
+    .rank-list-section {
+        padding-top: 54px;
+        scroll-margin-top: 74px;
+    }
+
+    .ranking-page .ranking-table th {
+        top: 64px;
+    }
+
+    .ranking-page .pagination-controls {
+        grid-template-columns: 76px minmax(0, 1fr) 76px;
+        gap: 6px;
+    }
+
+    .ranking-page .pagination-controls > button {
+        width: 76px;
+    }
+}
+
+@media (max-width: 420px) {
+    .ranking-page #pagination-numbers-top .pagination-number:nth-of-type(n + 5),
+    .ranking-page #pagination-numbers-top .pagination-ellipsis:nth-of-type(n + 5) {
+        display: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+ * Ranking studio v3.1 final cascade: remove redundant chrome and keep menus
+ * above the v3 layout rules.
+ * -------------------------------------------------------------------------- */
+/* v3.2 interaction overrides must follow every previous ranking experiment. */
+.ranking-page #my-rank {
+    border-left-width: 2px;
+    transition: border-color 180ms ease;
+}
+
+.ranking-page #my-rank:has(.rank-current-hit-area:hover),
+.ranking-page #my-rank:has(.rank-current-hit-area:focus-visible) {
+    border-left-width: 2px;
+    border-left-color: var(--rank-blue-dark);
+}
+
+.rank-current-hit-area::before {
+    content: none;
+    display: none;
+}
+
+.rank-current-hit-area::after {
+    content: '順位表へ  ↓';
+    right: clamp(24px, 3vw, 34px);
+    bottom: 26px;
+    color: var(--rank-blue-dark);
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.ranking-page .rank-current-hit-area:hover::after,
+.ranking-page .rank-current-hit-area:focus-visible::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.rank-current-hit-area > *,
+.ranking-page .rank-current-hit-area:hover > *,
+.ranking-page .rank-current-hit-area:focus-visible > * {
+    transform: none;
+    transition: color 180ms ease;
+}
+
+.rank-current-position {
+    align-items: flex-end;
+    gap: 0;
+    width: max-content;
+}
+
+.rank-current-position strong {
+    line-height: .88;
+}
+
+.rank-current-divider {
+    margin: 0 8px 0 clamp(11px, 1vw, 15px);
+    font-size: clamp(23px, 2vw, 29px);
+    transform: translateY(-20%);
+}
+
+.rank-current-total {
+    margin-bottom: 0;
+    font-size: clamp(20px, 1.75vw, 25px);
+    line-height: 1;
+    transform: translateY(-20%);
+}
+
+@media (max-width: 680px) {
+    .rank-current-divider {
+        margin-right: 6px;
+        margin-left: 10px;
+        font-size: 22px;
+        transform: translateY(-20%);
+    }
+
+    .rank-current-total {
+        font-size: 19px;
+        transform: translateY(-20%);
+    }
+}
+
+.ranking-page #my-rank-graph-card {
+    padding-top: clamp(4px, 1svh, 10px);
+}
+
+.ranking-page #my-rank-graph-canvas {
+    height: clamp(270px, 38svh, 390px);
+}
+
+.rank-filter-dock {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.ranking-page .filters {
+    overflow: visible;
+    border: 0;
+}
+
+.ranking-page .rank-filter-control {
+    min-height: 48px;
+    padding: 4px 0 3px clamp(14px, 1.6vw, 20px);
+    color: var(--rank-ink);
+    background: transparent;
+    border: 0;
+    border-left: 1px solid var(--rank-line);
+    cursor: default;
+}
+
+.ranking-page .rank-filter-control:first-child {
+    padding-left: 0;
+    border-left: 0;
+}
+
+.ranking-page .rank-filter-control::after {
+    content: none;
+}
+
+.ranking-page .rank-filter-control:hover,
+.ranking-page .rank-filter-control:focus-within,
+.ranking-page .rank-filter-control.has-value {
+    color: var(--rank-blue-dark);
+    background: transparent;
+    border-left-color: var(--rank-line);
+}
+
+.rank-filter-label {
+    gap: 0;
+    margin-bottom: 5px;
+    font-size: 9px;
+    letter-spacing: .09em;
+}
+
+.rank-filter-label::before {
+    content: none;
+}
+
+.rank-list-section {
+    padding-top: 32px;
+}
+
+.ranking-page .pagination-controls-top {
+    margin-bottom: 12px;
+    padding-top: 0;
+    border-bottom: 0;
+}
+
+.ranking-page .ranking-table th {
+    background: var(--rank-paper);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+@media (max-width: 680px) {
+    .ranking-page #my-rank-graph-card {
+        padding-top: 6px;
+    }
+
+    .ranking-page #my-rank-graph-canvas {
+        height: clamp(240px, 36svh, 310px);
+    }
+
+    .rank-filter-dock {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .ranking-page .rank-filter-control {
+        padding-left: 14px;
+    }
+
+    .ranking-page .rank-filter-control:nth-of-type(odd) {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .rank-list-section {
+        padding-top: 38px;
+    }
+}

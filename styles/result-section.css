@@ -35,13 +35,79 @@
 /* =======================================================================
    Result Container
    ======================================================================= */
+body.pdf-result-view #main-content > h1,
+body.pdf-result-view .top-action-stage,
+body.pdf-result-view .top-related-links,
+body.pdf-result-view #instructions2,
+body.pdf-result-view .top-lucky-course {
+    display: none !important;
+}
+
+body.pdf-result-view #result {
+    display: block !important;
+}
+
 #result {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+.result-overview {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.result-gpa-copy {
+    min-width: 0;
+}
+
+.result-gpa-value-stack {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+#cumulativeGpaValue {
+    display: inline-block;
+    min-width: 4.1ch;
+    font-variant-numeric: tabular-nums;
+}
+
+.result-back-button {
+    flex: 0 0 auto;
+    min-height: 46px;
+    padding: 11px 18px;
+    color: var(--text-primary);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.result-back-button:hover,
+.result-back-button:focus-visible {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.result-back-button:focus-visible {
+    outline: 3px solid var(--primary-light);
+    outline-offset: 3px;
+}
+
 #result h1#gpa {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.24em;
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -63,8 +129,12 @@
    GPA Display - Simple text display, no card
    ======================================================================= */
 #gpashow {
-    margin-bottom: 24px;
-    text-align: center;
+    display: block;
+    margin: 0.45rem 0 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25;
+    text-align: left;
 }
 
 /* =======================================================================
@@ -215,69 +285,6 @@
 #rankingStatus {
     color: var(--text-secondary);
     font-size: 0.9375rem;
-}
-
-/* =======================================================================
-   Simulator Button
-   ======================================================================= */
-#repeater {
-    display: block;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto 32px !important;
-    padding: 16px 32px !important;
-    background: var(--bg-secondary) !important;
-    border: 2px solid var(--border-color) !important;
-    border-radius: var(--border-radius) !important;
-    color: var(--text-primary) !important;
-    font-size: 1rem !important;
-    font-weight: 500 !important;
-    cursor: pointer;
-    transition: all var(--transition-fast) !important;
-}
-
-#repeater:hover {
-    border-color: var(--primary-color) !important;
-    background: var(--primary-light) !important;
-    color: var(--primary-color) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: var(--shadow-md) !important;
-}
-
-/* =======================================================================
-   Repeat Simulator Section
-   ======================================================================= */
-#repeat {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-lg);
-    padding: 28px;
-    margin-bottom: 32px;
-    box-shadow: var(--shadow-md);
-}
-
-#repeat h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border-color);
-    text-align: center;
-}
-
-#repeat button {
-    background: var(--primary-gradient);
-    border: none;
-    border-radius: var(--border-radius-sm);
-    padding: 12px 24px;
-    font-weight: 500;
-    transition: all var(--transition-fast);
-}
-
-#repeat button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
 }
 
 .selecter-row {
@@ -480,6 +487,15 @@
         font-size: 2rem;
     }
 
+    .result-overview {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .result-back-button {
+        width: 100%;
+    }
+
     #result table th,
     #result table td {
         padding: 12px 14px;
@@ -487,8 +503,7 @@
     }
 
     #ranking-area,
-    #gpa-trend,
-    #repeat {
+    #gpa-trend {
         padding: 20px !important;
     }
 

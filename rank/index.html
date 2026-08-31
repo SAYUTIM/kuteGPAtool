@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-top-theme="studio">
 
 <head>
     <meta charset="UTF-8">
-    <title>工学院大学GPAランキング</title>
+    <title>GPAランキング - 工学院大学GPA計算機</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="工学院大学の学生が、成績PDFをアップロードするだけでGPAを自動計算できるサイトです。あなたのGPAの順位が分かります。">
     <link rel="icon" href="../icon.ico">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css?v=legal-consent-20260829-2-footer-20260830-3">
+    <link rel="stylesheet" href="../styles/top-studio.css?v=studio-20260825-46">
+    <link rel="stylesheet" href="../styles/ranking-studio-v2.css?v=20260830-26">
+    <link rel="stylesheet" href="../styles/ranking-studio-v4.css?v=20260831-12">
 </head>
 
 <body class="ranking-page">
@@ -15,7 +23,10 @@
     <header id="site-header" class="site-header">
         <a href="../" class="site-header-logo">
             <img src="../icon.ico" alt="" class="site-header-logo-icon">
-            <span>工学院GPA計算機</span>
+            <span class="site-header-name">
+                <span class="top-header-name-full">工学院大学GPA計算機</span>
+                <span class="top-header-name-short">GPA計算機</span>
+            </span>
         </a>
         <nav class="site-header-nav">
             <a href="../" class="site-header-link">計算機</a>
@@ -24,126 +35,227 @@
         </nav>
     </header>
 
-    <div id="loading-screen">
-        <div class="wave-loader"></div>
-        <div class="loading-text">Loading...</div>
-        <div id="loading-message" style="display: none;">
-            サーバーが混み合っています...
-        </div>
-    </div>
-
-    <div id="login-prompt" style="display: none;">
-        <div class="login-card">
-            <h1>GPAランキング</h1>
-            <p>ランキングを閲覧するには、大学のGoogleアカウント（@g.kogakuin.jp）でログインしてください。</p>
-
-            <label class="privacy-checkbox-container" for="privacy-checkbox">
-                <input type="checkbox" id="privacy-checkbox">
-                <span><a href="../privacy/" target="_blank" rel="noopener noreferrer"
-                        onclick="event.stopPropagation()">プライバシーポリシー</a>に同意する</span>
-            </label>
-
-            <button id="login-button" class="login-button" disabled>Googleアカウントでログイン</button>
-
-            <div class="site-description">
-                <h2>サイトについて</h2>
-                <p>このサイトは工学院大学の学生有志が開発・運営しており、大学公式のサービスではありません。</p>
-                <p>成績PDFをアップロードするだけでGPAを自動計算できます。再履修やリピートのシミュレーションにも対応しています。</p>
+    <main id="main-content" class="main-container rank-workspace" inert aria-busy="true" data-auth-pending
+        style="display: block;">
+        <section class="rank-overview" aria-label="あなたの順位とGPA分布">
+            <div id="rank-overview-summary" class="rank-overview-summary is-loading" aria-busy="true">
+                <div id="my-rank" style="display: none;">
+                    <button id="my-rank-trigger" type="button" class="rank-current-hit-area"
+                        aria-label="順位表で自分の順位を確認">
+                        <span class="rank-overview-label">現在の順位</span>
+                        <span class="rank-current-position">
+                            <strong id="rank-my-position">—</strong>
+                            <span class="rank-current-divider" aria-hidden="true">/</span>
+                            <span id="rank-my-total" class="rank-current-total">—</span>
+                        </span>
+                        <span id="rank-my-percentile" class="rank-current-percentile">—</span>
+                    </button>
+                </div>
+                <dl id="rank-summary-stats" class="rank-summary-stats" aria-label="GPA比較" aria-live="polite">
+                    <div class="rank-summary-personal">
+                        <dt>あなたのGPA</dt>
+                        <dd id="rank-my-gpa">—</dd>
+                    </div>
+                    <div class="rank-summary-average">
+                        <dt>平均値</dt>
+                        <dd>
+                            <span id="rank-average-gpa">—</span>
+                            <small id="rank-average-delta" class="rank-summary-delta"
+                                aria-label="あなたのGPAとの差">Δ —</small>
+                        </dd>
+                    </div>
+                    <div class="rank-summary-mode">
+                        <dt>最頻値</dt>
+                        <dd>
+                            <span id="rank-mode-gpa">—</span>
+                            <small id="rank-mode-delta" class="rank-summary-delta"
+                                aria-label="あなたのGPAとの差">Δ —</small>
+                        </dd>
+                    </div>
+                    <div class="rank-summary-median">
+                        <dt>中央値</dt>
+                        <dd>
+                            <span id="rank-median-gpa">—</span>
+                            <small id="rank-median-delta" class="rank-summary-delta"
+                                aria-label="あなたのGPAとの差">Δ —</small>
+                        </dd>
+                    </div>
+                </dl>
             </div>
+            <section id="my-rank-graph-card" class="is-loading" aria-label="GPA分布" aria-busy="true"
+                style="display: block;">
+                <canvas id="my-rank-graph-canvas" aria-label="GPA分布グラフ"></canvas>
+                <div class="rank-graph-reference-key" aria-label="グラフの比較線">
+                    <button type="button" class="rank-graph-reference-toggle rank-graph-reference-average"
+                        data-rank-reference-key="average" aria-pressed="true">
+                        <i aria-hidden="true"></i><span class="rank-graph-reference-label">平均値</span>
+                    </button>
+                    <button type="button" class="rank-graph-reference-toggle rank-graph-reference-mode"
+                        data-rank-reference-key="mode" aria-pressed="true">
+                        <i aria-hidden="true"></i><span class="rank-graph-reference-label">最頻値</span>
+                    </button>
+                    <button type="button" class="rank-graph-reference-toggle rank-graph-reference-median"
+                        data-rank-reference-key="median" aria-pressed="true">
+                        <i aria-hidden="true"></i><span class="rank-graph-reference-label">中央値</span>
+                    </button>
+                </div>
+                <div id="my-rank-graph-tooltip" style="display: none;"></div>
+            </section>
 
-            <a href="../" class="back-to-main">GPA計算ページに戻る</a>
-        </div>
-    </div>
-
-
-
-
-    <div id="main-content" class="main-container" style="display: none;">
-        <h1>工学院大学 GPAランキング</h1>
-
-        <div id="my-rank" style="display: none;"></div>
-        <section id="my-rank-graph-card" style="display: none;">
-            <div id="my-rank-graph-header">
-                <h2 id="my-rank-graph-title">あなたの立ち位置</h2>
-                <p id="my-rank-graph-caption"></p>
-            </div>
-            <canvas id="my-rank-graph-canvas"></canvas>
-            <div id="my-rank-graph-tooltip" style="display: none;"></div>
+            <section id="rank-filter-dock" class="rank-filter-dock" aria-labelledby="rank-filter-title">
+                <header class="rank-filter-dock-header">
+                    <h2 id="rank-filter-title">絞り込み</h2>
+                    <p id="rank-filter-summary" aria-live="polite">全学生</p>
+                </header>
+                <div class="filters" aria-label="ランキングの絞り込み">
+                    <div class="rank-filter-control" data-filter="year">
+                        <span id="rank-year-filter-label" class="rank-filter-label">学年</span>
+                        <span class="rank-filter-select-wrap">
+                            <select id="year-filter" class="rank-native-select" tabindex="-1" aria-hidden="true">
+                                <option value="">すべて</option>
+                                <option value="1">1年</option>
+                                <option value="2">2年</option>
+                                <option value="3">3年</option>
+                                <option value="4">4年</option>
+                            </select>
+                            <button type="button" class="rank-filter-trigger" aria-haspopup="listbox"
+                                aria-expanded="false" aria-labelledby="rank-year-filter-label rank-year-filter-value">
+                                <span id="rank-year-filter-value" class="rank-filter-value">すべて</span>
+                                <span class="rank-filter-chevron" aria-hidden="true"></span>
+                            </button>
+                            <span id="rank-year-filter-menu" class="rank-filter-menu" role="listbox"
+                                aria-labelledby="rank-year-filter-label" hidden></span>
+                        </span>
+                    </div>
+                    <div class="rank-filter-control" data-filter="faculty">
+                        <span id="rank-faculty-filter-label" class="rank-filter-label">学部</span>
+                        <span class="rank-filter-select-wrap">
+                            <select id="faculty-filter" class="rank-native-select" tabindex="-1" aria-hidden="true">
+                                <option value="">すべて</option>
+                                <option value="0">先進工学部</option>
+                                <option value="1">工学部</option>
+                                <option value="2">建築学部</option>
+                                <option value="3">情報学部</option>
+                            </select>
+                            <button type="button" class="rank-filter-trigger" aria-haspopup="listbox"
+                                aria-expanded="false" aria-labelledby="rank-faculty-filter-label rank-faculty-filter-value">
+                                <span id="rank-faculty-filter-value" class="rank-filter-value">すべて</span>
+                                <span class="rank-filter-chevron" aria-hidden="true"></span>
+                            </button>
+                            <span id="rank-faculty-filter-menu" class="rank-filter-menu" role="listbox"
+                                aria-labelledby="rank-faculty-filter-label" hidden></span>
+                        </span>
+                    </div>
+                    <div id="department-container" class="rank-filter-control is-disabled" data-filter="department">
+                        <span id="rank-department-filter-label" class="rank-filter-label">学科</span>
+                        <span class="rank-filter-select-wrap">
+                            <select id="department-filter" class="rank-native-select" tabindex="-1" aria-hidden="true"
+                                disabled>
+                                <option value="">学部を選択</option>
+                            </select>
+                            <button type="button" class="rank-filter-trigger" aria-haspopup="listbox"
+                                aria-expanded="false" aria-disabled="true" disabled
+                                aria-labelledby="rank-department-filter-label rank-department-filter-value">
+                                <span id="rank-department-filter-value" class="rank-filter-value">学部を選択</span>
+                                <span class="rank-filter-chevron" aria-hidden="true"></span>
+                            </button>
+                            <span id="rank-department-filter-menu" class="rank-filter-menu" role="listbox"
+                                aria-labelledby="rank-department-filter-label" hidden></span>
+                        </span>
+                    </div>
+                    <button id="clear-filters-button" class="clear-button" type="button">条件をクリア</button>
+                </div>
+            </section>
         </section>
 
-        <div class="filters">
-            <div>
-                <label for="year-filter">学年:</label>
-                <select id="year-filter">
-                    <option value="">すべて</option>
-                    <option value="1">1年</option>
-                    <option value="2">2年</option>
-                    <option value="3">3年</option>
-                    <option value="4">4年</option>
-                </select>
-            </div>
-            <div>
-                <label for="faculty-filter">学部:</label>
-                <select id="faculty-filter">
-                    <option value="">すべて</option>
-                    <option value="0">先進工学部</option>
-                    <option value="1">工学部</option>
-                    <option value="2">建築学部</option>
-                    <option value="3">情報学部</option>
-                </select>
-            </div>
-            <div id="department-container" style="display: none;">
-                <label for="department-filter">学科:</label>
-                <select id="department-filter">
-                    <option value="">すべて</option>
-                </select>
-            </div>
-            <button id="clear-filters-button" class="clear-button">クリア</button>
-        </div>
+        <section id="rank-list-section" class="rank-list-section is-loading" aria-label="ランキング"
+            aria-busy="true">
+            <nav class="pagination-controls pagination-controls-top" aria-label="ランキング上部のページ移動">
+                <button id="prev-button-top" type="button" disabled><span aria-hidden="true">←</span><span>前へ</span></button>
+                <div id="pagination-numbers-top"></div>
+                <button id="next-button-top" type="button" disabled><span>次へ</span><span aria-hidden="true">→</span></button>
+                <div class="page-info-container">
+                    <span id="page-info-top"></span>
+                </div>
+            </nav>
 
-        <div class="ranking-table-wrapper">
-            <table class="ranking-table">
-                <thead>
-                    <tr>
-                        <th>順位</th>
-                        <th>ニックネーム</th>
-                        <th>学部</th>
-                        <th>学年</th>
-                        <th>GPA</th>
-                    </tr>
-                </thead>
-                <tbody id="ranking-list">
-                </tbody>
-            </table>
-            <div id="loading-container" class="loading-container" style="display: none;">
-                <div class="loading-spinner"></div>
-                <p>ランキングを読み込み中...</p>
+            <div class="ranking-table-wrapper">
+                <div class="ranking-table rank-ledger" role="table" aria-label="GPAランキング順位表">
+                    <div class="rank-ledger-head" role="rowgroup">
+                        <div class="rank-ledger-row" role="row">
+                            <div class="rank-column-position" role="columnheader">順位</div>
+                            <div class="rank-column-person" role="columnheader">ニックネーム</div>
+                            <div class="rank-column-faculty" role="columnheader">学部</div>
+                            <div class="rank-column-year" role="columnheader">学年</div>
+                            <div class="rank-column-gpa" role="columnheader">GPA</div>
+                        </div>
+                    </div>
+                    <div id="ranking-list" class="rank-ledger-body" role="rowgroup"></div>
+                </div>
+                <div id="loading-container" class="loading-container" role="status" aria-live="polite"
+                    style="display: flex;">
+                    <p class="rank-loading-label">ランキングを読み込み中</p>
+                    <div class="rank-ledger-skeleton" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+                <p id="no-data-message" class="no-data-message" style="display: none;"></p>
             </div>
-            <p id="no-data-message" class="no-data-message" style="display: none;"></p>
-        </div>
 
-        <div class="pagination-controls">
-            <button id="prev-button" disabled>前へ</button>
-            <div id="pagination-numbers"></div>
-            <button id="next-button" disabled>次へ</button>
-            <div class="page-info-container">
-                <span id="page-info"></span>
+            <nav class="pagination-controls" aria-label="ランキングのページ移動">
+                <button id="prev-button" type="button" disabled><span aria-hidden="true">←</span><span>前へ</span></button>
+                <div id="pagination-numbers"></div>
+                <button id="next-button" type="button" disabled><span>次へ</span><span aria-hidden="true">→</span></button>
+                <div class="page-info-container">
+                    <span id="page-info"></span>
+                </div>
+            </nav>
+        </section>
+
+    </main>
+
+    <dialog id="rank-scholarship-dialog" class="rank-scholarship-dialog"
+        aria-labelledby="rank-scholarship-title" aria-describedby="rank-scholarship-description">
+        <section class="rank-scholarship-modal">
+            <button class="rank-scholarship-modal-close" type="button" data-rank-scholarship-close
+                aria-label="閉じる">
+                <span aria-hidden="true">×</span>
+            </button>
+            <p class="rank-scholarship-modal-kicker">奨学金情報</p>
+            <h2 id="rank-scholarship-title" tabindex="-1" autofocus>あなたは奨学金を受け取れる可能性があります</h2>
+            <p id="rank-scholarship-description" class="rank-scholarship-modal-copy">
+                現在のGPAと学年では、<strong>大学成績優秀学生奨励奨学金</strong>（給付・年間15万円）を受け取れる可能性があります。
+            </p>
+            <p class="rank-scholarship-modal-condition">
+                対象は学部2〜4年生です。本サイトではGPA 3.80以上を案内の目安としています。非公募・学科推薦のため、GPAだけで採用は決まりません。
+            </p>
+            <div class="rank-scholarship-modal-actions">
+                <a class="rank-scholarship-modal-link"
+                    href="https://www.kogakuin.ac.jp/student/money_insurance/grant.html" target="_blank"
+                    rel="noopener noreferrer">
+                    <span>奨学金情報を確認</span><span aria-hidden="true">↗</span>
+                </a>
+                <button class="rank-scholarship-modal-dismiss" type="button" data-rank-scholarship-close>
+                    閉じる
+                </button>
             </div>
-        </div>
-        <a href="../" class="back-link">GPA計算ページに戻る</a>
+        </section>
+    </dialog>
 
-    </div>
-
-    <footer class="footer">
-        <a
-            href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a>
-        <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a>
-        <a href="../privacy/">プライバシーポリシーについて</a>
-        <p class="copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
+    <footer class="footer site-footer">
+        <nav class="site-footer-links" aria-label="フッターリンク">
+            <a
+                href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a>
+            <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a>
+            <a href="../terms/">利用規約</a>
+            <a href="../privacy/">プライバシーポリシー</a>
+            <button class="site-footer-logout" type="button" data-site-footer-logout hidden>ログアウト</button>
+        </nav>
+        <p class="site-footer-copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4"></script>
+    <script src="../app.js?v=release-20260831-8"></script>
 </body>
 
 </html>

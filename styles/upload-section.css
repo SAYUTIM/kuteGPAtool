@@ -282,111 +282,6 @@ body {
 }
 
 /* =======================================================================
-   Legacy Instructions (既存構造の上書き)
-   ======================================================================= */
-#instructions2>h2,
-#instructions2>p,
-#instructions2>br,
-#instructions2>.back-link {
-    grid-column: 1 / -1;
-}
-
-#instructions2>p {
-    font-size: 0.9375rem;
-    color: var(--text-secondary);
-    margin: 0;
-    line-height: 1.8;
-    padding: 0;
-}
-
-#instructions2>br {
-    display: none;
-}
-
-/* Step indicators */
-#instructions2>p:nth-of-type(1)::before,
-#instructions2>p:nth-of-type(2)::before,
-#instructions2>p:nth-of-type(3)::before {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--primary-gradient);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    margin-right: 12px;
-    flex-shrink: 0;
-}
-
-#instructions2>p:nth-of-type(1)::before {
-    content: '1';
-}
-
-#instructions2>p:nth-of-type(2)::before {
-    content: '2';
-}
-
-#instructions2>p:nth-of-type(3)::before {
-    content: '3';
-}
-
-/* 各種リンクボタン */
-#instructions2 .back-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin: 12px 0 32px;
-    padding: 14px 28px;
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-full);
-    text-decoration: none;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    transition: all var(--transition-fast);
-    box-shadow: var(--shadow-sm);
-}
-
-#instructions2 .back-link:hover {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-#instructions2 .back-link::before {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-/* ランキングリンク */
-#instructions2 .back-link[href="rank/"]::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2310b981' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E");
-}
-
-#instructions2 .back-link[href="rank/"]:hover::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E");
-}
-
-/* 成績統計リンク */
-#instructions2 .back-link[href="course/"]::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2310b981' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'/%3E%3C/svg%3E");
-}
-
-#instructions2 .back-link[href="course/"]:hover::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'/%3E%3C/svg%3E");
-}
-
-/* =======================================================================
    Stats Banner (optional) - 統計バナー
    ======================================================================= */
 .stats-banner {
@@ -501,21 +396,6 @@ body {
         width: 100%;
     }
 
-    #instructions2 .back-link {
-        width: auto;
-        max-width: 100%;
-        display: inline-flex;
-        justify-content: center;
-        padding: 12px 20px;
-        font-size: 0.875rem;
-        gap: 6px;
-    }
-
-    #instructions2 .back-link::before {
-        width: 16px;
-        height: 16px;
-    }
-
     .footer {
         padding: 24px 16px;
         text-align: center;
@@ -564,12 +444,358 @@ body {
         font-size: 0.6875rem;
     }
 
-    #instructions2>p {
-        font-size: 0.875rem;
+}
+
+/* =======================================================================
+   Server-side PDF verification progress
+   ======================================================================= */
+.file-upload-area.is-processing {
+    cursor: wait;
+    border-color: rgba(5, 150, 105, 0.42) !important;
+    transform: none;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+}
+
+.file-upload-area.is-complete {
+    border-color: var(--primary-color) !important;
+}
+
+.file-upload-area.is-error {
+    border-color: #dc2626 !important;
+}
+
+.server-processing {
+    width: min(100%, 650px);
+    margin: 28px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: left;
+    animation: processing-enter 280ms ease-out both;
+}
+
+.server-processing[hidden] {
+    display: none;
+}
+
+.processing-heading {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 12px;
+    align-items: center;
+}
+
+.processing-heading strong,
+.processing-heading span {
+    display: block;
+}
+
+.processing-heading strong {
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    line-height: 1.35;
+}
+
+#processingMessage {
+    color: var(--text-secondary);
+    font-size: 0.8125rem;
+    margin-top: 3px;
+}
+
+.processing-mark {
+    width: 32px;
+    height: 32px;
+    border: 2px solid rgba(5, 150, 105, 0.18);
+    border-top-color: var(--primary-hover);
+    border-radius: 50%;
+    animation: processing-spin 850ms linear infinite;
+}
+
+.server-processing.is-complete .processing-mark {
+    border: 0;
+    background: var(--primary-hover);
+    animation: processing-complete 320ms ease-out both;
+}
+
+.server-processing.is-complete .processing-mark::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 14px;
+    margin: 6px 0 0 11px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.server-processing.is-error .processing-mark {
+    border-color: #dc2626;
+    animation: none;
+}
+
+.server-processing.is-error .processing-percent,
+.server-processing.is-error .processing-steps li.is-active {
+    color: #b91c1c;
+}
+
+.server-processing.is-error .processing-track span,
+.server-processing.is-error .processing-steps li.is-active>span {
+    background: #dc2626;
+}
+
+.server-processing.is-error .processing-steps li.is-active>span {
+    box-shadow: 0 0 0 5px rgba(220, 38, 38, 0.1);
+    animation: none;
+}
+
+.processing-percent {
+    color: var(--primary-hover);
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+}
+
+.processing-track {
+    height: 3px;
+    margin: 18px 0 20px 48px;
+    overflow: hidden;
+    background: #e7eee9;
+    border-radius: 999px;
+}
+
+.processing-track span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--primary-hover);
+    border-radius: inherit;
+    transition: width 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.queue-details {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 10px 14px;
+    align-items: baseline;
+    margin: -4px 0 20px 48px;
+    padding: 13px 15px;
+    background: #f3f8f5;
+    border-left: 3px solid var(--primary-color);
+    border-radius: 0 10px 10px 0;
+    animation: processing-enter 220ms ease-out both;
+}
+
+.queue-details[hidden] {
+    display: none;
+}
+
+.queue-details .queue-kicker {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.queue-details strong {
+    color: #065f46;
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums;
+}
+
+#queueEstimate {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    justify-self: end;
+}
+
+.processing-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 0 0 0 48px;
+    padding: 0;
+    list-style: none;
+}
+
+.processing-steps li {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.45;
+    transition: color 180ms ease;
+}
+
+.processing-steps li>span {
+    display: block;
+    width: 7px;
+    height: 7px;
+    margin-bottom: 7px;
+    background: #d8e0dc;
+    border-radius: 50%;
+    transition: background 180ms ease, box-shadow 180ms ease;
+}
+
+.processing-steps li.is-active,
+.processing-steps li.is-complete {
+    color: #0f513f;
+}
+
+.processing-steps li.is-active>span {
+    background: var(--primary-color);
+    box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.12);
+    animation: processing-pulse 1.2s ease-in-out infinite;
+}
+
+.processing-steps li.is-complete>span {
+    background: var(--primary-hover);
+}
+
+.processing-privacy {
+    margin: 18px 0 0 48px;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.6;
+}
+
+@keyframes processing-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes processing-enter {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes processing-complete {
+    from { transform: scale(0.75); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes processing-pulse {
+    50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.04); }
+}
+
+@media (max-width: 768px) {
+    .processing-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .processing-heading {
+        grid-template-columns: 30px 1fr auto;
+        gap: 9px;
     }
 
-    #instructions2 .back-link {
-        padding: 12px 20px;
-        font-size: 0.875rem;
+    .processing-mark {
+        width: 28px;
+        height: 28px;
+    }
+
+    .processing-track,
+    .queue-details,
+    .processing-steps,
+    .processing-privacy {
+        margin-left: 0;
+    }
+
+    .processing-privacy {
+        margin-top: 16px;
+    }
+
+    .queue-details {
+        grid-template-columns: auto 1fr;
+    }
+
+    #queueEstimate {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+}
+
+/* Generic PDF failure dialog. Detailed validation errors are never rendered. */
+.pdf-error-overlay {
+    position: fixed;
+    z-index: 30000;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    box-sizing: border-box;
+    background: rgba(244, 243, 238, 0.82);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.pdf-error-overlay[hidden] {
+    display: none !important;
+}
+
+.pdf-error-dialog {
+    width: min(430px, 100%);
+    padding: 34px;
+    box-sizing: border-box;
+    color: #24241f;
+    background: #fbfaf6;
+    border: 1px solid #b9b8b1;
+    border-radius: 0;
+    box-shadow: none;
+    text-align: left;
+}
+
+.pdf-error-kicker {
+    display: block;
+    margin-bottom: 16px;
+    color: #001dff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+.pdf-error-dialog h2 {
+    margin: 0;
+    color: inherit;
+    font-size: clamp(1.7rem, 5vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+}
+
+.pdf-error-dialog p {
+    margin: 18px 0 30px;
+    color: #6e6e67;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.pdf-error-dialog button {
+    width: 100%;
+    min-height: 52px;
+    padding: 12px 18px;
+    color: #fff;
+    background: #001dff;
+    border: 1px solid #001dff;
+    border-radius: 0;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer !important;
+}
+
+.pdf-error-dialog button:hover {
+    color: #001dff;
+    background: transparent;
+}
+
+.pdf-error-dialog button:focus-visible {
+    outline: 2px solid #001dff;
+    outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+    .pdf-error-overlay {
+        padding: 18px;
+    }
+
+    .pdf-error-dialog {
+        padding: 28px 24px 24px;
     }
 }

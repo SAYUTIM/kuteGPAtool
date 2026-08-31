@@ -3,86 +3,46 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ログイン - 工学院大学GPA計算機</title>
-    <meta name="description" content="工学院大学GPA計算機へのログイン。大学のGoogleアカウント（@g.kogakuin.jp）が必要です。">
+    <title>工学院大学GPA計算機</title>
+    <meta name="description" content="工学院大学GPA計算機へのログイン。工学院大学のGoogleアカウント（@g.kogakuin.jp）が必要です。">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../icon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/loading.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=login-20260830-3">
 </head>
 
 <body class="login-body">
+    <div id="login-prompt" class="login-prompt" data-auth-pending aria-busy="true" style="display: block;">
+        <div class="login-sculpture" aria-hidden="true"></div>
 
-    <div id="loading-screen">
-        <div class="wave-loader"></div>
-        <div class="loading-text">Loading...</div>
-        <div id="loading-message" style="display: none;">
-            サーバーが混み合っています...
-        </div>
-    </div>
+        <a href="../" class="login-brand" aria-label="工学院大学GPA計算機 トップへ">
+            <img src="../icon.ico" alt="" class="login-logo">
+            <span>工学院大学GPA計算機</span>
+        </a>
 
-    <div id="login-prompt" class="login-prompt" style="display: none;">
-        <div class="login-wrapper">
-            <div class="login-left">
-                <div class="login-content">
-                    <div class="login-branding">
-                        <div class="brand-header">
-                            <img src="../icon.ico" alt="工学院GPA計算機" class="login-logo">
-                            <div>
-                                <h1>工学院大学GPA計算機</h1>
-                                <p class="tagline">成績管理をもっとスマートに</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="features">
-                        <div class="feature">
-                            <span class="feature-icon">📊</span>
-                            <div class="feature-body">
-                                <strong>GPA自動計算</strong>
-                                <p>PDFをアップロードするだけで、GPAを自動で計算。</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <span class="feature-icon">🏆</span>
-                            <div class="feature-body">
-                                <strong>GPAランキング</strong>
-                                <p>学部・学年別のGPAランキングで自分の位置を確認。</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <span class="feature-icon">📈</span>
-                            <div class="feature-body">
-                                <strong>科目別成績統計</strong>
-                                <p>科目ごとの成績分布や平均評定を閲覧可能。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="login-right">
-                <div class="login-form">
-                    <h2>ログイン</h2>
+        <main class="login-shell">
+            <section class="login-form" aria-labelledby="login-title">
+                <div class="login-form-inner">
+                    <h1 id="login-title">ログイン</h1>
                     <p class="login-desc">
-                        大学のGoogleアカウント<br>
-                        <strong>@g.kogakuin.jp</strong> が必要です
+                        <span class="login-account-label">Googleアカウント <strong>@g.kogakuin.jp</strong></span>
+                        <span id="login-domain-error" class="login-domain-error-message" role="alert"
+                            aria-live="assertive"></span>
                     </p>
 
-                    <label class="privacy-checkbox" for="privacy-checkbox">
-                        <input type="checkbox" id="privacy-checkbox">
-                        <span><a href="../privacy/" target="_blank"
-                                onclick="event.stopPropagation()">プライバシーポリシー</a>に同意する</span>
-                    </label>
+                    <div class="legal-consent-group" role="group" aria-label="利用条件への同意">
+                        <div class="legal-consent-row">
+                            <input type="checkbox" id="terms-checkbox" data-login-consent aria-required="true" aria-label="利用規約に同意する">
+                            <label for="terms-checkbox"><a href="../terms/" target="_blank" rel="noopener noreferrer">利用規約</a>に同意する</label>
+                        </div>
+                        <div class="legal-consent-row">
+                            <input type="checkbox" id="privacy-checkbox" data-login-consent aria-required="true" aria-label="プライバシーポリシーに同意する">
+                            <label for="privacy-checkbox"><a href="../privacy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>に同意する</label>
+                        </div>
+                    </div>
 
                     <button id="login-button" class="login-button" disabled>
-                        <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+                        <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
                             <path fill="#4285F4"
                                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
                             <path fill="#34A853"
@@ -95,17 +55,16 @@
                         <span>Googleでログイン</span>
                     </button>
 
-                    <div class="login-footer">
-                        <p class="login-notice-text">このサイトは学生有志が運営しており、大学公式のサービスではありません。</p>
-                        <p class="copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
-                    </div>
+                    <p class="login-notice-text">工学院大学の公式サービスではありません。</p>
                 </div>
-            </div>
-        </div>
+
+                <p class="copyright">Copyright © 2024-2026 SAYU.</p>
+            </section>
+        </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4"></script>
+    <script src="../app.js?v=release-20260831-8"></script>
 </body>
 
 </html>

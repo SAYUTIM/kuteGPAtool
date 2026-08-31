@@ -1,0 +1,930 @@
+/* Ranking studio v4: constrained overview and rebuilt edge-soft ranking ledger. */
+
+:root {
+    --rank-v4-stage: 1160px;
+    --rank-v4-ledger: 980px;
+    --rank-v4-rule: rgba(42, 45, 40, .14);
+    --rank-v4-rule-strong: rgba(42, 45, 40, .22);
+    --rank-reference-average: #d13a32;
+    --rank-reference-mode: #178447;
+    --rank-reference-median: #a98500;
+}
+
+/* Large screens gain outer whitespace; the information itself does not stretch. */
+.ranking-page #main-content.rank-workspace {
+    width: 100%;
+    padding-right: clamp(18px, 4vw, 64px);
+    padding-left: clamp(18px, 4vw, 64px);
+}
+
+.ranking-page .rank-overview {
+    width: min(100%, var(--rank-v4-stage));
+}
+
+/*
+ * The overview normally occupies the first viewport while the distribution is
+ * available. When production has no histogram, the graph is hidden inline by
+ * app.js; release that reserved viewport only for this empty-data state.
+ */
+.ranking-page .rank-overview:has(#my-rank-graph-card[style*="display: none"]) {
+    min-height: 0;
+    align-content: start;
+}
+
+.ranking-page .rank-overview-summary {
+    grid-template-columns: minmax(330px, 370px) minmax(0, 1fr);
+    width: min(100%, 1080px);
+    margin-inline: auto;
+}
+
+.ranking-page #my-rank-graph-card,
+.ranking-page .rank-filter-dock {
+    width: 100%;
+}
+
+/* Keep the existing inset margins inside the overview at tablet widths. */
+.ranking-page .rank-filter-dock {
+    width: auto;
+}
+
+.ranking-page #my-rank-graph-canvas {
+    height: clamp(260px, 39svh, 360px);
+}
+
+.ranking-page .rank-graph-reference-key {
+    position: absolute;
+    z-index: 2;
+    top: 7px;
+    right: clamp(30px, 4.5vw, 50px);
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 1.5vw, 18px);
+    color: var(--rank-muted);
+    font-size: 9px;
+    line-height: 1;
+    pointer-events: auto;
+}
+
+.ranking-page .rank-graph-reference-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    padding: 4px 2px;
+    color: var(--rank-muted);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font: inherit;
+    line-height: inherit;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 150ms ease, opacity 150ms ease;
+}
+
+.ranking-page .rank-graph-reference-toggle:hover,
+.ranking-page .rank-graph-reference-toggle:focus-visible {
+    color: var(--rank-blue-dark);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.ranking-page .rank-graph-reference-toggle:focus-visible {
+    outline: 1px solid var(--rank-blue);
+    outline-offset: 3px;
+}
+
+.ranking-page .rank-graph-reference-toggle.is-hidden {
+    opacity: .58;
+}
+
+.ranking-page .rank-graph-reference-toggle.is-hidden .rank-graph-reference-label {
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+}
+
+.ranking-page .rank-graph-reference-key i {
+    width: 1px;
+    height: 11px;
+    background: currentColor;
+}
+
+.ranking-page .rank-graph-reference-average,
+.ranking-page .rank-summary-average #rank-average-gpa {
+    color: var(--rank-reference-average);
+}
+
+.ranking-page .rank-graph-reference-mode,
+.ranking-page .rank-summary-mode #rank-mode-gpa {
+    color: var(--rank-reference-mode);
+}
+
+.ranking-page .rank-graph-reference-median,
+.ranking-page .rank-summary-median #rank-median-gpa {
+    color: var(--rank-reference-median);
+}
+
+/* Adopted comparison treatment: red, green and yellow dashed lines. */
+.ranking-page .rank-summary-average,
+.ranking-page .rank-graph-reference-average {
+    --rank-stat-marker: var(--rank-reference-average);
+}
+
+.ranking-page .rank-summary-mode,
+.ranking-page .rank-graph-reference-mode {
+    --rank-stat-marker: var(--rank-reference-mode);
+}
+
+.ranking-page .rank-summary-median,
+.ranking-page .rank-graph-reference-median {
+    --rank-stat-marker: var(--rank-reference-median);
+}
+
+.ranking-page .rank-summary-stats dt::before {
+    content: none !important;
+    display: none !important;
+}
+
+.ranking-page .rank-graph-reference-key i {
+    background: repeating-linear-gradient(90deg,
+            var(--rank-stat-marker) 0 5px,
+            transparent 5px 8px);
+}
+
+.ranking-page .rank-graph-reference-key .rank-graph-reference-label {
+    color: var(--rank-muted);
+}
+
+.ranking-page .rank-graph-reference-toggle:hover .rank-graph-reference-label,
+.ranking-page .rank-graph-reference-toggle:focus-visible .rank-graph-reference-label {
+    color: var(--rank-blue-dark);
+}
+
+.ranking-page .rank-graph-reference-key i {
+    width: 18px;
+    height: 1px;
+    color: var(--rank-stat-marker);
+}
+
+/* The comparison strip keeps its slot even when filters exclude the current user. */
+.ranking-page .rank-overview-summary.is-rank-hidden .rank-summary-stats {
+    grid-column: 2;
+    border-left: 1px solid var(--rank-line);
+}
+
+.ranking-page .rank-filter-control.opens-upward .rank-filter-menu {
+    top: auto;
+    bottom: calc(100% + 8px);
+    animation-name: rank-filter-menu-in-upward;
+}
+
+.ranking-page .rank-filter-control.is-disabled {
+    color: #a6a9a1;
+    cursor: not-allowed;
+}
+
+.ranking-page .rank-filter-control.is-disabled:hover,
+.ranking-page .rank-filter-control.is-disabled:focus-within {
+    color: #a6a9a1;
+    border-left-color: var(--rank-line);
+}
+
+.ranking-page .rank-filter-trigger:disabled {
+    color: #a6a9a1;
+    cursor: not-allowed;
+}
+
+@keyframes rank-filter-menu-in-upward {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* The list is an open ledger, not a clipped table or a stack of cards. */
+.ranking-page .rank-list-section {
+    width: min(100%, var(--rank-v4-ledger));
+    padding-top: 44px;
+    scroll-margin-top: 92px;
+}
+
+.ranking-page .ranking-table-wrapper {
+    position: relative;
+    overflow: visible;
+    background: transparent;
+    border: 0;
+}
+
+.ranking-page .rank-ledger {
+    width: 100%;
+    margin: 0;
+    color: var(--rank-ink);
+}
+
+.ranking-page .rank-ledger-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 64px minmax(128px, 164px) 72px 56px 72px;
+    align-items: center;
+    justify-content: center;
+    column-gap: clamp(20px, 2.6vw, 38px);
+    min-width: 0;
+}
+
+.ranking-page .rank-ledger-head {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 10px;
+    background: var(--rank-paper);
+}
+
+.ranking-page .rank-ledger-head .rank-ledger-row {
+    min-height: 46px;
+}
+
+.ranking-page .rank-ledger-head .rank-ledger-row::after {
+    content: '';
+    position: absolute;
+    right: -28px;
+    bottom: 0;
+    left: -28px;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+            transparent 0,
+            var(--rank-v4-rule) 7%,
+            var(--rank-v4-rule) 93%,
+            transparent 100%);
+}
+
+.ranking-page .rank-ledger [role="columnheader"] {
+    color: var(--rank-muted);
+    font-size: 10px;
+    font-weight: 560;
+    letter-spacing: .08em;
+    white-space: nowrap;
+}
+
+.ranking-page .rank-ledger-body .rank-ledger-row {
+    min-height: 74px;
+    opacity: 0;
+    transform: translateY(5px);
+    transition:
+        opacity 260ms ease,
+        transform 260ms ease,
+        color 160ms ease;
+    isolation: isolate;
+}
+
+.ranking-page .rank-ledger-body .rank-ledger-row.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ranking-page .rank-ledger-body .rank-ledger-row::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 6px -28px;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+            transparent 0,
+            rgba(51, 71, 184, 0) 5%,
+            rgba(51, 71, 184, .035) 12%,
+            rgba(51, 71, 184, .035) 88%,
+            rgba(51, 71, 184, 0) 95%,
+            transparent 100%);
+    opacity: 0;
+    transition: opacity 180ms ease;
+}
+
+.ranking-page .rank-ledger-body .rank-ledger-row::after {
+    content: none;
+    display: none;
+}
+
+.ranking-page .rank-ledger-body .rank-ledger-row:hover::before {
+    opacity: 1;
+}
+
+.ranking-page .rank-ledger [role="cell"] {
+    min-width: 0;
+    white-space: nowrap;
+}
+
+.ranking-page .rank-ledger .rank-cell-position {
+    color: var(--rank-muted);
+    font-size: 18px;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+}
+
+.ranking-page .rank-ledger .rank-person-name {
+    display: block;
+    overflow: hidden;
+    color: var(--rank-ink);
+    font-size: 14px;
+    text-overflow: ellipsis;
+    transition: color 160ms ease;
+}
+
+.ranking-page .rank-ledger .rank-person-meta {
+    display: none;
+}
+
+.ranking-page .rank-ledger .rank-cell-faculty,
+.ranking-page .rank-ledger .rank-cell-year {
+    overflow: hidden;
+    color: var(--rank-muted);
+    font-size: 12px;
+    text-overflow: ellipsis;
+}
+
+.ranking-page .rank-ledger .rank-column-gpa,
+.ranking-page .rank-ledger .rank-cell-gpa {
+    text-align: right;
+}
+
+.ranking-page .rank-ledger .rank-cell-gpa span {
+    display: inline-block;
+    min-width: 54px;
+    color: var(--rank-blue);
+    font-size: 18px;
+    font-weight: 560;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.025em;
+    transition: color 160ms ease;
+}
+
+.ranking-page .rank-ledger-body .rank-ledger-row:hover .rank-person-name,
+.ranking-page .rank-ledger-body .rank-ledger-row:hover .rank-cell-gpa span {
+    color: var(--rank-blue-dark);
+}
+
+/* Podium colors remain information, not decoration. */
+.ranking-page .rank-ledger-body .rank-podium-gold .rank-cell-position {
+    color: var(--rank-gold);
+}
+
+.ranking-page .rank-ledger-body .rank-podium-silver .rank-cell-position {
+    color: var(--rank-silver);
+}
+
+.ranking-page .rank-ledger-body .rank-podium-bronze .rank-cell-position {
+    color: var(--rank-bronze);
+}
+
+/* Current user uses the same open geometry as every other row. */
+.ranking-page .rank-ledger-body .rank-ledger-row.my-rank-highlight::before,
+.ranking-page .rank-ledger-body .rank-ledger-row.my-rank-highlight:hover::before {
+    background: linear-gradient(90deg,
+            transparent 0,
+            rgba(51, 71, 184, 0) 3%,
+            rgba(51, 71, 184, .085) 12%,
+            rgba(51, 71, 184, .085) 88%,
+            rgba(51, 71, 184, 0) 97%,
+            transparent 100%);
+    opacity: 1;
+}
+
+.ranking-page .rank-ledger-body .rank-ledger-row.my-rank-highlight::after {
+    content: none;
+    display: none;
+}
+
+.ranking-page .ranking-table-wrapper > .loading-container {
+    position: relative;
+    inset: auto;
+    z-index: 1;
+    min-height: 320px;
+    padding: 0;
+    background: transparent;
+}
+
+.ranking-page .rank-loading-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.ranking-page .rank-ledger-skeleton {
+    width: 100%;
+}
+
+.ranking-page .rank-ledger-skeleton > span {
+    display: block;
+    height: 64px;
+    background:
+        linear-gradient(90deg, rgba(197, 199, 193, .36), rgba(225, 226, 221, .72), rgba(197, 199, 193, .36)) 0 50% / 220% 10px no-repeat;
+    border-bottom: 1px solid var(--rank-v4-rule);
+    animation: rank-v4-skeleton-pass 1.15s ease-in-out infinite;
+}
+
+.ranking-page .rank-ledger-skeleton > span:nth-child(2) {
+    animation-delay: 70ms;
+}
+
+.ranking-page .rank-ledger-skeleton > span:nth-child(3) {
+    animation-delay: 140ms;
+}
+
+.ranking-page .rank-ledger-skeleton > span:nth-child(4) {
+    animation-delay: 210ms;
+}
+
+.ranking-page .rank-ledger-skeleton > span:nth-child(5) {
+    animation-delay: 280ms;
+}
+
+.ranking-page .rank-list-section.is-loading .pagination-controls,
+.ranking-page .rank-list-section[aria-busy="true"] .pagination-controls {
+    visibility: hidden;
+}
+
+.ranking-page .rank-overview-summary.is-loading #rank-my-position,
+.ranking-page .rank-overview-summary.is-loading #rank-my-total,
+.ranking-page .rank-overview-summary.is-loading #rank-my-percentile,
+.ranking-page .rank-overview-summary.is-loading #rank-my-gpa,
+.ranking-page .rank-overview-summary.is-loading .rank-summary-stats dd > span {
+    color: transparent !important;
+    background: linear-gradient(90deg,
+            rgba(197, 199, 193, .38),
+            rgba(229, 230, 225, .82),
+            rgba(197, 199, 193, .38)) 0 50% / 220% 72% no-repeat;
+    animation: rank-v4-skeleton-pass 1.15s ease-in-out infinite;
+}
+
+.ranking-page .rank-overview-summary.is-loading #rank-my-position {
+    min-width: 2.2ch;
+}
+
+.ranking-page .rank-overview-summary.is-loading #rank-my-total {
+    min-width: 4.5ch;
+}
+
+.ranking-page .rank-overview-summary.is-loading #rank-my-percentile {
+    display: inline-block;
+    min-width: 7.5em;
+}
+
+.ranking-page .rank-overview-summary.is-loading .rank-summary-delta {
+    opacity: 0;
+}
+
+.ranking-page #my-rank-graph-card.is-loading {
+    display: block;
+    min-height: clamp(260px, 39svh, 360px);
+}
+
+.ranking-page #my-rank-graph-card.is-loading canvas,
+.ranking-page #my-rank-graph-card.is-loading .rank-graph-reference-key {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.ranking-page #my-rank-graph-card.is-loading::after {
+    position: absolute;
+    inset: 22px 12px 64px 46px;
+    content: "";
+    background:
+        repeating-linear-gradient(to top,
+            transparent 0 calc(20% - 1px),
+            rgba(197, 199, 193, .25) calc(20% - 1px) 20%),
+        linear-gradient(90deg,
+            rgba(197, 199, 193, .24),
+            rgba(229, 230, 225, .72),
+            rgba(197, 199, 193, .24)) 0 50% / 220% 38% no-repeat;
+    animation: rank-v4-skeleton-pass 1.15s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.ranking-page .pagination-controls > button:hover:not(:disabled),
+.ranking-page .pagination-controls > button:focus-visible:not(:disabled) {
+    color: var(--rank-blue);
+    background: transparent;
+}
+
+.ranking-page .pagination-controls > button:disabled {
+    cursor: not-allowed;
+}
+
+@keyframes rank-v4-skeleton-pass {
+    from {
+        background-position-x: 115%;
+    }
+
+    to {
+        background-position-x: -15%;
+    }
+}
+
+html.rank-scholarship-open,
+body.rank-scholarship-open {
+    overflow: hidden;
+}
+
+.rank-scholarship-dialog {
+    position: fixed;
+    inset: 0;
+    width: min(560px, calc(100vw - 48px));
+    max-width: none;
+    max-height: calc(100dvh - 48px);
+    margin: auto;
+    padding: 0;
+    overflow: visible;
+    color: var(--rank-ink, #20221e);
+    background: transparent;
+    border: 0;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 180ms ease, transform 260ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.rank-scholarship-dialog[open] {
+    display: block;
+}
+
+.rank-scholarship-dialog.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.rank-scholarship-dialog::backdrop {
+    background: rgba(24, 26, 22, 0);
+    backdrop-filter: blur(0);
+    transition: background 180ms ease, backdrop-filter 180ms ease;
+}
+
+.rank-scholarship-dialog.is-visible::backdrop {
+    background: rgba(24, 26, 22, .42);
+    backdrop-filter: blur(3px);
+}
+
+.rank-scholarship-modal {
+    position: relative;
+    max-height: calc(100dvh - 48px);
+    padding: 38px 40px 32px;
+    overflow: auto;
+    background: var(--rank-paper, #fffefa);
+    border: 1px solid rgba(54, 57, 50, .28);
+    border-radius: 10px;
+    box-shadow: 0 22px 58px rgba(31, 33, 28, .14);
+}
+
+.rank-scholarship-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: grid;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    place-items: center;
+    color: var(--rank-muted);
+    font: inherit;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    cursor: pointer;
+    transform: none;
+    transition: color 160ms ease;
+}
+
+.rank-scholarship-modal-close:hover,
+.rank-scholarship-modal-close:focus-visible {
+    color: var(--rank-blue);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.rank-scholarship-modal-close:focus-visible {
+    outline: 1px solid var(--rank-blue);
+    outline-offset: 2px;
+}
+
+.rank-scholarship-modal-kicker {
+    margin: 0 56px 14px 0;
+    color: #745d1a;
+    font-size: 11px;
+    font-weight: 680;
+    letter-spacing: .12em;
+}
+
+.rank-scholarship-modal h2 {
+    max-width: 440px;
+    margin: 0;
+    color: var(--rank-ink);
+    font-size: clamp(25px, 2.2vw, 31px);
+    font-weight: 620;
+    line-height: 1.38;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+}
+
+.rank-scholarship-modal h2:focus {
+    outline: 0;
+}
+
+.rank-scholarship-modal-copy {
+    margin: 22px 0 0;
+    color: var(--rank-ink);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.rank-scholarship-modal-copy strong {
+    font-weight: 650;
+}
+
+.rank-scholarship-modal-condition {
+    margin: 8px 0 0;
+    color: var(--rank-muted);
+    font-size: 11px;
+    line-height: 1.75;
+}
+
+.rank-scholarship-modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rank-line);
+}
+
+.rank-scholarship-modal-link {
+    display: inline-flex;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 44px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    color: var(--rank-blue);
+    font-size: 13px;
+    font-weight: 600;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(30, 61, 182, .32);
+    border-radius: 0;
+    text-decoration: none;
+    transition: color 160ms ease, border-color 160ms ease;
+}
+
+.rank-scholarship-modal-link > span:first-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.rank-scholarship-modal-link:hover,
+.rank-scholarship-modal-link:focus-visible {
+    color: var(--rank-ink);
+    background: transparent;
+    border-color: var(--rank-ink);
+}
+
+.rank-scholarship-modal-link:focus-visible,
+.rank-scholarship-modal-dismiss:focus-visible {
+    outline: 1px solid var(--rank-blue);
+    outline-offset: 3px;
+}
+
+.rank-scholarship-modal-dismiss {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 44px;
+    min-height: 44px;
+    margin: 0 0 0 auto;
+    padding: 0 6px;
+    color: var(--rank-muted);
+    font: inherit;
+    font-size: 12px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    cursor: pointer;
+    transform: none;
+    transition: color 160ms ease;
+}
+
+.rank-scholarship-modal-dismiss:hover,
+.rank-scholarship-modal-dismiss:focus-visible {
+    color: var(--rank-blue);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+@media (max-width: 1100px) {
+    .ranking-page .rank-overview-summary {
+        grid-template-columns: minmax(300px, 340px) minmax(0, 1fr);
+    }
+
+    .ranking-page .rank-ledger-row {
+        grid-template-columns: 60px minmax(128px, 164px) 72px 56px 72px;
+        column-gap: clamp(16px, 2.5vw, 28px);
+    }
+}
+
+@media (max-width: 760px) {
+    .ranking-page .rank-overview-summary {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ranking-page .rank-overview-summary .rank-summary-stats {
+        grid-column: 1;
+        grid-row: 2;
+        border-top: 1px solid var(--rank-line);
+        border-left: 0;
+    }
+
+    .ranking-page .rank-list-section {
+        padding-top: 36px;
+        padding-right: 12px;
+        padding-left: 12px;
+        scroll-margin-top: 74px;
+    }
+
+    .ranking-page .rank-ledger-row {
+        grid-template-columns: 44px minmax(0, 1fr) 70px;
+        justify-content: stretch;
+        column-gap: 10px;
+    }
+
+    .ranking-page .rank-overview-summary.is-rank-hidden .rank-summary-stats {
+        grid-column: 1;
+        border-top: 1px solid var(--rank-line);
+        border-left: 0;
+    }
+
+    .ranking-page .rank-graph-reference-key {
+        top: 4px;
+        right: 12px;
+        gap: 9px;
+        font-size: 8px;
+    }
+
+    .ranking-page .rank-graph-reference-key i {
+        width: 14px;
+    }
+
+    .ranking-page .rank-ledger .rank-column-faculty,
+    .ranking-page .rank-ledger .rank-column-year,
+    .ranking-page .rank-ledger .rank-cell-faculty,
+    .ranking-page .rank-ledger .rank-cell-year {
+        display: none;
+    }
+
+    .ranking-page .rank-ledger .rank-person-meta {
+        display: block;
+        margin-top: 5px;
+        color: var(--rank-muted);
+        font-size: 10px;
+    }
+
+    .ranking-page .rank-ledger-head .rank-ledger-row::after {
+        right: -12px;
+        left: -12px;
+        background: linear-gradient(90deg,
+                transparent 0,
+                var(--rank-v4-rule) 8%,
+                var(--rank-v4-rule) 92%,
+                transparent 100%);
+    }
+
+    .ranking-page .rank-ledger-body .rank-ledger-row::before {
+        inset: 5px -12px;
+    }
+}
+
+@media (max-width: 680px) {
+    .rank-scholarship-dialog {
+        inset: auto 12px max(12px, env(safe-area-inset-bottom));
+        width: auto;
+        max-height: calc(100dvh - 24px - env(safe-area-inset-bottom));
+        margin: 0;
+        transform: translateY(24px);
+    }
+
+    .rank-scholarship-dialog.is-visible {
+        transform: translateY(0);
+    }
+
+    .rank-scholarship-modal {
+        max-height: calc(100dvh - 24px - env(safe-area-inset-bottom));
+        padding: 28px 22px 22px;
+        border-radius: 16px;
+    }
+
+    .rank-scholarship-modal-close {
+        top: 10px;
+        right: 10px;
+    }
+
+    .rank-scholarship-modal-kicker {
+        margin-bottom: 10px;
+        font-size: 10px;
+    }
+
+    .rank-scholarship-modal h2 {
+        padding-right: 24px;
+        font-size: clamp(21px, 6.5vw, 26px);
+        line-height: 1.4;
+    }
+
+    .rank-scholarship-modal-copy {
+        margin-top: 17px;
+        font-size: 13px;
+        line-height: 1.75;
+    }
+
+    .rank-scholarship-modal-condition {
+        font-size: 10px;
+        line-height: 1.65;
+    }
+
+    .rank-scholarship-modal-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px 16px;
+        margin-top: 20px;
+        padding-top: 18px;
+    }
+
+    .rank-scholarship-modal-link {
+        width: auto;
+        min-height: 44px;
+    }
+
+    .rank-scholarship-modal-dismiss {
+        width: auto;
+    }
+}
+
+/* An open mobile filter must paint above the later list stacking context. */
+.ranking-page .rank-overview:has(.rank-filter-control.is-open) {
+    position: relative;
+    z-index: 3;
+}
+
+@media (max-width: 680px) {
+    .ranking-page .filters {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 8px;
+        row-gap: 8px;
+    }
+
+    .ranking-page .rank-filter-control,
+    .ranking-page .rank-filter-control:nth-of-type(odd),
+    .ranking-page .rank-filter-control:not(:first-child) {
+        padding-left: 8px;
+        border-left: 1px solid var(--rank-line);
+    }
+
+    .ranking-page .rank-filter-control:first-child {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .ranking-page .rank-filter-trigger {
+        gap: 6px;
+        font-size: 12px;
+    }
+
+    .ranking-page .rank-filter-control:nth-of-type(n + 2) .rank-filter-menu {
+        right: 0;
+        left: auto;
+    }
+
+    .ranking-page .filters .clear-button {
+        grid-column: 1 / -1;
+    }
+}

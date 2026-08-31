@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-top-theme="studio" data-result-section-style="rail" data-repeat-design="ledger">
 
 <head>
     <meta charset="UTF-8">
@@ -12,17 +12,23 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styles/course-popup.css">
+    <link rel="stylesheet" href="style.css?v=legal-consent-20260829-1-footer-20260830-3-repeat-20260830-1">
+    <link rel="stylesheet" href="styles/course-popup.css?v=course-popup-20260826-13">
+    <link rel="stylesheet" href="styles/top-studio.css?v=studio-20260825-47">
+    <link rel="stylesheet" href="styles/result-studio-v2.css?v=result-studio-20260831-90">
+    <link rel="stylesheet" href="styles/ranking-registration-v2.css?v=ranking-registration-20260828-10">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body class="home-page">
 
     <header id="site-header" class="site-header">
         <a href="./" class="site-header-logo">
             <img src="icon.ico" alt="" class="site-header-logo-icon">
-            <span>工学院GPA計算機</span>
+            <span class="site-header-name">
+                <span class="top-header-name-full">工学院大学GPA計算機</span>
+                <span class="top-header-name-short">GPA計算機</span>
+            </span>
         </a>
         <nav class="site-header-nav">
             <a href="./" class="site-header-link">計算機</a>
@@ -31,216 +37,474 @@
         </nav>
     </header>
 
-    <div id="loading-screen">
-        <div class="wave-loader"></div>
-        <div class="loading-text">Loading...</div>
-        <div id="loading-message" style="display: none;">
-            サーバーが混み合っています...
-        </div>
-    </div>
+    <div id="main-content" inert aria-busy="true" data-auth-pending style="display: block;">
+        <h1><span>工学院</span><span class="top-title-mark">GPA計算機</span></h1>
 
-    <div id="f-credit-input-container" style="display: none;"></div>
-
-    <div id="main-content" style="display: none;">
-        <h1>工学院大学GPA計算機</h1>
-
-        <div id="fileUploadArea" class="file-upload-area">
-            <input type="file" id="fileInput" accept=".pdf" hidden>
-            <div class="upload-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                </svg>
+        <section class="top-action-stage" aria-label="成績PDFの読み込み">
+            <picture class="processing-sculpture" aria-hidden="true">
+                <source media="(min-width: 681px)"
+                    srcset="assets/generated/processing-sculpture-arm-v1.webp">
+                <img alt="" width="1677" height="938" decoding="async">
+            </picture>
+            <aside id="processingCourseStream" class="processing-course-stream" aria-hidden="true">
+                <div id="processingCourseStreamTrack" class="processing-course-stream-track"></div>
+            </aside>
+            <div id="fileUploadArea" class="file-upload-area" role="button" tabindex="0"
+                aria-label="成績PDFを選択">
+                <input type="file" id="fileInput" accept=".pdf" hidden>
+                <div class="upload-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                    </svg>
+                </div>
+                <p class="upload-title">成績PDFを選択</p>
+                <p class="upload-subtitle">
+                    <span class="top-copy-desktop">クリックまたはドラッグ＆ドロップ</span>
+                    <span class="top-copy-mobile">タップして選択</span>
+                </p>
+                <p id="fileName" class="file-name"></p>
             </div>
-            <p class="upload-title">ここにPDFファイルをドラッグ&ドロップ</p>
-            <p class="upload-subtitle">またはクリックして選択</p>
-            <p id="fileName" class="file-name"></p>
-        </div>
+            <button id="calculationHistoryToggle" class="calculation-history-toggle" type="button"
+                aria-controls="calculationHistoryPanel" aria-expanded="false" hidden>
+                <span class="calculation-history-toggle-label">過去の計算結果</span>
+                <span class="calculation-history-toggle-indicator" aria-hidden="true">↓</span>
+            </button>
+            <section id="calculationHistoryPanel" class="calculation-history-panel" aria-labelledby="calculationHistoryTitle" hidden>
+                <div class="calculation-history-heading">
+                    <h2 id="calculationHistoryTitle">0件の履歴</h2>
+                </div>
+                <div id="calculationHistoryList" class="calculation-history-list"></div>
+            </section>
+            <section id="serverProcessing" class="server-processing" hidden role="status" aria-live="polite"
+                aria-busy="false">
+                <div class="processing-heading">
+                    <span class="processing-state" aria-hidden="true">
+                        <span class="processing-spinner">⣾</span>
+                        <span>計算中</span>
+                    </span>
+                    <span id="processingPercent" class="processing-percent">0%</span>
+                </div>
+                <div class="processing-track" aria-hidden="true">
+                    <span id="processingProgress"></span>
+                </div>
+                <div id="queueDetails" class="queue-details" hidden>
+                    <span class="queue-kicker">処理待ち</span>
+                    <div class="queue-metrics">
+                        <div class="queue-metric">
+                            <span>待機中</span>
+                            <strong><span id="queueWaitingCount">0</span>人</strong>
+                        </div>
+                        <div class="queue-metric">
+                            <span>あなたは</span>
+                            <strong><span id="queuePosition">0</span>番目</strong>
+                        </div>
+                    </div>
+                    <div class="queue-track" aria-hidden="true"><span id="queueProgress"></span></div>
+                    <span id="queueEstimate">予測時間を計算しています</span>
+                    <p class="queue-notice">この画面を開いたままお待ちください。</p>
+                </div>
+            </section>
+            <div class="top-relief-art" aria-hidden="true"></div>
+        </section>
+
+        <nav class="top-related-links" aria-label="関連ページと使い方">
+            <a href="rank/">
+                <span>
+                    <strong>ランキング</strong>
+                </span>
+                <span class="top-related-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a href="course/">
+                <span>
+                    <strong>成績統計</strong>
+                </span>
+                <span class="top-related-arrow" aria-hidden="true">↗</span>
+            </a>
+            <button class="top-help-toggle" type="button" aria-controls="top-help-panel" aria-expanded="false"
+                aria-label="使い方を表示" title="使い方">
+                <span aria-hidden="true">?</span>
+            </button>
+        </nav>
 
         <div id="instructions2">
-            <h2>使い方:</h2>
-            <p>キューポート > 成績 > 成績照会 の右上にあるPDFをクリックして、成績のPDFファイルをダウンロードします。</p>
-            <p>このサイトを開き、PDFファイルを選択してください。</p>
-            <p>成績が表示されます。</p>
+            <section id="top-help-panel" class="top-guide" aria-labelledby="top-guide-title" hidden>
+                <div class="top-guide-heading">
+                    <h2 id="top-guide-title">使い方</h2>
+                </div>
 
-            <br>
+                <ol class="top-steps">
+                    <li>
+                        <span class="top-step-number">01</span>
+                        <div>
+                            <strong>成績PDFを保存</strong>
+                            <p>キューポートの「成績照会」からダウンロード</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="top-step-number">02</span>
+                        <div>
+                            <strong>PDFを選択</strong>
+                            <p>上のエリアをクリック、またはドラッグ＆ドロップ</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="top-step-number">03</span>
+                        <div>
+                            <strong>結果を確認</strong>
+                            <p>GPA・取得単位・科目の内訳を表示</p>
+                        </div>
+                    </li>
+                </ol>
 
-            <h2>ランキング:</h2>
-            <p>- 大学のGoogleアカウント(@g.kogakuin.jp)でログインをするとGPAランキングに参加出来ます。</p>
-            <p>- 発行から1ヶ月以内の成績pdfが有効です。</p>
-            <p>- 1年間更新がない場合はランキングから削除されます。</p>
-            <a href="rank/" class="back-link">現在のランキングを確認</a>
-
-            <h2>成績統計:</h2>
-            <p>- 科目ごとの成績の統計を検索できます。</p>
-            <a href="course/" class="back-link">成績統計を確認</a>
+            </section>
         </div>
 
-        <div id="result">
-            <br>
-            <h1 id="gpa"></h1>
-            <div id="gpashow"></div>
-
-            <div id="gpa-trend" style="display: none;">
-                <h2>GPA推移（四半期 &amp; 通算）</h2>
-                <canvas id="gpaTrendCanvas"></canvas>
+        <section id="lucky-course" class="top-lucky-course"
+            aria-labelledby="lucky-course-title" aria-busy="false">
+            <div class="top-lucky-heading">
+                <h2 id="lucky-course-title">授業のすすめ</h2>
             </div>
 
-            <div id="ranking-area">
-                <div id="ranking-unavailable-message" style="display: none;">
-                    <p>発行から1ヶ月以内の成績PDFを読み込むとランキングに参加できます。</p>
+            <div id="luckyCourseReel" class="top-lucky-reel" aria-hidden="true">
+                <div class="top-lucky-copy">
+                    <span id="luckyCourseValue" class="top-lucky-value">―</span>
+                    <span id="luckyCourseDepartment" class="top-lucky-department"></span>
                 </div>
+            </div>
+
+            <button id="luckyCourseButton" class="top-lucky-button" type="button">
+                <span>占う</span>
+            </button>
+            <p id="luckyCourseAnnouncement" class="top-visually-hidden" aria-live="polite"></p>
+        </section>
+
+        <div id="result">
+            <div class="result-page-toolbar">
+                <button id="discardResultButton" class="result-back-button" type="button"
+                    title="PDF選択画面へ戻る"
+                    aria-label="PDF選択画面へ戻る">← 戻る</button>
+            </div>
+
+            <section class="result-overview" aria-labelledby="resultOverviewTitle">
+                <div class="result-gpa-copy">
+                    <h1 id="gpa" tabindex="-1">
+                        <span id="resultOverviewTitle" class="result-gpa-label">通算GPA</span>
+                        <span class="result-gpa-value-stack">
+                            <span id="cumulativeGpaValue">0.00</span>
+                            <span class="result-gpa-precision">
+                                <span class="result-gpa-precision-spacer" aria-hidden="true">計算値</span>
+                                <span id="gpashow"></span>
+                            </span>
+                        </span>
+                    </h1>
+                </div>
+                <dl id="grade-summary" aria-live="polite">
+                    <div class="result-summary-item">
+                        <dt>履修科目</dt>
+                        <dd><strong id="TotalCourseCount">—</strong><span>科目</span></dd>
+                    </div>
+                    <div class="result-summary-item">
+                        <dt>取得単位</dt>
+                        <dd><strong id="TotalCreditsExcludingF">—</strong><span>単位</span></dd>
+                    </div>
+                    <div class="result-summary-item">
+                        <dt id="PreviousCumulativeGpaLabel">前回のGPA</dt>
+                        <dd><strong id="PreviousCumulativeGpa">—</strong></dd>
+                    </div>
+                    <div class="result-summary-item">
+                        <dt>前期比</dt>
+                        <dd><strong id="QuarterGpaDelta">—</strong></dd>
+                    </div>
+                </dl>
+            </section>
+
+            <section id="gpa-trend" class="result-section result-trend-section" style="display: none;"
+                aria-labelledby="gpaTrendTitle">
+                <div class="result-section-heading">
+                    <h2 id="gpaTrendTitle">GPAの推移</h2>
+                </div>
+                <div class="gpa-chart-frame">
+                    <canvas id="gpaTrendCanvas" role="img" aria-label="学期ごとのGPA推移"></canvas>
+                </div>
+            </section>
+
+            <section class="result-section result-course-section" aria-labelledby="courseBreakdownTitle">
+            <div class="result-section-heading">
+                <h2 id="courseBreakdownTitle">評定内訳</h2>
+                <div id="courseBreakdownFilters" class="course-breakdown-filters" aria-label="評定内訳の期間を絞り込む" hidden>
+                    <div id="courseBreakdownYearFilters" class="course-breakdown-filter-group" aria-label="年度"></div>
+                    <span class="course-breakdown-filter-divider" aria-hidden="true"></span>
+                    <div id="courseBreakdownQuarterFilters" class="course-breakdown-filter-group" aria-label="学期"></div>
+                </div>
+            </div>
+            <div class="result-course-groups">
+                <details class="result-course-group">
+                    <summary>
+                        <span class="result-course-grade">A+</span>
+                        <span class="result-grade-meter" aria-hidden="true"><span id="APlusGradeBar"></span></span>
+                        <span id="APlusCourseCount" class="result-course-count"></span>
+                        <span class="result-course-credits"><span id="APlusTotal"></span>単位</span>
+                        <span class="result-course-toggle" aria-hidden="true">＋</span>
+                    </summary>
+                    <div id="APlusSubjects" class="subjects"></div>
+                </details>
+                <details class="result-course-group">
+                    <summary>
+                        <span class="result-course-grade">A</span>
+                        <span class="result-grade-meter" aria-hidden="true"><span id="AGradeBar"></span></span>
+                        <span id="ACourseCount" class="result-course-count"></span>
+                        <span class="result-course-credits"><span id="ATotal"></span>単位</span>
+                        <span class="result-course-toggle" aria-hidden="true">＋</span>
+                    </summary>
+                    <div id="ASubjects" class="subjects"></div>
+                </details>
+                <details class="result-course-group">
+                    <summary>
+                        <span class="result-course-grade">B</span>
+                        <span class="result-grade-meter" aria-hidden="true"><span id="BGradeBar"></span></span>
+                        <span id="BCourseCount" class="result-course-count"></span>
+                        <span class="result-course-credits"><span id="BTotal"></span>単位</span>
+                        <span class="result-course-toggle" aria-hidden="true">＋</span>
+                    </summary>
+                    <div id="BSubjects" class="subjects"></div>
+                </details>
+                <details class="result-course-group">
+                    <summary>
+                        <span class="result-course-grade">C</span>
+                        <span class="result-grade-meter" aria-hidden="true"><span id="CGradeBar"></span></span>
+                        <span id="CCourseCount" class="result-course-count"></span>
+                        <span class="result-course-credits"><span id="CTotal"></span>単位</span>
+                        <span class="result-course-toggle" aria-hidden="true">＋</span>
+                    </summary>
+                    <div id="CSubjects" class="subjects"></div>
+                </details>
+                <details class="result-course-group">
+                    <summary>
+                        <span class="result-course-grade">D</span>
+                        <span class="result-grade-meter" aria-hidden="true"><span id="DGradeBar"></span></span>
+                        <span id="DCourseCount" class="result-course-count"></span>
+                        <span class="result-course-credits"><span id="DTotal"></span>単位</span>
+                        <span class="result-course-toggle" aria-hidden="true">＋</span>
+                    </summary>
+                    <div id="DSubjects" class="subjects"></div>
+                </details>
+                <details class="result-course-group">
+                    <summary>
+                        <span class="result-course-grade">F</span>
+                        <span class="result-grade-meter" aria-hidden="true"><span id="FGradeBar"></span></span>
+                        <span id="FCourseCount" class="result-course-count"></span>
+                        <span class="result-course-credits"><span id="FTotal"></span>単位</span>
+                        <span class="result-course-toggle" aria-hidden="true">＋</span>
+                    </summary>
+                    <div id="FSubjects" class="subjects"></div>
+                </details>
+            </div>
+            </section>
+
+            <div class="result-simulation-section">
+                <button id="repeater" type="button" onclick="startrepeat()" aria-controls="repeat" aria-expanded="false">
+                    <span>再履修・リピート</span>
+                    <span class="result-action-arrow">
+                        <span>試算する</span>
+                        <span aria-hidden="true">→</span>
+                    </span>
+                </button>
+                <div id="repeat" aria-labelledby="simulationTitle">
+                    <div class="simulation-screen-header">
+                        <button type="button" class="simulation-screen-back" onclick="cancelrepeat()">← 結果へ戻る</button>
+                        <div class="simulation-screen-title">
+                            <strong>再履修・リピート</strong>
+                        </div>
+                    </div>
+                    <div class="result-simulation-heading">
+                        <h2 id="simulationTitle">科目を選択</h2>
+                        <button type="button" class="result-simulation-close" onclick="cancelrepeat()">試算を終了</button>
+                    </div>
+                    <section class="simulation-gpa-display" aria-label="試算GPA">
+                        <span>通算GPA</span>
+                        <strong id="simulationGpaValue">0.00</strong>
+                        <div id="simulationGpaRaw" class="simulation-gpa-raw">0</div>
+                        <small id="simulationGpaDelta">±0.00</small>
+                    </section>
+                    <div class="simulation-course-browser">
+                        <label class="simulation-global-search" for="simulationCourseSearch">
+                            <span class="simulation-search-icon" aria-hidden="true"></span>
+                            <input id="simulationCourseSearch" type="search" placeholder=" "
+                                autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list"
+                                aria-controls="simulationCoursePopover" aria-label="科目名を検索">
+                            <span class="simulation-course-placeholder" aria-hidden="true">
+                                <span class="simulation-course-placeholder-prefix">科目名を入力... 例：</span>
+                                <span class="simulation-course-placeholder-window">
+                                    <span id="simulationCoursePlaceholderExample"
+                                        class="simulation-course-placeholder-example">微分積分学</span>
+                                </span>
+                            </span>
+                        </label>
+                        <div id="simulationCoursePopover" class="simulation-course-popover" role="dialog" hidden>
+                            <section id="simulationSearchSection" class="simulation-library-section" hidden>
+                                <header>
+                                    <h3>検索結果</h3>
+                                    <span id="simulationSearchCount"></span>
+                                </header>
+                                <div id="simulationSearchResults" class="simulation-course-list"></div>
+                            </section>
+                            <section id="simulationCompletedSection" class="simulation-library-section">
+                                <header>
+                                    <h3>履修済み</h3>
+                                    <span id="simulationCompletedCount"></span>
+                                </header>
+                                <div id="simulationCompletedCourses" class="simulation-course-list"></div>
+                            </section>
+                            <section id="simulationFutureSection" class="simulation-library-section">
+                                <header>
+                                    <h3>履修中</h3>
+                                    <span id="simulationFutureCount"></span>
+                                </header>
+                                <div id="simulationFutureCourses" class="simulation-course-list"></div>
+                            </section>
+                        </div>
+                    </div>
+                    <section id="simulationSelectionSection" class="simulation-selection-section" hidden>
+                        <header>
+                            <h3>試算する科目 <span id="simulationSelectionCount"></span></h3>
+                            <button id="clearSimulationCourses" type="button">クリア</button>
+                        </header>
+                        <div id="selecter" class="simulation-rows"></div>
+                    </section>
+                    <p id="simulationFormError" class="simulation-form-error" role="alert" hidden></p>
+                </div>
+            </div>
+
+            <section id="ranking-area" aria-labelledby="rankingRegistrationTitle">
+                <div id="ranking-unavailable-message" style="display: none;" aria-hidden="true"><p></p></div>
                 <div id="ranking-controls" style="display: none;">
                     <div id="nickname-section">
                         <div id="ranking-box-expanded">
-                            <div class="collapsible-header">
-                                <h3>ランキングに登録</h3>
-                                <button id="collapse-ranking-btn" title="閉じる">x</button>
-                            </div>
-                            <div class="collapsible-content">
-                                <p>計算したGPAを登録して、他の学生と成績を比較できます。</p>
-                                <p>現在<strong>1,000人</strong>以上が参加中！ あなたは上位何％に入れるかチェックしてみよう！</p>
-                                <p style="font-size: 0.7em; color: #666;">
-                                    ※ランキングは匿名で登録され、個人が特定されることはありませんのでご安心ください。
-                                </p>
-                                <p>ランキングに表示するニックネームを入力してください（8文字以内）。</p>
-                                <div class="form-row">
-                                    <input type="text" id="nicknameInput" class="form-row-item" placeholder="ニックネームを入力">
-                                    <button id="submitRankingButton" class="form-row-item">登録/更新</button>
-                                    <button id="logout-button" class="form-row-item">ログアウト</button>
+                            <div class="ranking-registration-layout">
+                                <header class="ranking-registration-heading">
+                                    <h2 id="rankingRegistrationTitle">ランキングに登録</h2>
+                                    <p id="rankingParticipantCount">参加者が増えています🔥</p>
+                                </header>
+                                <div class="ranking-registration-entry">
+                                    <div class="ranking-registration-form">
+                                        <input type="text" id="nicknameInput" maxlength="8" placeholder="ニックネーム(8文字以内)"
+                                            aria-label="ランキング表示名">
+                                        <button id="submitRankingButton" type="button">
+                                            <span>登録・更新</span>
+                                            <span aria-hidden="true">→</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <button id="expand-ranking-btn" style="display: none;">ランキングに登録</button>
                     </div>
                 </div>
-                <p id="rankingStatus"></p>
-            </div>
-
-            <br>
-
-            <button id="repeater" onclick="startrepeat()">再履修・リピートをシュミレートしてみる</button>
-            <div id="repeat">
-                <h2>再履修・リピートシュミレーター</h2>
-                <div id="selecter"></div>
-                <button onclick="addrepeat()">追加</button>
-                <button onclick="executerepeat()">実行</button>
-            </div>
-
-            <h2>成績の詳細</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>評定</th>
-                        <th>個数</th>
-                        <th>総単位数</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>A+</td>
-                        <td id="APlusCount"></td>
-                        <td id="APlusTotal"></td>
-                    </tr>
-                    <tr>
-                        <td>A</td>
-                        <td id="ACount"></td>
-                        <td id="ATotal"></td>
-                    </tr>
-                    <tr>
-                        <td>B</td>
-                        <td id="BCount"></td>
-                        <td id="BTotal"></td>
-                    </tr>
-                    <tr>
-                        <td>C</td>
-                        <td id="CCount"></td>
-                        <td id="CTotal"></td>
-                    </tr>
-                    <tr>
-                        <td>D</td>
-                        <td id="DCount"></td>
-                        <td id="DTotal"></td>
-                    </tr>
-                    <tr>
-                        <td>F</td>
-                        <td id="FCount"></td>
-                        <td id="FTotal"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div id="grade-summary" aria-live="polite">
-                <span>履修科目数：<strong id="TotalCourseCount"></strong></span>
-                <span>総履修単位数：<strong id="TotalCreditsExcludingF"></strong></span>
-            </div>
-            <br>
-
-            <h2>各評定の科目</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th width="10%">評定</th>
-                        <th>科目名</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>A+</td>
-                        <td id="APlusSubjects" class="subjects"></td>
-                    </tr>
-                    <tr>
-                        <td>A</td>
-                        <td id="ASubjects" class="subjects"></td>
-                    </tr>
-                    <tr>
-                        <td>B</td>
-                        <td id="BSubjects" class="subjects"></td>
-                    </tr>
-                    <tr>
-                        <td>C</td>
-                        <td id="CSubjects" class="subjects"></td>
-                    </tr>
-                    <tr>
-                        <td>D</td>
-                        <td id="DSubjects" class="subjects"></td>
-                    </tr>
-                    <tr>
-                        <td>F</td>
-                        <td id="FSubjects" class="subjects"></td>
-                    </tr>
-                </tbody>
-            </table>
-
+                <p id="rankingStatus" role="status" aria-live="polite"></p>
+            </section>
         </div>
+    </div>
+
+    <div id="pdfErrorOverlay" class="pdf-error-overlay" hidden>
+        <section class="pdf-error-dialog" role="alertdialog" aria-modal="true"
+            aria-labelledby="pdfErrorTitle" aria-describedby="pdfErrorMessage">
+            <span class="pdf-error-kicker" aria-hidden="true">ERROR</span>
+            <h2 id="pdfErrorTitle">エラー</h2>
+            <p id="pdfErrorMessage">処理を完了できませんでした。もう一度お試しください。</p>
+            <button id="pdfErrorClose" type="button">← 戻る</button>
+        </section>
+    </div>
+
+    <div id="calculationHistoryDeleteOverlay" class="calculation-history-delete-overlay" hidden>
+        <section class="calculation-history-delete-dialog" role="alertdialog" aria-modal="true"
+            aria-labelledby="calculationHistoryDeleteTitle" aria-describedby="calculationHistoryDeleteDetails">
+            <div class="calculation-history-delete-header">
+                <span class="calculation-history-delete-marker" aria-hidden="true"></span>
+                <p class="calculation-history-delete-kicker">計算履歴</p>
+                <h2 id="calculationHistoryDeleteTitle">この履歴を削除しますか？</h2>
+            </div>
+            <div id="calculationHistoryDeleteDetails" class="calculation-history-delete-details">
+                <span class="calculation-history-delete-target">削除するPDF</span>
+                <p id="calculationHistoryDeleteFile"></p>
+                <time id="calculationHistoryDeleteDate"></time>
+            </div>
+            <p class="calculation-history-delete-note">この操作は取り消せません。</p>
+            <div class="calculation-history-delete-actions">
+                <button id="calculationHistoryDeleteCancel" type="button">キャンセル</button>
+                <button id="calculationHistoryDeleteConfirm" type="button">削除する</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="creditResolutionOverlay" class="credit-resolution-overlay" hidden>
+        <section class="credit-resolution-dialog" role="dialog" aria-modal="true"
+            aria-labelledby="creditResolutionTitle" aria-describedby="creditResolutionDescription">
+            <div class="credit-resolution-intro">
+                <header class="credit-resolution-heading">
+                    <div>
+                        <span class="credit-resolution-kicker">CREDIT CHECK</span>
+                        <h2 id="creditResolutionTitle">単位数を確認</h2>
+                    </div>
+                    <p id="creditResolutionTimer" class="credit-resolution-timer" aria-live="polite">残り 05:00</p>
+                </header>
+                <p id="creditResolutionDescription">シラバスで単位数を特定できない科目があります。該当する単位数を選択してください。</p>
+            </div>
+            <div id="creditResolutionCourses" class="credit-resolution-courses"></div>
+            <p id="creditResolutionError" class="credit-resolution-error" role="alert" hidden></p>
+            <div class="credit-resolution-actions">
+                <button id="creditResolutionCancel" type="button">← 戻る</button>
+                <button id="creditResolutionSubmit" type="button" disabled>計算を再開</button>
+            </div>
+        </section>
     </div>
 
     <div id="course-popup-container"></div>
 
-    <aside id="ad-sidebar" class="ad-sidebar">
-        <div class="ad-sidebar-wrapper">
-            <button id="ad-sidebar-close" class="ad-sidebar-close" title="閉じる">&times;</button>
-            <a href="https://sayutim.github.io/KLPF/" target="_blank" rel="noopener noreferrer" class="ad-sidebar-link">
-                <img data-src="ad/ad_klpf_extensions.png" alt="KLPF Extensions" class="ad-sidebar-image">
-            </a>
-            <span class="ad-sidebar-label">AD</span>
-        </div>
-    </aside>
-
-    <footer class="footer">
-        <font color="red">結果をSNS等で共有する場合はファイル名に注意してください</font><br><br>
-        <a
-            href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a>
-        <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a>
-        <a href="privacy/">プライバシーポリシーについて</a>
-        <p class="copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
+    <footer class="footer site-footer">
+        <nav class="site-footer-links" aria-label="フッターリンク">
+            <a
+                href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a>
+            <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a>
+            <a href="terms/">利用規約</a>
+            <a href="privacy/">プライバシーポリシー</a>
+            <button class="site-footer-logout" type="button" data-site-footer-logout hidden>ログアウト</button>
+        </nav>
+        <p class="site-footer-copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4"></script>
     <script src="pdf/pdf.min.js"></script>
-    <script src="pdf/pdf.worker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <script src="app.js"></script>
+    <script src="app.js?v=release-20260831-8"></script>
+    <script src="lucky-course.js?v=20260823-3"></script>
+    <script>
+        const topUploadArea = document.getElementById('fileUploadArea');
+        if (topUploadArea) {
+            topUploadArea.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    topUploadArea.click();
+                }
+            });
+        }
+
+        const topHelpToggle = document.querySelector('.top-help-toggle');
+        const topHelpPanel = document.getElementById('top-help-panel');
+        if (topHelpToggle && topHelpPanel) {
+            topHelpToggle.addEventListener('click', () => {
+                const willOpen = topHelpPanel.hidden;
+                topHelpPanel.hidden = !willOpen;
+                topHelpToggle.setAttribute('aria-expanded', String(willOpen));
+                topHelpToggle.setAttribute('aria-label', willOpen ? '使い方を閉じる' : '使い方を表示');
+                if (willOpen) {
+                    requestAnimationFrame(() => {
+                        topHelpPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    });
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
