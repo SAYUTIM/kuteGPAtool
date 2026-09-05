@@ -304,7 +304,7 @@
             </section>
 
             <div class="result-simulation-section">
-                <button id="repeater" type="button" onclick="startrepeat()" aria-controls="repeat" aria-expanded="false">
+                <button id="repeater" type="button" aria-controls="repeat" aria-expanded="false">
                     <span>再履修・リピート</span>
                     <span class="result-action-arrow">
                         <span>試算する</span>
@@ -313,14 +313,14 @@
                 </button>
                 <div id="repeat" aria-labelledby="simulationTitle">
                     <div class="simulation-screen-header">
-                        <button type="button" class="simulation-screen-back" onclick="cancelrepeat()">← 結果へ戻る</button>
+                        <button type="button" class="simulation-screen-back">← 結果へ戻る</button>
                         <div class="simulation-screen-title">
                             <strong>再履修・リピート</strong>
                         </div>
                     </div>
                     <div class="result-simulation-heading">
                         <h2 id="simulationTitle">科目を選択</h2>
-                        <button type="button" class="result-simulation-close" onclick="cancelrepeat()">試算を終了</button>
+                        <button type="button" class="result-simulation-close">試算を終了</button>
                     </div>
                     <section class="simulation-gpa-display" aria-label="試算GPA">
                         <span>通算GPA</span>
@@ -476,35 +476,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4"></script>
     <script src="pdf/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <script src="app.js?v=release-20260901-preflight-fix"></script>
-    <script src="lucky-course.js?v=20260823-3"></script>
-    <script>
-        const topUploadArea = document.getElementById('fileUploadArea');
-        if (topUploadArea) {
-            topUploadArea.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    topUploadArea.click();
-                }
-            });
-        }
-
-        const topHelpToggle = document.querySelector('.top-help-toggle');
-        const topHelpPanel = document.getElementById('top-help-panel');
-        if (topHelpToggle && topHelpPanel) {
-            topHelpToggle.addEventListener('click', () => {
-                const willOpen = topHelpPanel.hidden;
-                topHelpPanel.hidden = !willOpen;
-                topHelpToggle.setAttribute('aria-expanded', String(willOpen));
-                topHelpToggle.setAttribute('aria-label', willOpen ? '使い方を閉じる' : '使い方を表示');
-                if (willOpen) {
-                    requestAnimationFrame(() => {
-                        topHelpPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    });
-                }
-            });
-        }
-    </script>
+    <script src="app.js?v=sync-20260905-1"></script>
 </body>
 
 </html>
