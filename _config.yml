@@ -1,2 +1,40 @@
 plugins:
   - jekyll-sitemap
+
+defaults:
+  - scope:
+      path: "app.js"
+    values:
+      sitemap: false
+  - scope:
+      path: "style.css"
+    values:
+      sitemap: false
+  - scope:
+      path: "icon.ico"
+    values:
+      sitemap: false
+  - scope:
+      path: "google982777efd3c2f890.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "login/style.css"
+    values:
+      sitemap: false
+  - scope:
+      path: "assets/**/*"
+    values:
+      sitemap: false
+  - scope:
+      path: "dataset/**/*"
+    values:
+      sitemap: false
+  - scope:
+      path: "pdf/**/*"
+    values:
+      sitemap: false
+  - scope:
+      path: "styles/**/*"
+    values:
+      sitemap: false
