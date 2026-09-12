@@ -18,6 +18,17 @@
     transition: transform 0.3s ease;
 }
 
+/*
+ * The course page uses its own Inter/Noto Sans body typography, while the
+ * studio header on the calculator uses the Yu Gothic stack.  Keep the course
+ * header independent from the page body so the shared studio header has the
+ * same typography and line box on both pages.
+ */
+.course-page .site-header {
+    font-family: "Yu Gothic UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    line-height: normal;
+}
+
 .site-header.hidden {
     transform: translateY(-100%);
 }
