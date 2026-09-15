@@ -214,3 +214,21 @@
     font-size: 1.2em;
     color: #888;
 }
+
+/* The repeat-workspace clear action is styled as a quiet text control in
+ * result-studio-v2.css. Prevent the global button hover lift/shadow/green
+ * background from leaking into that control on hover, keyboard focus, or tap. */
+html[data-top-theme="studio"][data-repeat-design] body.home-page #repeat #clearSimulationCourses {
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    transition: color 150ms ease, border-color 150ms ease;
+}
+
+html[data-top-theme="studio"][data-repeat-design] body.home-page #repeat #clearSimulationCourses:hover,
+html[data-top-theme="studio"][data-repeat-design] body.home-page #repeat #clearSimulationCourses:focus-visible,
+html[data-top-theme="studio"][data-repeat-design] body.home-page #repeat #clearSimulationCourses:active {
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
