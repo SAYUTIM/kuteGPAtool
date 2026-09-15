@@ -20,7 +20,7 @@
 
 /*
  * The course page uses its own Inter/Noto Sans body typography, while the
- * studio header on the calculator uses the Yu Gothic stack.  Keep the course
+ * studio header on the calculator uses the Yu Gothic stack. Keep the course
  * header independent from the page body so the shared studio header has the
  * same typography and line box on both pages.
  */
@@ -100,5 +100,60 @@
     .site-header-link {
         padding: 6px 10px;
         font-size: 0.8rem;
+    }
+}
+
+/*
+ * Studio mobile navigation must occupy the same slots on calculator, ranking,
+ * and course pages. The logo is the calculator link, so only the first nav
+ * item is hidden; route-relative href values must not decide the layout.
+ */
+@media (max-width: 680px) {
+    html[data-top-theme="studio"] body .site-header {
+        height: 64px;
+        padding: 0 16px;
+    }
+
+    html[data-top-theme="studio"] body .site-header-nav {
+        gap: 0;
+    }
+
+    html[data-top-theme="studio"] body .site-header-nav .site-header-link {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px;
+        font-size: 0.73rem;
+    }
+
+    html[data-top-theme="studio"] body .site-header-nav .site-header-link:first-child {
+        display: none;
+    }
+
+    html[data-top-theme="studio"] body.ranking-page {
+        padding-top: 64px !important;
+    }
+}
+
+/*
+ * In GPT mode the final score is the primary mobile metric. Give it enough
+ * room for values such as 382.45 and do not clip the rendered number.
+ */
+@media (max-width: 760px) {
+    html[data-top-theme="studio"] body.ranking-page[data-rank-metric="gpt"] .rank-ledger .rank-ledger-row {
+        grid-template-columns: 44px minmax(0, 1fr) 58px 80px;
+        column-gap: 8px;
+    }
+
+    html[data-top-theme="studio"] body.ranking-page[data-rank-metric="gpt"] .rank-ledger .rank-cell-score-secondary {
+        overflow: visible;
+        white-space: nowrap;
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 420px) {
+    html[data-top-theme="studio"] body.ranking-page[data-rank-metric="gpt"] .rank-ledger .rank-ledger-row {
+        grid-template-columns: 40px minmax(0, 1fr) 54px 80px;
+        column-gap: 6px;
     }
 }
