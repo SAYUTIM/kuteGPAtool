@@ -4519,3 +4519,37 @@ html[data-top-theme="studio"] .home-page .selecter-row.is-catalog-selection .sim
         margin-top: 0;
     }
 }
+
+
+/* Grade Point Total shown as a secondary value beside cumulative GPA. */
+html[data-top-theme="studio"] .home-page .result-gpa-mainline {
+    display: inline-flex;
+    align-items: baseline;
+    gap: clamp(10px, 1.4vw, 18px);
+}
+
+html[data-top-theme="studio"] .home-page .result-gpt-value {
+    color: var(--top-muted);
+    font-family: Inter, "Noto Sans JP", sans-serif;
+    font-size: clamp(.76rem, 1.15vw, 1rem);
+    font-weight: 600;
+    letter-spacing: .015em;
+    white-space: nowrap;
+}
+
+html[data-top-theme="studio"] .home-page .result-gpt-value::before {
+    content: "GPT ";
+    font-size: .72em;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+@media (max-width: 520px) {
+    html[data-top-theme="studio"] .home-page .result-gpa-mainline {
+        gap: 9px;
+    }
+
+    html[data-top-theme="studio"] .home-page .result-gpt-value {
+        font-size: .72rem;
+    }
+}

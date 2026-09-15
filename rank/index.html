@@ -38,7 +38,11 @@
 
     <main id="main-content" class="main-container rank-workspace" inert aria-busy="true" data-auth-pending
         style="display: block;">
-        <section class="rank-overview" aria-label="あなたの順位とGPA分布">
+        <section class="rank-overview" aria-label="あなたの順位と成績分布">
+            <div class="rank-metric-switch" role="group" aria-label="ランキング指標">
+                <button id="rank-metric-gpa" type="button" class="rank-metric-option is-active" aria-pressed="true">GPA</button>
+                <button id="rank-metric-gpt" type="button" class="rank-metric-option" aria-pressed="false">GPT</button>
+            </div>
             <div id="rank-overview-summary" class="rank-overview-summary is-loading" aria-busy="true">
                 <div id="my-rank" style="display: none;">
                     <button id="my-rank-trigger" type="button" class="rank-current-hit-area"
@@ -54,7 +58,7 @@
                 </div>
                 <dl id="rank-summary-stats" class="rank-summary-stats" aria-label="GPA比較" aria-live="polite">
                     <div class="rank-summary-personal">
-                        <dt>あなたのGPA</dt>
+                        <dt id="rank-personal-metric-label">あなたのGPA</dt>
                         <dd id="rank-my-gpa">—</dd>
                     </div>
                     <div class="rank-summary-average">
@@ -188,7 +192,8 @@
                             <div class="rank-column-person" role="columnheader">ニックネーム</div>
                             <div class="rank-column-faculty" role="columnheader">学部</div>
                             <div class="rank-column-year" role="columnheader">学年</div>
-                            <div class="rank-column-gpa" role="columnheader">GPA</div>
+                            <div id="rank-table-metric-header" class="rank-column-gpa" role="columnheader">GPA</div>
+                            <div id="rank-table-secondary-metric-header" class="rank-column-score-secondary" role="columnheader">GPT</div>
                         </div>
                     </div>
                     <div id="ranking-list" class="rank-ledger-body" role="rowgroup"></div>
@@ -256,7 +261,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4"></script>
-    <script src="../app.js?v=app-f56e862d7bac"></script>
+    <script src="../app.js?v=app-a092bab806f7"></script>
 </body>
 
 </html>

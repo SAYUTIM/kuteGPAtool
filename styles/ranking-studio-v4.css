@@ -928,3 +928,195 @@ body.rank-scholarship-open {
         grid-column: 1 / -1;
     }
 }
+
+
+/* GPA / GPT ranking metric switch and split-score treatment. */
+.ranking-page .rank-overview {
+    position: relative;
+}
+
+.ranking-page .rank-metric-switch {
+    position: absolute;
+    z-index: 4;
+    top: clamp(22px, 3.8svh, 40px);
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 0 2px;
+    background: transparent;
+    border-bottom: 1px solid var(--rank-line);
+}
+
+.ranking-page .rank-metric-option {
+    position: relative;
+    min-width: 52px;
+    min-height: 36px;
+    margin: 0;
+    padding: 2px 8px 9px;
+    color: var(--rank-muted);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 560;
+    letter-spacing: .065em;
+    cursor: pointer;
+    transform: none;
+    transition: color 150ms ease;
+}
+
+.ranking-page .rank-metric-option::after {
+    content: '';
+    position: absolute;
+    right: 8px;
+    bottom: -1px;
+    left: 8px;
+    height: 2px;
+    background: var(--rank-blue);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 180ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.ranking-page .rank-metric-option:hover,
+.ranking-page .rank-metric-option:focus-visible {
+    color: var(--rank-blue-dark);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.ranking-page .rank-metric-option:focus-visible {
+    outline: 1px solid var(--rank-blue);
+    outline-offset: 3px;
+}
+
+.ranking-page .rank-metric-option.is-active {
+    color: var(--rank-blue-dark);
+    font-weight: 680;
+    background: transparent;
+    box-shadow: none;
+}
+
+.ranking-page .rank-metric-option.is-active::after {
+    transform: scaleX(1);
+}
+
+.ranking-page .rank-ledger-row {
+    grid-template-columns: 64px minmax(128px, 164px) 72px 56px 72px 64px;
+    column-gap: clamp(16px, 2.15vw, 30px);
+}
+
+.ranking-page .rank-ledger .rank-column-position,
+.ranking-page .rank-ledger .rank-cell-position {
+    width: auto;
+    min-width: 0;
+}
+
+.ranking-page .rank-ledger .rank-column-gpa,
+.ranking-page .rank-ledger .rank-cell-gpa,
+.ranking-page .rank-ledger .rank-column-score-secondary,
+.ranking-page .rank-ledger .rank-cell-score-secondary {
+    width: auto;
+    min-width: 0;
+    text-align: right;
+}
+
+.ranking-page .rank-ledger .rank-cell-score-secondary {
+    overflow: hidden;
+    color: var(--rank-muted);
+    font-size: 12px;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    text-overflow: clip;
+}
+
+/* Keep the GPA/GPT columns in the same DOM/grid slots while the selected
+ * metric controls only their visual hierarchy. */
+.ranking-page[data-rank-metric="gpa"] .rank-ledger .rank-column-gpa,
+.ranking-page[data-rank-metric="gpt"] .rank-ledger .rank-column-score-secondary {
+    color: var(--rank-blue-dark);
+    font-weight: 680;
+}
+
+.ranking-page[data-rank-metric="gpa"] .rank-ledger .rank-cell-gpa span {
+    color: var(--rank-blue);
+    font-weight: 560;
+}
+
+.ranking-page[data-rank-metric="gpt"] .rank-ledger .rank-cell-gpa span {
+    min-width: 0;
+    color: var(--rank-muted);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.ranking-page[data-rank-metric="gpt"] .rank-ledger .rank-cell-score-secondary {
+    color: var(--rank-blue);
+    font-size: 18px;
+    font-weight: 560;
+    letter-spacing: -.025em;
+}
+
+.ranking-page[data-rank-metric="gpt"] .rank-ledger-body .rank-ledger-row:hover .rank-cell-gpa span {
+    color: var(--rank-muted);
+}
+
+.ranking-page[data-rank-metric="gpt"] .rank-ledger-body .rank-ledger-row:hover .rank-cell-score-secondary {
+    color: var(--rank-blue-dark);
+}
+
+@media (max-width: 1100px) {
+    .ranking-page .rank-ledger-row {
+        grid-template-columns: 60px minmax(128px, 164px) 72px 56px 72px 64px;
+        column-gap: clamp(14px, 2vw, 24px);
+    }
+}
+
+@media (max-width: 760px) {
+    .ranking-page .rank-metric-switch {
+        top: 12px;
+        right: 0;
+    }
+
+    .ranking-page .rank-metric-option {
+        min-width: 46px;
+        min-height: 32px;
+        padding: 1px 6px 8px;
+        font-size: 10px;
+    }
+
+    .ranking-page .rank-metric-option::after {
+        right: 6px;
+        left: 6px;
+    }
+
+    .ranking-page .rank-ledger-row {
+        grid-template-columns: 44px minmax(0, 1fr) 66px 66px;
+        column-gap: 8px;
+    }
+
+    .ranking-page .rank-ledger .rank-cell-score-secondary {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 420px) {
+    .ranking-page .rank-ledger-row {
+        grid-template-columns: 40px minmax(0, 1fr) 62px 62px;
+        column-gap: 6px;
+    }
+
+    .ranking-page .rank-ledger .rank-cell-gpa span {
+        font-size: 17px;
+    }
+
+    .ranking-page .rank-ledger .rank-cell-score-secondary {
+        font-size: 10px;
+    }
+}
