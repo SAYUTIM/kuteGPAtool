@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja" data-top-theme="studio">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index,follow">
+    <title>GPA計算機ガイド - 工学院大学GPA計算機</title>
+    <meta name="description" content="工学院大学GPA計算機の使い方、GPA・GPTの計算方法、再履修の扱い、ランキング、科目別成績統計、PDF処理とデータの扱いをまとめたガイドです。">
+    <link rel="icon" href="../icon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/top-studio.css?v=studio-20260825-47">
+    <link rel="stylesheet" href="../styles/guide.css?v=guide-20260919-1">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "GPTは総単位数と同じですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "違います。総単位数は単位数の合計ですが、GPTはGPA計算に使う各科目の「単位数 × Grade Point」を合計した値です。同じ単位数でも評定が違えばGPTは変わります。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Fを取るとGPAはどうなりますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "FのGrade Pointは0です。GPTには加点されませんが、GPA計算の対象になっているF科目の単位数はGPA算入単位数に含まれるため、GPAを下げる方向に働きます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "再履修したらFと新しい評定の両方がGPAに入りますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "同一科目として判定された場合は、最も高い評定だけをGPA計算に使います。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "GPTが「—」と表示されるのはなぜですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GPT機能の追加前(2026/09/15より前)に登録されたデータなど、GPTがまだ保存されていないランキング行があるためです。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "古い成績PDFでもランキング登録できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "発行から31日以上経過したPDFは、原則としてランキングや科目別成績統計には登録されません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "アップロードしたPDFは保存されますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "サーバーで計算するPDFは処理中に使用しますが、PDFファイルを計算後に本サービスのデータベースやファイル保存領域へ保存することはありません。"
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="guide-page">
+    <a class="guide-skip-link" href="#guide-content">本文へ移動</a>
+
+    <header id="site-header" class="site-header">
+        <a href="../" class="site-header-logo">
+            <img src="../icon.ico" alt="" class="site-header-logo-icon">
+            <span class="site-header-name">
+                <span class="top-header-name-full">工学院大学GPA計算機</span>
+                <span class="top-header-name-short">GPA計算機</span>
+            </span>
+        </a>
+        <nav class="site-header-nav" aria-label="主要メニュー">
+            <a href="../" class="site-header-link">計算機</a>
+            <a href="../rank/" class="site-header-link">ランキング</a>
+            <a href="../course/" class="site-header-link">成績統計</a>
+        </nav>
+    </header>
+
+    <main id="guide-content" class="guide-main">
+        <header class="guide-intro">
+            <h1>GPA計算機ガイド</h1>
+            <p class="guide-intro-description">GPA・GPTの計算方法、再履修・リピート、ランキング、科目別成績統計など、このサイトの使い方をまとめています。</p>
+        </header>
+
+        <div class="guide-layout">
+            <nav class="guide-toc" aria-label="このページの目次">
+                <p>目次</p>
+                <ol>
+                    <li><a href="#usage">基本的な使い方</a></li>
+                    <li><a href="#calculation">GPAとGPT</a></li>
+                    <li><a href="#repeat">再履修・リピート</a></li>
+                    <li><a href="#ranking">ランキング</a></li>
+                    <li><a href="#statistics">科目別成績統計</a></li>
+                    <li><a href="#faq">よくある質問</a></li>
+                </ol>
+            </nav>
+
+            <article class="guide-article">
+
+                <section class="guide-reference-note" aria-labelledby="reference-note-title">
+                    <h2 id="reference-note-title">計算結果について</h2>
+                    <p class="guide-reference-note-copy">
+                        <span>本サイトは工学院大学の公式サービスではありません。</span>
+                        <span>履修、進級、卒業など<span class="guide-reference-note-keep">重要な判断</span>を行う場合は、大学の公式情報と照合してください。</span>
+                    </p>
+                    <p><a href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算の参考資料</a></p>
+                </section>
+
+                <section id="usage" class="guide-section">
+                    <h2>基本的な使い方</h2>
+                    <ol class="guide-steps">
+                        <li>
+                            <strong>キューポートから成績PDFを保存する</strong>
+                            <p><a href="https://ku-port.sc.kogakuin.ac.jp" target="_blank" rel="noopener noreferrer">キューポート</a> > 成績メニュー > 4 成績照会 のページにある右上の「PDF」ボタンから自分の成績PDFをダウンロードします。</p>
+                        </li>
+                        <li>
+                            <strong>GPA計算機でPDFを選択する</strong>
+                            <p><a href="../" target="_blank" rel="noopener noreferrer">トップページ</a>の「成績PDFを選択」からファイルを読み込みます。</p>
+                        </li>
+                        <li>
+                            <strong>計算結果を確認する</strong>
+                            <p>計算が終了すると、通算GPA、GPT、取得単位、評定内訳、GPA推移などを確認できます。</p>
+                        </li>
+                    </ol>
+                    <p class="guide-link-row"><a href="../">GPA計算機を開く</a></p>
+                </section>
+
+                <section id="calculation" class="guide-section">
+                    <h2>GPAとGPT</h2>
+                    <p>　GPAは、履修した科目の成績をGrade Pointに置き換えて平均した指標です。本サービスでは、GPAの計算過程を確認しやすくするため、各科目の「単位数 × Grade Point」を合計したGPTも表示します。GPAの利用条件や選考基準は制度ごとに異なるため、履修・進級・奨学金・進学などの判断では大学の最新の公式情報も確認してください。</p>
+                    <p>　評定にはA+, A, B, C, D, Fの6段階があります。各科目の評定は以下の表に対応するGrade Pointに置き換え、単位数を掛けてGPAやGPTを計算します。</p>
+
+                    <table class="guide-table guide-grade-table">
+                        <caption>評定とGrade Pointの対応</caption>
+                        <thead>
+                            <tr><th scope="col">評定</th><th scope="col">Grade Point</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">A+</th><td>4.00</td></tr>
+                            <tr><th scope="row">A</th><td>3.67</td></tr>
+                            <tr><th scope="row">B</th><td>3.00</td></tr>
+                            <tr><th scope="row">C</th><td>2.00</td></tr>
+                            <tr><th scope="row">D</th><td>1.00</td></tr>
+                            <tr><th scope="row">F</th><td>0.00</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>GPTとは</h3>
+                    <p>　<strong>GPT（Grade Point Total）</strong>は、GPA計算に使う各科目の「単位数 × Grade Point」を合計した値です。</p>
+                    <div class="guide-formula guide-basic-formula">
+                        <math display="block" aria-label="GPTはGPA計算に使う各科目の単位数かけるGrade Pointの合計">
+                            <mrow>
+                                <mi mathvariant="normal">GPT</mi>
+                                <mo>=</mo>
+                                <mo largeop="true">∑</mo>
+                                <mo>(</mo>
+                                <mtext>単位数</mtext>
+                                <mo>×</mo>
+                                <mtext>Grade Point</mtext>
+                                <mo>)</mo>
+                            </mrow>
+                        </math>
+                    </div>
+                    <p>　例えば、2単位のA+ と 1.5単位のA と 1単位のF がある場合、GPTは <code>2×4.00 + 1.5×3.67 + 1×0.00 = 13.505</code> です。</p>
+                    <p>　GPTは総単位数とは異なり、同じ単位数でも評定が高いほど大きくなります。本サービスではGPAとあわせて計算結果やランキングの確認に使用します。</p>
+                    <h3>GPAとは</h3>
+                    <p>　<strong>GPA（Grade Point Average）</strong>はGPTをGPA算入単位数で割った値です。小数点以下第3位を四捨五入し、4.00~0.00の範囲で表示されます。</p>
+                    <div class="guide-formula guide-basic-formula">
+                        <math display="block" aria-label="GPAはGPTをGPA算入単位数で割った値">
+                            <mrow>
+                                <mi mathvariant="normal">GPA</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mi mathvariant="normal">GPT</mi>
+                                    <mtext>GPA算入単位数</mtext>
+                                </mfrac>
+                            </mrow>
+                        </math>
+                    </div>
+                    <p>　上の例ではGPA算入単位数が4.5単位なので、<code>13.505 ÷ 4.5 ≒ 3.001</code> となり、GPAは <strong>3.00</strong> になります。</p>
+                    
+                    <aside class="guide-note">
+                        <h3>Fと「取得単位」の扱い</h3>
+                        <p>　GPA計算の対象になっているF科目はGrade Pointが0ですが、その科目の単位数はGPAの分母に入ります。一方、結果画面の「取得単位」はFを除いて集計します。そのため、GPA算入単位数と取得単位数は同じとは限りません。</p>
+                        <h3>GPA / GPT の解析範囲</h3>
+                        <p>　成績PDFは通常成績を上から読み取り、「教職課程科目」または「数理・データサイエンス・AI（リテラシー）」の見出しが最初に現れた時点でGPA / GPTの解析を終了します。見出し自体とそれ以降の科目は計算対象外です。どちらの見出しもない場合は「単位修得状況表」を成績欄の終端として扱います。</p>
+                    </aside>
+                    <br>
+                    <p>　本サービスの表示値は、読み込んだ成績PDFをもとにその時点で計算した値です。大学が公式に提示するGPAや各制度で使用される値と確認時期が異なる場合があるため、重要な判断では公式情報と照合してください。</p>
+                </section>
+
+                <section id="repeat" class="guide-section">
+                    <h2>再履修・リピート</h2>
+                    <p>　同一科目として判定された履修歴が複数ある場合は、<strong>A+ > A > B > C > D > F</strong> の順で最も高い評定だけをGPA計算に使います。<br>
+                    　たとえば、最初に評定Fだった科目を再履修して評定Bになった場合は、評定Bを使ってGPAを計算します。その時、同じ科目であれば、単位数は1科目分のみが計算に含まれます。</p>
+
+                    <h3>再履修・リピートのシミュレーション</h3>
+                    <p>　結果画面の「再履修・リピート」では、科目と評定を選んでGPAの変化を試算できます。<br>
+                        　検索のサジェストには上から履修済みの中で低い科目から昇順で表示されます。また、その後ろには現在履修中または履修予定の科目が表示されます。任意の科目を検索して選択することもできます。
+                        </p>
+                </section>
+
+                <section id="ranking" class="guide-section">
+                    <h2>ランキング</h2>
+                    <p>　ランキングページでは、本サービスに登録された対象者と自分の順位、成績分布のグラフ、平均値・最頻値・中央値などを確認できます。GPAとGPTで基準を切り替えられ、絞り込み条件を変更すると、比較対象の人数や順位も変わります。</p>
+
+                    <strong>GPAを基準にする場合</strong>
+                    <p>
+                        　GPAが高い順に並び、GPAが同じ場合はGPTが高い人を先に表示します。
+                        GPAとGPTがともに同じ場合は同順位です。
+                    </p>
+
+                    <strong>GPTを基準にする場合</strong>
+                    <p>
+                        　GPTが高い順に並びます。GPTが同じ人は同順位で、同じGPTの中ではGPAが高い人を先に表示します。
+                    </p>
+
+                    <h3>ランキングへの登録・更新</h3>
+                    <p>　大学アカウントでログインし、PDF内の学籍番号が一致した状態で、登録対象のPDFを計算するとランキングと科目別成績統計が登録または更新されます。<br>
+                        　初回のニックネームは「guest」で、8文字以内で任意のニックネームに変更可能です。</p>
+                </section>
+
+                <section id="statistics" class="guide-section">
+                    <h2>科目別成績統計</h2>
+                    <p>　科目ごとの履修者数、平均GPA、単位取得率、成績分布などを確認でき、学部・学科・学期による絞り込みもできます。</p>
+
+                    <table class="guide-table guide-stat-table">
+                        <thead>
+                            <tr><th scope="col">表示</th><th scope="col">主な基準</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">科目を探す</th><td>科目一覧・検索条件にあった科目を表示します。</td></tr>
+                            <tr><th scope="row">楽単科目</th><td>50人以上のデータがある科目を対象に、A+ / A の割合をもとに降順で並べます。</td></tr>
+                            <tr><th scope="row">落単科目</th><td>50人以上のデータがある科目を対象に、D / F の割合をもとに降順で並べます。</td></tr>
+                            <tr><th scope="row">人気科目</th><td>履修者数をもとに降順で並べます。</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p>　楽単・落単ランキングは、単純な割合順ではありません。参加者が少ない科目が偶然高い割合になったことで上位に表示されにくいよう、95% Wilson信頼区間の下限を用いて補正しています。</p>
+
+                    <h3>95% Wilson下限とは</h3>
+                    <p>　割合には、履修者数が少ないほど結果が偶然に左右されやすいという問題があります。95% Wilson下限は、そのばらつきを考慮して、観測された割合を保守的に評価するための値です。楽単科目ではA+・Aの割合、落単科目ではD・Fの割合について、次の式で下限値を計算します。</p>
+                    <div class="guide-formula guide-wilson-formula">
+                        <span class="guide-wilson-formula-label">Wilson下限</span>
+                        <math display="block" aria-label="Wilson下限は、ピー・ハット足すゼットの二乗割る二エヌ、引く、ゼット掛ける、ピー・ハット掛ける一引くピー・ハット割るエヌ足すゼットの二乗割る四エヌの二乗の平方根、全体を一足すゼットの二乗割るエヌで割った値">
+                            <mrow>
+                                <mi>L</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mi>p̂</mi>
+                                        <mo>+</mo>
+                                        <mfrac>
+                                            <msup><mi>z</mi><mn>2</mn></msup>
+                                            <mrow><mn>2</mn><mi>n</mi></mrow>
+                                        </mfrac>
+                                        <mo>−</mo>
+                                        <mi>z</mi>
+                                        <msqrt>
+                                            <mfrac>
+                                                <mrow><mi>p̂</mi><mo>(</mo><mn>1</mn><mo>−</mo><mi>p̂</mi><mo>)</mo></mrow>
+                                                <mi>n</mi>
+                                            </mfrac>
+                                            <mo>+</mo>
+                                            <mfrac>
+                                                <msup><mi>z</mi><mn>2</mn></msup>
+                                                <mrow><mn>4</mn><msup><mi>n</mi><mn>2</mn></msup></mrow>
+                                            </mfrac>
+                                        </msqrt>
+                                    </mrow>
+                                    <mrow>
+                                        <mn>1</mn>
+                                        <mo>+</mo>
+                                        <mfrac>
+                                            <msup><mi>z</mi><mn>2</mn></msup>
+                                            <mi>n</mi>
+                                        </mfrac>
+                                    </mrow>
+                                </mfrac>
+                            </mrow>
+                        </math>
+                    </div>
+
+                    <h4 class="guide-wilson-detail-title">式に使う記号</h4>
+                    <table class="guide-table guide-wilson-symbol-table">
+                        <thead>
+                            <tr><th scope="col">記号</th><th scope="col">意味</th><th scope="col">このランキングで入る値</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row"><var>L</var></th><td>Wilson信頼区間の下限</td><td>補正後の割合。順位を決める値です。</td></tr>
+                            <tr><th scope="row"><var>x</var></th><td>対象の評定だった人数</td><td>楽単ではA+・A、落単ではD・Fだった人数です。</td></tr>
+                            <tr><th scope="row"><var>n</var></th><td>履修者数</td><td>その科目について集計された全人数です。</td></tr>
+                            <tr><th scope="row"><var>p̂</var></th><td>補正前の割合</td><td><code>x ÷ n</code>。たとえば45人÷50人なら0.90です。</td></tr>
+                            <tr><th scope="row"><var>z</var></th><td>信頼水準に対応する値</td><td>95%では常に <code>1.96</code> を使います。</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="guide-wilson-detail-title">同じ90%を補正した例</h4>
+                    <div class="guide-wilson-examples">
+                        <section class="guide-wilson-example" aria-labelledby="wilson-example-a-title">
+                            <h5 id="wilson-example-a-title">例A：50人中45人</h5>
+                            <p class="guide-wilson-example-description">楽単ランキングで、50人のうち45人がA+・Aだった場合</p>
+                            <dl>
+                                <div><dt><var>x</var></dt><dd>45</dd></div>
+                                <div><dt><var>n</var></dt><dd>50</dd></div>
+                                <div><dt><var>p̂</var></dt><dd>45 ÷ 50 = 0.90</dd></div>
+                                <div><dt><var>z</var></dt><dd>1.96</dd></div>
+                            </dl>
+                            <p class="guide-wilson-example-result"><var>L</var> ≈ 0.786（78.6%）</p>
+                        </section>
+                        <section class="guide-wilson-example" aria-labelledby="wilson-example-b-title">
+                            <h5 id="wilson-example-b-title">例B：100人中90人</h5>
+                            <p class="guide-wilson-example-description">楽単ランキングで、100人のうち90人がA+・Aだった場合</p>
+                            <dl>
+                                <div><dt><var>x</var></dt><dd>90</dd></div>
+                                <div><dt><var>n</var></dt><dd>100</dd></div>
+                                <div><dt><var>p̂</var></dt><dd>90 ÷ 100 = 0.90</dd></div>
+                                <div><dt><var>z</var></dt><dd>1.96</dd></div>
+                            </dl>
+                            <p class="guide-wilson-example-result"><var>L</var> ≈ 0.826（82.6%）</p>
+                        </section>
+                    </div>
+                    <p>　補正前はどちらも90%ですが、履修者が多い例Bの方が偶然によるぶれが小さいと考えられるため、Wilson下限は高くなります。この場合、ランキングでは例Bが例Aより上位になります。</p>
+                </section>
+
+                <section id="faq" class="guide-section">
+                    <h2>よくある質問</h2>
+                    <div class="guide-faq-list">
+                        <details>
+                            <summary>GPTは総単位数と同じですか？</summary>
+                            <p>違います。総単位数は単位数の合計ですが、GPTはGPA計算に使う各科目の「単位数 × Grade Point」を合計した値です。同じ単位数でも評定が違えばGPTは変わります。</p>
+                        </details>
+                        <details>
+                            <summary>Fを取るとGPAはどうなりますか？</summary>
+                            <p>FのGrade Pointは0です。GPTには加点されませんが、GPA計算の対象になっているF科目の単位数はGPA算入単位数に含まれるため、GPAを下げる方向に働きます。</p>
+                        </details>
+                        <details>
+                            <summary>再履修したらFと新しい評定の両方がGPAに入りますか？</summary>
+                            <p>同一科目として判定された場合は、最も高い評定だけをGPA計算に使います。</p>
+                        </details>
+                        <details>
+                            <summary>GPTが「—」と表示されるのはなぜですか？</summary>
+                            <p>GPT機能の追加前(2026/09/15より前)に登録されたデータなど、GPTがまだ保存されていないランキング行があるためです。</p>
+                        </details>
+                        <details>
+                            <summary>古い成績PDFでもランキング登録できますか？</summary>
+                            <p>発行から31日以上経過したPDFは、原則としてランキングや科目別成績統計には登録されません。</p>
+                        </details>
+                        <details>
+                            <summary>アップロードしたPDFは保存されますか？</summary>
+                            <p>サーバーで計算するPDFは処理中に使用しますが、PDFファイルを計算後に本サービスのデータベースやファイル保存領域へ保存することはありません。</p>
+                        </details>
+                    </div>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer site-footer">
+        <nav class="site-footer-links" aria-label="フッターリンク">
+            <a href="https://www.kogakuin.ac.jp/student/syllabus_binran/u53qdr00000037u3-att/gpa_2024.pdf">GPA計算はこちらを参考にしています</a>
+            <a href="https://x.com/i/user/1769273557606150144">要望・不具合の報告はこちら</a>
+            <a href="./">ガイド</a>
+            <a href="../terms/">利用規約</a>
+            <a href="../privacy/">プライバシーポリシー</a>
+        </nav>
+        <p class="site-footer-copyright">Copyright © 2024-2026 SAYU. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
